@@ -3,12 +3,15 @@ import { RouterLink, RouterView } from 'vue-router';
 </script>
 
 <template>
-  <TheHeader />
-  <RouterView />
+  <Header />
+  <Container>
+    <RouterView />
+  </Container>
 </template>
 
 <style lang="scss">
 body {
   margin: 0;
+  line-height: 1.5;
 }
 </style>
