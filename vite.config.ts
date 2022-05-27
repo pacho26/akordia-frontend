@@ -16,6 +16,18 @@ export default defineConfig({
     vueJsx(),
     Unocss({
       presets: [presetAttributify(), presetUno()],
+      shortcuts: {
+        'flex-center': 'flex items-center justify-center',
+        'flex-vcenter': 'flex items-center',
+        'transition-default': 'transition-all ease-in-out duration-400',
+      },
+      theme: {
+        colors: {
+          // primary: {
+          //   100: '#007CA5',
+          // },
+        },
+      },
     }),
     AutoImport({
       // targets to transform
