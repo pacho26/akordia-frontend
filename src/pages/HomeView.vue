@@ -17,9 +17,6 @@
       assumenda eveniet, eius aperiam corporis.
     </p>
 
-    <div>
-      <i class="fa-brands fa-facebook"></i>
-      <p>Profile</p>
-    </div>
+    <!-- <i class="fa-brands fa-facebook"></i> -->
   </div>
 </template>
