@@ -12,6 +12,5 @@ import { RouterLink, RouterView } from 'vue-router';
 <style lang="scss">
 body {
   margin: 0;
-  line-height: 1.5;
 }
 </style>

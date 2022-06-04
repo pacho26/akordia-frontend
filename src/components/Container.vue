@@ -1,5 +1,5 @@
 <template>
-  <div max-w="1366px" m="0 auto">
+  <div max-w="base" m="0 auto">
     <slot />
   </div>
 </template>

@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 
 import Unocss from 'unocss/vite';
-import { presetAttributify, presetUno } from 'unocss';
+import { presetAttributify, presetUno, transformerVariantGroup } from 'unocss';
 
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
@@ -21,11 +21,27 @@ export default defineConfig({
         'flex-vcenter': 'flex items-center',
         'transition-default': 'transition-all ease-in-out duration-400',
       },
+      transformers: [transformerVariantGroup()],
       theme: {
         colors: {
+          // TODO: Make palette and add colors
           // primary: {
           //   100: '#007CA5',
           // },
+        },
+        shortcuts: {
+          'transition-default': 'transition-all ease-in-out duration-400',
+          'flex-center': 'flex items-center justify-center',
+          'flex-vcenter': 'flex items-center',
+        },
+        fontSize: {
+          '3xs': '0.5rem', // 8px
+          '2xs': '0.625rem', // 10px
+          '2xl': '1.375rem', // 22px
+          '3xl': '1.625rem', // 26px
+        },
+        maxWidth: {
+          base: '1366px',
         },
       },
     }),
