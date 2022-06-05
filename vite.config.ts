@@ -24,10 +24,17 @@ export default defineConfig({
       transformers: [transformerVariantGroup()],
       theme: {
         colors: {
-          // TODO: Make palette and add colors
-          // primary: {
-          //   100: '#007CA5',
-          // },
+          primary: {
+            100: '#cae4b4',
+            200: '#b0d78e',
+            300: '#96ca68',
+            400: '#7bbd42',
+            500: '#689f38',
+            600: '#56842e',
+            700: '#4a7128',
+            800: '#3e5e21',
+            900: '#314b1b',
+          },
         },
         shortcuts: {
           'transition-default': 'transition-all ease-in-out duration-400',
@@ -42,6 +49,17 @@ export default defineConfig({
         },
         maxWidth: {
           base: '1366px',
+        },
+        fontFamily: {
+          sans: ['Poppins', 'sans-serif'],
+          display: ['Ubuntu', 'sans-serif'],
+        },
+        boxShadow: {
+          xs: '0px 1px 2px 0px #5C5C5C0D',
+          sm: '0px 1px 3px #5C5C5C1A, 0px 1px 2px -1px #5C5C5C1A',
+          md: '0px 4px 6px -1px #5C5C5C1A, 0px 2px 4px -2px #5C5C5C1A',
+          lg: '0px 10px 15px -3px #5C5C5C1A, 0px 4px 6px -4px #5C5C5C1A',
+          xl: '0px 20px 25px -5px #5C5C5C1A, 0px 8px 10px -6px #5C5C5C1A',
         },
       },
     }),

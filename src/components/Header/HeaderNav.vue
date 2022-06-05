@@ -1,5 +1,5 @@
 <template>
-  <div flex="vcenter gap-6">
+  <div flex="vcenter gap-5">
     <Link to="/my-songbook">
       <HeaderNavItem icon="music" label="My songbook" />
     </Link>

@@ -12,13 +12,14 @@ import { RouterLink, RouterView } from 'vue-router';
 <style lang="scss">
 * {
   box-sizing: border-box;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 body {
   margin: 0;
+  background-color: #f8f9fa;
 }
 
 ::selection {
-  background-color: #fa08;
+  background-color: #bddea1;
 }
 </style>
