@@ -15,14 +15,17 @@ const props = withDefaults(defineProps<Props>(), {
 <template>
   <div
     flex="vcenter gap-2"
-    p="y-2 x-3"
-    text="gray-900"
+    p="2 md:(y-2 x-3)"
+    text="gray-700 hover:primary-900"
     font="medium"
     border="rounded"
     cursor="pointer"
-    hover="bg-gray-100"
+    transition="default"
+    hover="bg-primary-50"
   >
-    <i :class="`fa-${iconType} fa-${props.icon}`" />
-    <slot>{{ label }}</slot>
+    <i text="xl" :class="`fa-${iconType} fa-${props.icon}`" />
+    <div display="none md:block">
+      <slot>{{ label }}</slot>
+    </div>
   </div>
 </template>

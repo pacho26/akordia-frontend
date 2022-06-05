@@ -10,6 +10,23 @@ import { presetAttributify, presetUno, transformerVariantGroup } from 'unocss';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 
+export const breakpoints = {
+  sm: '640px',
+  // => @media (min-width: 640px) { ... }
+
+  md: '768px',
+  // => @media (min-width: 768px) { ... }
+
+  lg: '1024px',
+  // => @media (min-width: 1024px) { ... }
+
+  xl: '1280px',
+  // => @media (min-width: 1280px) { ... }
+
+  '2xl': '1536px',
+  // => @media (min-width: 1536px) { ... }
+};
+
 export default defineConfig({
   plugins: [
     vue(),
@@ -25,7 +42,8 @@ export default defineConfig({
       theme: {
         colors: {
           primary: {
-            100: '#cae4b4',
+            50: '#e5f2d9',
+            100: '#d8ebc6',
             200: '#b0d78e',
             300: '#96ca68',
             400: '#7bbd42',
@@ -37,7 +55,7 @@ export default defineConfig({
           },
         },
         shortcuts: {
-          'transition-default': 'transition-all ease-in-out duration-400',
+          'transition-default': 'transition-all ease-in-out duration-200',
           'flex-center': 'flex items-center justify-center',
           'flex-vcenter': 'flex items-center',
         },
@@ -48,7 +66,7 @@ export default defineConfig({
           '3xl': '1.625rem', // 26px
         },
         maxWidth: {
-          base: '1366px',
+          base: '1280px',
         },
         fontFamily: {
           sans: ['Poppins', 'sans-serif'],
@@ -105,5 +123,8 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
+  },
+  build: {
+    chunkSizeWarningLimit: 2000,
   },
 });

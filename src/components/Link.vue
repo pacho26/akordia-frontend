@@ -22,6 +22,7 @@ const props = defineProps({
     :to="to || ''"
     :href="href || ''"
     :target="newTab ? '_blank' : ''"
+    flex="vcenter"
     class="no-underline"
   >
     <slot />
