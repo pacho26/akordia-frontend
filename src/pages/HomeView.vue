@@ -16,7 +16,5 @@
       distinctio inventore doloribus dolores ipsa et minima vel odit, cupiditate
       assumenda eveniet, eius aperiam corporis.
     </p>
-
-    <!-- <i class="fa-brands fa-facebook"></i> -->
   </div>
 </template>
