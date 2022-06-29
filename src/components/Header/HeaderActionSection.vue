@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { useChordsBreakpoints } from '@/composables/use-chords-breakpoints';
-import Link from '../Link.vue';
 
 const breakpoints = useChordsBreakpoints();
 const lg = breakpoints.smaller('lg');
@@ -20,6 +19,7 @@ const lg = breakpoints.smaller('lg');
       <HeaderNavItem
         icon="plus"
         label="Add new"
+        h="full"
         bg="primary-500 hover:primary-600"
         text="white"
         :class="{ 'min-w-43px': lg }"
