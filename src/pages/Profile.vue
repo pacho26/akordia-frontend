@@ -1,5 +1,3 @@
-<script lang="ts" setup></script>
-
 <template>
-  <p>Test</p>
+  <div>Profile content</div>
 </template>
