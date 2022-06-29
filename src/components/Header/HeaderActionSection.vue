@@ -1,12 +1,5 @@
-<script lang="ts" setup>
-import { useChordsBreakpoints } from '@/composables/use-chords-breakpoints';
-
-const breakpoints = useChordsBreakpoints();
-const lg = breakpoints.smaller('lg');
-</script>
-
 <template>
-  <div flex gap-4 sm:gap-6>
+  <div flex="~ gap-3.75 sm:gap-6">
     <div class="p-inputgroup">
       <InputText
         placeholder="Search for songs, artists..."
@@ -19,10 +12,8 @@ const lg = breakpoints.smaller('lg');
       <HeaderNavItem
         icon="plus"
         label="Add new"
-        h="full"
         bg="primary-500 hover:primary-600"
         text="white"
-        :class="{ 'min-w-43px': lg }"
       />
     </Link>
   </div>

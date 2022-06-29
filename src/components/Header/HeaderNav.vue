@@ -4,7 +4,7 @@
       <HeaderNavItem icon="music" label="My songbook" />
     </Link>
     <Link to="/profile">
-      <HeaderNavItem icon="user" label="Profile" />
+      <HeaderNavItem icon="user" label="Login" />
     </Link>
     <HeaderNavItem icon="bars" label="Menu" />
   </div>
