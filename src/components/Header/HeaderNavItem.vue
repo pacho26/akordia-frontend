@@ -14,7 +14,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <div
-    flex="vcenter gap-2"
+    flex="center gap-2"
     p="2 md:(y-2 x-3)"
     text="gray-700 hover:primary-900"
     font="medium"
@@ -22,9 +22,11 @@ const props = withDefaults(defineProps<Props>(), {
     cursor="pointer"
     transition="default"
     hover="bg-primary-50"
+    whitespace="nowrap"
+    select="none"
   >
     <i text="xl" :class="`fa-${iconType} fa-${props.icon}`" />
-    <div display="none md:block">
+    <div display="none lg:block">
       <slot>{{ label }}</slot>
     </div>
   </div>

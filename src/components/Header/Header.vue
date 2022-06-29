@@ -9,7 +9,7 @@ const sm = breakpoints.smaller('sm');
   <div p="t-2 b-4 sm:y-4" bg="white" shadow="sm">
     <Container flex="~ col gap-3">
       <div flex="vcenter" justify="between">
-        <div flex="vcenter gap-12">
+        <div flex="vcenter gap-8 md:gap-12">
           <Link to="/">
             <img
               src="@/assets/img/logos/logo-placeholder.png"
@@ -18,25 +18,12 @@ const sm = breakpoints.smaller('sm');
             />
           </Link>
 
-          <div v-if="!sm" class="p-inputgroup">
-            <InputText
-              placeholder="Search for songs, artists..."
-              class="p-inputtext"
-            />
-            <Button icon="pi pi-search" class="p-button-success" />
-          </div>
+          <HeaderActionSection v-if="!sm" />
         </div>
-
         <HeaderNav />
       </div>
 
-      <div v-if="sm" class="p-inputgroup">
-        <InputText
-          placeholder="Search for songs, artists..."
-          class="p-inputtext"
-        />
-        <Button icon="pi pi-search" class="p-button-success" />
-      </div>
+      <HeaderActionSection v-if="sm" />
     </Container>
   </div>
 </template>
