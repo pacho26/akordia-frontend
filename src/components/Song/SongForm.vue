@@ -32,7 +32,7 @@ const print = () => {
 </script>
 
 <template>
-  <div m="t-12" flex="~ col sm:row" gap-9>
+  <div m="t-12" flex="~ col gap-9 sm:row">
     <div class="p-float-label">
       <InputText id="inputtext" type="text" v-model="formData.title" w="full" />
       <label for="inputtext">Title*</label>

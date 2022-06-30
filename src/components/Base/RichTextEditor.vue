@@ -35,7 +35,7 @@ onMounted(() => {
     :spellcheck="false"
     text="!base sm:!lg"
     @text-change="$emit('text-change', editor.getHTML())"
-    :class="readOnly ? 'remove-padding' : 'bg-white'"
+    :class="readOnly ? 'read-only' : 'bg-white'"
   />
 </template>
 
@@ -44,9 +44,10 @@ onMounted(() => {
   background: #f0f2f4;
 }
 
-.remove-padding {
+.read-only {
   .ql-editor {
     padding: 0 !important;
+    line-height: 1.5;
 
     p {
       cursor: inherit !important;
