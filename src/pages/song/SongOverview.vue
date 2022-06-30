@@ -13,7 +13,7 @@ const song = ref({
 </script>
 
 <template>
-  <div p="y-4" border="b-1 gray-300">
+  <div m="sm:t-2" p="y-4" border="b-1 gray-300">
     <!-- TODO: Add link to fetch all songs by artist -->
     <div text="gray-600 lg sm:2xl" font="300" class="uppercase">
       {{ song.artist }}

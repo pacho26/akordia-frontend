@@ -8,7 +8,7 @@
       <Button icon="pi pi-search" class="p-button-success" />
     </div>
 
-    <Link to="/new-chords">
+    <Link to="/song/new">
       <HeaderNavItem
         icon="plus"
         label="Add new"

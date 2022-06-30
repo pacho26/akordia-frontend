@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/pages/Home.vue';
 import Profile from '@/pages/Profile.vue';
-import NewChords from '@/pages/NewChords.vue';
+import SongAdd from '@/pages/song/SongAdd.vue';
 import MySongbook from '@/pages/MySongbook.vue';
 import SongOverview from '@/pages/song/SongOverview.vue';
 import SongEdit from '@/pages/song/SongEdit.vue';
@@ -20,11 +20,6 @@ const router = createRouter({
       component: Profile,
     },
     {
-      path: '/new-chords',
-      name: 'new-chords',
-      component: NewChords,
-    },
-    {
       path: '/my-songbook',
       name: 'my-songbook',
       component: MySongbook,
@@ -39,6 +34,11 @@ const router = createRouter({
           path: ':id',
           name: 'song',
           component: SongOverview,
+        },
+        {
+          path: 'new',
+          name: 'new',
+          component: SongAdd,
         },
         {
           path: ':id/edit',
