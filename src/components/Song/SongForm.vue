@@ -27,7 +27,7 @@ onBeforeMount(() => {
 });
 
 const print = () => {
-  console.log(formData);
+  console.log(formData.content);
 };
 </script>
 
