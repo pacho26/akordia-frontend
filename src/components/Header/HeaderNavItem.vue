@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { IconPropModel } from '@/models/icon';
+import type { IconPropModel } from '@/models/icon.model';
 
 interface Props {
   icon?: IconPropModel | null;

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useChordsBreakpoints } from '@/composables/use-chords-breakpoints';
+import { useChordsBreakpoints } from '@/composables/useChordsBreakpoints';
 
 const breakpoints = useChordsBreakpoints();
 const sm = breakpoints.smaller('sm');

@@ -1,14 +1,13 @@
 <script lang="ts" setup>
-import type SongModel from '@/models/song';
+import type { Song } from '@/models/song.model';
 
-interface Props {
-  song?: SongModel;
-}
+const props = defineProps<{
+  song?: Song;
+}>();
 
-const props = defineProps<Props>();
-
-const formData: SongModel = {
-  id: '',
+const formData: {
+  [key: string]: any;
+} = {
   title: '',
   alternativeTitle: '',
   artist: '',
@@ -19,8 +18,8 @@ const formData: SongModel = {
 onBeforeMount(() => {
   if (props?.song) {
     Object.keys(props.song).forEach((key) => {
-      if (key in formData) {
-        formData[key] = props.song[key];
+      if (key in formData && props?.song) {
+        formData[key] = props.song[key as keyof Song];
       }
     });
   }

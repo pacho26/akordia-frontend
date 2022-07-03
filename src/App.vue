@@ -31,28 +31,14 @@ const onWindowHeightChange = () => {
     >
       <div text="md" font="500" class="uppercase">Recent songs:</div>
       <div flex="~ col gap-2" m="t-2">
-        <div w="260px" text="xs" cursor="pointer" class="three-dots">
-          Đorđe Balašević - Devojka sa čardaš nogama
-        </div>
-        <div w="260px" text="xs" cursor="pointer" class="three-dots">
-          Đorđe Balašević - Devojka sa čardaš nogama
-        </div>
-        <div w="260px" text="xs" cursor="pointer" class="three-dots">
-          Đorđe Balašević - Devojka sa čardaš nogama
-        </div>
-        <div w="260px" text="xs" cursor="pointer" class="three-dots">
-          Đorđe Balašević - Devojka sa čardaš nogama
-        </div>
-        <div w="260px" text="xs" cursor="pointer" class="three-dots">
-          Đorđe Balašević - Devojka sa čardaš nogama
-        </div>
-        <div w="260px" text="xs" cursor="pointer" class="three-dots">
-          Đorđe Balašević - Devojka sa čardaš nogama
-        </div>
-        <div w="260px" text="xs" cursor="pointer" class="three-dots">
-          Đorđe Balašević - Devojka sa čardaš nogama
-        </div>
-        <div w="260px" text="xs" cursor="pointer" class="three-dots">
+        <div
+          :key="i"
+          v-for="i in 8"
+          w="260px"
+          text="xs"
+          cursor="pointer"
+          class="three-dots"
+        >
           Đorđe Balašević - Devojka sa čardaš nogama
         </div>
       </div>

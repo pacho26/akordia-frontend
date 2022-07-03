@@ -1,7 +1,4 @@
-<script setup lang="ts">
-import InputText from 'primevue/inputtext';
-const value = ref('test');
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div>
