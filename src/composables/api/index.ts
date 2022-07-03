@@ -1,3 +1,5 @@
+import { get } from '@vueuse/core';
+
 export const useResultState = () => {
   const error = ref<string | null>(null);
   const isError = computed(() => get(error) !== null);

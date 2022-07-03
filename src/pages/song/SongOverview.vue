@@ -1,38 +1,35 @@
 <script lang="ts" setup>
 import { useRoute } from 'vue-router';
-import { useSongs } from '@/composables/api/songs';
-import { storeToRefs } from 'pinia';
-import { useSongsStore } from '@/stores/songs';
+import { useSong } from '@/composables/api/songs';
 
-const { fetchSongs } = useSongs();
+const route = useRoute();
 
-const songsStore = useSongsStore();
-const { songs } = storeToRefs(songsStore);
+const { fetchSong, song } = useSong();
 
-const song = ref({});
+const songId = computed(() => route.params.id as string);
 
-onBeforeMount(async () => {
-  await fetchSongs();
-  song.value = songs.value.data[0];
+watchEffect(() => {
+  if (songId.value) {
+    fetchSong(songId.value);
+  }
 });
-
 // TODO: Replace with real values
 const isAuthor = true;
 
 const youtubeLink = computed(() => {
-  return song.value.youtubeId
-    ? `https://www.youtube.com/embed/${songs.value.data[0].youtubeId}`
+  return song.value?.youtubeId
+    ? `https://www.youtube.com/embed/${song.value?.youtubeId}`
     : '';
 });
 
 const editRoute = computed(() => {
-  const route = useRoute();
   return `${route.path}/edit`;
 });
 </script>
 
 <template>
   <div
+    v-if="song"
     flex="~ col gap-4 sm:row"
     justify="between"
     items="sm:end"
@@ -46,7 +43,7 @@ const editRoute = computed(() => {
         {{ song.artist }}
       </div>
       <div text="gray-800 2xl sm:3xl" font="600">
-        {{ song.title }}
+        {{ song?.title }}
       </div>
       <div font="300" v-if="song.alternativeTitle">
         ({{ song.alternativeTitle }})
@@ -60,7 +57,7 @@ const editRoute = computed(() => {
     </Link>
   </div>
   <div flex="~ gap-8 wrap" justify="between" m="t-6">
-    <RichTextEditor v-if="song.content" read-only :content="song.content" />
+    <RichTextEditor v-if="song?.content" read-only :content="song.content" />
     <div v-if="youtubeLink" w="full sm:80">
       <iframe :src="youtubeLink" w="full" border="none rounded" />
     </div>

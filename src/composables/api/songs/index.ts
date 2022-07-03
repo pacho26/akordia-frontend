@@ -1,3 +1,4 @@
+import { set } from '@vueuse/core';
 import type { Song } from '@/models/song.model';
 import * as api from '@/services/api/songs';
 import { useSongsStore } from '@/stores/songs';
@@ -23,6 +24,37 @@ export const useSongs = () => {
 
   return {
     fetchSongs,
+    error,
+    isError,
+    isSuccess,
+    loading,
+  };
+};
+
+export const useSong = () => {
+  const song = ref<Song>();
+  const { error, isError, isSuccess } = useResultState();
+
+  const fetchSong = async (id: string) => {
+    try {
+      set(loading, true);
+
+      const fetchedSong = await api.getSongById(id);
+      if (fetchedSong) {
+        set(song, fetchedSong.data);
+        return song;
+      }
+    } catch (err) {
+      set(error, err);
+      return false;
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  return {
+    song,
+    fetchSong,
     error,
     isError,
     isSuccess,
