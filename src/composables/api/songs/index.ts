@@ -1,5 +1,5 @@
 import { set } from '@vueuse/core';
-import type { Song } from '@/models/song.model';
+import type { Song, SongCreate } from '@/models/song.model';
 import * as api from '@/services/api/songs';
 import { useSongsStore } from '@/stores/songs';
 import { useResultState } from '../index';
@@ -59,5 +59,33 @@ export const useSong = () => {
     isError,
     isSuccess,
     loading,
+  };
+};
+
+export const useSongCreate = () => {
+  const store = useSongsStore();
+  const song = ref<Song>();
+  const { error, isError, isSuccess } = useResultState();
+
+  const createSong = async (songData: SongCreate) => {
+    try {
+      const newSong = await api.createSong(songData);
+      if (newSong) {
+        set(song, newSong);
+        store.addSong(newSong);
+        return newSong;
+      }
+    } catch (err) {
+      set(error, err);
+      return false;
+    }
+  };
+
+  return {
+    song,
+    createSong,
+    error,
+    isError,
+    isSuccess,
   };
 };

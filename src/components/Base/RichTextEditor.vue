@@ -8,6 +8,8 @@ interface Props {
 
 const props = defineProps<Props>();
 
+const emits = defineEmits(['change']);
+
 const options = {
   formats: ['bold', 'color'],
   modules: {
@@ -23,6 +25,10 @@ const editor = ref(null);
 onMounted(() => {
   editor.value.setHTML(props.content || '');
 });
+
+const emitChange = () => {
+  emits('change', editor.value.getHTML());
+};
 </script>
 
 <template>
@@ -34,7 +40,7 @@ onMounted(() => {
     :read-only="readOnly"
     :spellcheck="false"
     text="!base sm:!lg"
-    @text-change="$emit('text-change', editor.getHTML())"
+    @text-change="emitChange"
     :class="readOnly ? 'read-only' : 'bg-white'"
   />
 </template>
@@ -42,6 +48,13 @@ onMounted(() => {
 <style lang="scss">
 .ql-toolbar.ql-snow {
   background: #f0f2f4;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.ql-container {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .read-only {

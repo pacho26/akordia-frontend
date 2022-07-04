@@ -1,82 +1,89 @@
 <script lang="ts" setup>
-import type { Song } from '@/models/song.model';
+import type { FormInstance } from '@/models/element.model';
+import type { SongAction, SongCreate } from '@/models/song.model';
 
 const props = defineProps<{
-  song?: Song;
+  action: SongAction;
+  rules: object;
+  model: SongCreate;
+  submitMsg: string;
 }>();
+const emits = defineEmits(['submit', 'error']);
+const router = useRouter();
 
-const formData: {
-  [key: string]: any;
-} = {
-  title: '',
-  alternativeTitle: '',
-  artist: '',
-  youtubeId: '',
-  content: '',
+const form = reactive(props.model);
+const formRef = ref<FormInstance | null>(null);
+
+const emitSubmit = () => emits('submit', { formRef, form });
+
+const updateContent = (content: string) => {
+  form.content = content;
+  isPressedSubmitBtn.value = false;
 };
 
-onBeforeMount(() => {
-  if (props?.song) {
-    Object.keys(props.song).forEach((key) => {
-      if (key in formData && props?.song) {
-        formData[key] = props.song[key as keyof Song];
-      }
-    });
-  }
+const isEditorBlurred = ref(false);
+const isPressedSubmitBtn = ref(false);
+
+const onEditorBlur = () => {
+  isEditorBlurred.value = true;
+};
+
+const hasEditorErrorMsg = computed(() => {
+  return (
+    ((!form.content || form.content === '<p><br></p>') &&
+      isEditorBlurred.value) ||
+    isPressedSubmitBtn.value
+  );
 });
-
-const print = () => {
-  console.log(formData.content);
-};
 </script>
 
 <template>
-  <div m="t-12" flex="~ col gap-9 sm:row">
-    <div class="p-float-label">
-      <InputText id="inputtext" type="text" v-model="formData.title" w="full" />
-      <label for="inputtext">Title*</label>
+  <el-form
+    ref="formRef"
+    label-position="top"
+    :model="form"
+    :rules="rules"
+    size="large"
+    hide-required-asterisk
+    @submit.prevent="emitSubmit"
+  >
+    <div>
+      <el-form-item label="Title" prop="title">
+        <el-input v-model="form.title" type="text"></el-input>
+      </el-form-item>
+      <el-form-item label="Alternative title" prop="alternativeTitle">
+        <el-input v-model="form.alternativeTitle" type="text"></el-input>
+      </el-form-item>
+      <el-form-item label="Artist" prop="artist">
+        <el-input v-model="form.artist" type="text"></el-input>
+      </el-form-item>
+      <el-form-item label="Youtube ID" prop="youtubeId">
+        <el-input v-model="form.youtubeId" type="text"></el-input>
+      </el-form-item>
     </div>
 
-    <div class="p-float-label">
-      <InputText
-        id="inputtext"
-        type="text"
-        v-model="formData.artist"
-        w="full"
+    <div m="t-8">
+      <RichTextEditor
+        @blur="onEditorBlur"
+        @change="updateContent"
+        :content="form.content"
       />
-      <label for="inputtext">Artist*</label>
+      <div v-if="hasEditorErrorMsg" p="t-1" text="xs red">
+        Please enter the content
+      </div>
     </div>
 
-    <div class="p-float-label">
-      <InputText
-        id="inputtext"
-        type="text"
-        v-model="formData.alternativeTitle"
-        w="full"
-      />
-      <label for="inputtext">Alternative name</label>
-    </div>
-
-    <div class="p-float-label">
-      <InputText
-        id="inputtext"
-        type="text"
-        v-model="formData.youtubeId"
-        w="full"
-      />
-      <label for="inputtext">Youtube video ID</label>
-    </div>
-  </div>
-
-  <div m="t-8">
-    <RichTextEditor :content="formData.content" />
-  </div>
-
-  <Button
-    @click="print"
-    label="Save"
-    float="right"
-    m="!t-8"
-    class="p-button-success"
-  />
+    <el-form-item m="t-8">
+      <el-button
+        type="primary"
+        native-type="submit"
+        @click="isPressedSubmitBtn = true"
+      >
+        {{ submitMsg }}
+      </el-button>
+      <el-button plain native-type="button" @click="router.back()">
+        Cancel
+      </el-button>
+    </el-form-item>
+  </el-form>
 </template>

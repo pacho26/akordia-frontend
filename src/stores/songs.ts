@@ -12,8 +12,12 @@ export const useSongsStore = defineStore({
   }),
   getters: {},
   actions: {
+    // TODO: Is async necessary?
     async setSongs(songs: Song[]) {
       this.songs = songs;
+    },
+    addSong(song: Song) {
+      this.songs.push(song);
     },
   },
 });
