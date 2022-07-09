@@ -26,10 +26,10 @@ const editor = ref(null);
 
 let isEditorSet = false;
 
-const isCreateRoute = router.currentRoute.value.path.split('/')[2];
+const isCreateRoute = router.currentRoute.value.path.split('/')[2] === 'new';
 
 watchEffect(() => {
-  if (props.content && !isEditorSet && !isCreateRoute) {
+  if (props.content && !isEditorSet && !isCreateRoute && editor.value) {
     editor.value.setHTML(props.content);
     isEditorSet = true;
   }
