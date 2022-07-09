@@ -1,12 +1,13 @@
 <script lang="ts" setup>
 import type { FormInstance } from '@/models/element.model';
-import type { SongAction, SongCreate } from '@/models/song.model';
+import type { Song, SongAction, SongCreate } from '@/models/song.model';
 
 const props = defineProps<{
   action: SongAction;
   rules: object;
   model: SongCreate;
   submitMsg: string;
+  song?: Song;
 }>();
 const emits = defineEmits(['submit', 'error']);
 const router = useRouter();

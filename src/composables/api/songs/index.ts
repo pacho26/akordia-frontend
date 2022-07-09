@@ -1,5 +1,5 @@
 import { set } from '@vueuse/core';
-import type { Song, SongCreate } from '@/models/song.model';
+import type { Song, SongCreate, SongEdit } from '@/models/song.model';
 import * as api from '@/services/api/songs';
 import { useSongsStore } from '@/stores/songs';
 import { useResultState } from '../index';
@@ -84,6 +84,34 @@ export const useSongCreate = () => {
   return {
     song,
     createSong,
+    error,
+    isError,
+    isSuccess,
+  };
+};
+
+export const useSongUpdate = () => {
+  const store = useSongsStore();
+  const song = ref<Song>();
+  const { error, isError, isSuccess } = useResultState();
+
+  const updateSong = async (id: string, songData: SongEdit) => {
+    try {
+      const updatedSong = await api.updateSong(id, songData);
+      if (updatedSong) {
+        set(song, updatedSong);
+        store.updateSong(updatedSong);
+        return updatedSong;
+      }
+    } catch (err) {
+      set(error, err);
+      return false;
+    }
+  };
+
+  return {
+    song: readonly(song),
+    updateSong,
     error,
     isError,
     isSuccess,

@@ -3,7 +3,7 @@ export interface Song {
   title: string;
   alternativeTitle?: string;
   artist: string;
-  youtubeId?: string; // For example: "dQw4w9WgXcQ" in "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  youtubeId?: string;
   content: string;
   createdAt: string;
   updatedAt: string;
@@ -19,9 +19,11 @@ export interface SongCreate {
   title: string;
   alternativeTitle?: string;
   artist: string;
-  youtubeId?: string; // For example: "dQw4w9WgXcQ" in "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  youtubeId?: string;
   content: string;
 }
+
+export type SongEdit = Partial<SongCreate>;
 
 export interface SongDTO {
   data: Song;

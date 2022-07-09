@@ -19,5 +19,9 @@ export const useSongsStore = defineStore({
     addSong(song: Song) {
       this.songs.push(song);
     },
+    updateSong(song: Song) {
+      const index = this.songs.findIndex(({ _id }) => _id === song._id);
+      this.songs[index] = song;
+    },
   },
 });

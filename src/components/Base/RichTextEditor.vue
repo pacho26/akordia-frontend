@@ -4,11 +4,14 @@ import { QuillEditor } from '@vueup/vue-quill';
 interface Props {
   readOnly?: boolean;
   content?: string;
+  preventInitialize?: boolean;
 }
 
 const props = defineProps<Props>();
 
 const emits = defineEmits(['change']);
+
+const router = useRouter();
 
 const options = {
   formats: ['bold', 'color'],
@@ -21,6 +24,17 @@ const options = {
 };
 
 const editor = ref(null);
+
+let isEditorSet = false;
+
+const preventInitialize = router.currentRoute.value.path.split('/')[2];
+
+watchEffect(() => {
+  if (props.content && !isEditorSet && !preventInitialize) {
+    editor.value.setHTML(props.content);
+    isEditorSet = true;
+  }
+});
 
 onMounted(() => {
   editor.value.setHTML(props.content || '');
