@@ -4,7 +4,6 @@ import { QuillEditor } from '@vueup/vue-quill';
 interface Props {
   readOnly?: boolean;
   content?: string;
-  preventInitialize?: boolean;
 }
 
 const props = defineProps<Props>();
@@ -27,10 +26,10 @@ const editor = ref(null);
 
 let isEditorSet = false;
 
-const preventInitialize = router.currentRoute.value.path.split('/')[2];
+const isCreateRoute = router.currentRoute.value.path.split('/')[2];
 
 watchEffect(() => {
-  if (props.content && !isEditorSet && !preventInitialize) {
+  if (props.content && !isEditorSet && !isCreateRoute) {
     editor.value.setHTML(props.content);
     isEditorSet = true;
   }
