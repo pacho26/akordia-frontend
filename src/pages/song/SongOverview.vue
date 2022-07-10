@@ -8,11 +8,22 @@ const { fetchSong, song } = useSong();
 
 const songId = computed(() => route.params.id as string);
 
-watchEffect(() => {
+watchEffect(async () => {
   if (songId.value) {
-    fetchSong(songId.value);
+    await fetchSong(songId.value);
+    addMarginTopToChordsParagraphs();
   }
 });
+
+const addMarginTopToChordsParagraphs = () => {
+  const editorEl = document.querySelector('.editor');
+  editorEl?.querySelectorAll('strong').forEach((elem, idx) => {
+    if (idx > 0 && elem.parentElement) {
+      elem.parentElement.style.marginTop = '0.5rem';
+    }
+  });
+};
+
 // TODO: Replace with real values
 const isAuthor = true;
 
@@ -60,7 +71,12 @@ const editRoute = computed(() => {
     </Link>
   </div>
   <div flex="~ gap-8 wrap" justify="between" m="t-6">
-    <RichTextEditor v-if="song?.content" read-only :content="song.content" />
+    <RichTextEditor
+      v-if="song?.content"
+      read-only
+      :content="song.content"
+      class="editor"
+    />
     <div v-if="youtubeLink" w="full sm:80">
       <iframe :src="youtubeLink" w="full" border="none rounded" />
     </div>
