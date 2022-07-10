@@ -4,6 +4,7 @@ import { useSong } from '@/composables/api/songs';
 import { useEditSongForm } from '@/composables/form/useEditSongForm';
 import { SongAction } from '@/models/song.model';
 import type { SubmitFormArgs } from '@/models';
+import { get } from '@vueuse/core';
 
 const route = useRoute();
 
@@ -23,9 +24,7 @@ watchEffect(async () => {
 });
 
 const submitForm = ({ formRef, form }: SubmitFormArgs) => {
-  console.log('formRef :>> ', formRef);
-  console.log('form :>> ', form);
-  // onSubmit(form, get(formRef), '/my-songbook');
+  onSubmit(songId.value, form, get(formRef), `/song/${songId.value}`);
 };
 </script>
 

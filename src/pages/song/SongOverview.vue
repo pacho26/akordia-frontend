@@ -25,6 +25,9 @@ const youtubeLink = computed(() => {
 const editRoute = computed(() => {
   return `${route.path}/edit`;
 });
+
+// TODO: Add transpose
+// strongElementsInRichTextEditor.forEach((el) => {console.log(el.textContent.split(/\s+/))})
 </script>
 
 <template>
