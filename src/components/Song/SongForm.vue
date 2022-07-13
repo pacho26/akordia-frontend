@@ -45,21 +45,20 @@ const hasEditorErrorMsg = computed(() => {
     :model="form"
     :rules="rules"
     size="large"
-    hide-required-asterisk
     @submit.prevent="emitSubmit"
   >
     <div>
       <el-form-item label="Title" prop="title">
-        <el-input v-model="form.title" type="text"></el-input>
+        <el-input v-model="form.title" type="text" />
       </el-form-item>
       <el-form-item label="Alternative title" prop="alternativeTitle">
-        <el-input v-model="form.alternativeTitle" type="text"></el-input>
+        <el-input v-model="form.alternativeTitle" type="text" />
       </el-form-item>
       <el-form-item label="Artist" prop="artist">
-        <el-input v-model="form.artist" type="text"></el-input>
+        <el-input v-model="form.artist" type="text" />
       </el-form-item>
       <el-form-item label="Youtube ID" prop="youtubeId">
-        <el-input v-model="form.youtubeId" type="text"></el-input>
+        <el-input v-model="form.youtubeId" type="text" />
       </el-form-item>
     </div>
 

@@ -3,10 +3,11 @@ import { useNotification } from '../useNotification';
 import type { SongCreate } from '@/models/song.model';
 import { ElNotification, ElForm } from 'element-plus';
 
-// import { useUserStore } from 'store/user';
+import { useUserStore } from '@/stores/user';
+import { storeToRefs } from 'pinia';
 
 export const useCreateSongForm = () => {
-  // const { user } = storeToRefs(useUserStore());
+  const { user } = storeToRefs(useUserStore());
   const { createSong, isSuccess } = useSongCreate();
   const router = useRouter();
 
