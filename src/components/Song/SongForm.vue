@@ -62,7 +62,11 @@ const hasEditorErrorMsg = computed(() => {
       </el-form-item>
     </div>
 
-    <div m="t-8">
+    <div m="t-8" text="sm">
+      <div m="b-3" flex="~">
+        <div m="r-1" text="#f56c6c">*</div>
+        <div text="#606266">Content</div>
+      </div>
       <RichTextEditor
         @blur="onEditorBlur"
         @change="updateContent"

@@ -12,6 +12,8 @@ declare module '@vue/runtime-core' {
     HeaderNav: typeof import('./src/components/Header/HeaderNav.vue')['default']
     HeaderNavItem: typeof import('./src/components/Header/HeaderNavItem.vue')['default']
     Link: typeof import('./src/components/Base/Link.vue')['default']
+    LoginForm: typeof import('./src/components/Auth/LoginForm.vue')['default']
+    RegisterForm: typeof import('./src/components/Auth/RegisterForm.vue')['default']
     RichTextEditor: typeof import('./src/components/Base/RichTextEditor.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
