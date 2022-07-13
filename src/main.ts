@@ -33,6 +33,10 @@ import { QuillEditor } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 
+// FloatingVue
+import FloatingVue from 'floating-vue';
+import 'floating-vue/dist/style.css';
+
 library.add(fas, far, fab);
 dom.watch();
 
@@ -40,7 +44,8 @@ const app = createApp(App)
   .use(createPinia())
   .use(router)
   .use(PrimeVue)
-  .use(ElementPlus);
+  .use(ElementPlus)
+  .use(FloatingVue);
 
 // PrimeVue components
 app.component('font-awesome-icon', FontAwesomeIcon);

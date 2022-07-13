@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/pages/Home.vue';
+import Login from '@/pages/Login.vue';
 import Profile from '@/pages/Profile.vue';
 import SongAdd from '@/pages/song/SongAdd.vue';
 import MySongbook from '@/pages/MySongbook.vue';
@@ -13,6 +14,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Home,
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login,
     },
     {
       path: '/profile',

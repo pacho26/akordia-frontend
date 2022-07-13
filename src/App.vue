@@ -25,7 +25,7 @@ const onWindowHeightChange = () => {
     <div
       ref="sidebar"
       w="380px"
-      display="none sm:block"
+      display="none md:block"
       p="t-6 r-8"
       border="r-1 gray-300"
     >
