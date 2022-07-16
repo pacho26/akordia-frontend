@@ -14,11 +14,23 @@ const userStore = useUserStore();
       :triggers="['hover', 'click', 'focus']"
       :popperTriggers="['hover']"
       :distance="8"
+      pos="relative"
     >
-      <HeaderNavItem
-        icon="user"
-        :label="userStore.user ? userStore.username : 'Login'"
-      />
+      <div>
+        <HeaderNavItem
+          icon="user"
+          :label="userStore.user ? userStore.username : 'Login'"
+        />
+        <i
+          display="lg:none"
+          bg="primary-400"
+          text="7px white"
+          p="0.4"
+          pos="absolute bottom-1.9 right-2"
+          border="rounded-full"
+          class="fa-solid fa-check aspect-square"
+        />
+      </div>
       <template #popper>
         <div flex="~ col gap-4" items="center" p="4">
           <Link to="/profile">
