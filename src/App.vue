@@ -43,7 +43,7 @@ const onWindowHeightChange = () => {
         </div>
       </div>
     </div>
-    <div m="t-6 sm:l-8" w="full">
+    <div m="t-4 sm:(t-6 l-8)" w="full">
       <RouterView />
     </div>
   </Container>
@@ -67,5 +67,15 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
 }
 </style>

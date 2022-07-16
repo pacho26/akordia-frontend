@@ -99,7 +99,7 @@ const submitForm = () =>
       </el-radio-group>
     </el-form-item>
     <el-form-item>
-      <el-button type="success" native-type="submit">Register</el-button>
+      <el-button type="primary" native-type="submit">Register</el-button>
       <el-button native-type="button" @click="router.push('/login')">
         Login
       </el-button>

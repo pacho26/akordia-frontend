@@ -3,7 +3,7 @@
     <Link to="/my-songbook">
       <HeaderNavItem icon="music" label="My songbook" />
     </Link>
-    <Link to="/profile">
+    <Link to="/login">
       <HeaderNavItem icon="user" label="Login" />
     </Link>
     <HeaderNavItem icon="bars" label="Menu" />

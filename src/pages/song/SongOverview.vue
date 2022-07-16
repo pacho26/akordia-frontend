@@ -86,30 +86,33 @@ const transpose = (mode: string) => {
     }
   });
 };
-
-// TODO: Add transpose
-// strongElementsInRichTextEditor.forEach((el) => {console.log(el.textContent.split(/\s+/))})
 </script>
 
 <template>
   <div
     v-if="song"
-    flex="~ col gap-3 sm:row"
+    flex="~ col gap-4 sm:row"
     justify="between"
     p="b-4"
     border="b-1 gray-300"
   >
     <div>
       <!-- TODO: Add link to fetch all songs by artist -->
-      <div text="gray-600 lg sm:xl" font="300" class="uppercase">
-        {{ song.artist }}
-      </div>
-      <div text="gray-800 2xl sm:3xl" font="600">
-        {{ song?.title }}
-      </div>
-      <div v-if="song.alternativeTitle" m="t-1" font="300">
-        ({{ song.alternativeTitle }})
-      </div>
+      <Heading
+        :label="song?.artist"
+        as="h2"
+        :level="3"
+        font="300"
+        class="uppercase"
+      />
+      <Heading :label="song?.title" as="h1" :level="1" font="600" />
+      <Heading
+        :label="'(' + song?.alternativeTitle + ')'"
+        as="h2"
+        :level="3"
+        font="300"
+        m="t-1"
+      />
     </div>
 
     <div flex="~ row gap-4 sm:col" justify="between" items="end">
@@ -138,7 +141,7 @@ const transpose = (mode: string) => {
     </div>
   </div>
 
-  <div flex="~ gap-8 wrap" justify="center sm:between" m="t-6">
+  <div flex="~ gap-8 wrap" justify="center sm:between" m="t-4 sm:t-6">
     <RichTextEditor
       v-if="song?.content"
       read-only
