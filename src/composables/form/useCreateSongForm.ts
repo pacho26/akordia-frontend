@@ -82,7 +82,8 @@ export const useCreateSongForm = () => {
     if (!formEl) return;
     formEl.validate(async (valid: any) => {
       if (valid) {
-        const newSong = await createSong(song);
+        const payload = { ...song, author: user.value?._id };
+        const newSong = await createSong(payload);
         if (isSuccess && newSong) {
           ElNotification.closeAll();
           router.replace(routeRedirect);
