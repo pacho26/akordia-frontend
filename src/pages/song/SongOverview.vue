@@ -96,8 +96,7 @@ const transpose = (mode: string) => {
     v-if="song"
     flex="~ col gap-3 sm:row"
     justify="between"
-    m="sm:t-2"
-    p="y-4"
+    p="b-4"
     border="b-1 gray-300"
   >
     <div>

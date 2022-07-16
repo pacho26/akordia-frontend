@@ -49,16 +49,32 @@ const hasEditorErrorMsg = computed(() => {
   >
     <div>
       <el-form-item label="Title" prop="title">
-        <el-input v-model="form.title" type="text" />
+        <el-input v-model="form.title" type="text">
+          <template #prefix>
+            <i text="base" class="fa-solid fa-music" />
+          </template>
+        </el-input>
       </el-form-item>
       <el-form-item label="Alternative title" prop="alternativeTitle">
-        <el-input v-model="form.alternativeTitle" type="text" />
+        <el-input v-model="form.alternativeTitle" type="text">
+          <template #prefix>
+            <i text="base" class="fa-solid fa-music" />
+          </template>
+        </el-input>
       </el-form-item>
       <el-form-item label="Artist" prop="artist">
-        <el-input v-model="form.artist" type="text" />
+        <el-input v-model="form.artist" type="text">
+          <template #prefix>
+            <i text="base" class="fa-solid fa-microphone" />
+          </template>
+        </el-input>
       </el-form-item>
       <el-form-item label="Youtube ID" prop="youtubeId">
-        <el-input v-model="form.youtubeId" type="text" />
+        <el-input v-model="form.youtubeId" type="text">
+          <template #prefix>
+            <i text="base" class="fa-brands fa-youtube" />
+          </template>
+        </el-input>
       </el-form-item>
     </div>
 
