@@ -1,5 +1,8 @@
 <script lang="ts" setup>
+import { useAuth } from '@/composables/api/auth';
 import { useUserStore } from '@/stores/user';
+
+const { logout } = useAuth();
 
 const userStore = useUserStore();
 </script>
@@ -20,6 +23,7 @@ const userStore = useUserStore();
         <HeaderNavItem
           icon="user"
           :label="userStore.user ? userStore.username : 'Login'"
+          no-hover
         />
         <i
           display="lg:none"
@@ -36,7 +40,7 @@ const userStore = useUserStore();
           <Link to="/profile">
             <Button class="p-button-info">Profile</Button>
           </Link>
-          <Button class="p-button-danger">Logout</Button>
+          <Button @click="logout" class="p-button-danger">Logout</Button>
         </div>
       </template>
     </VDropdown>

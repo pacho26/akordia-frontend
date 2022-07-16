@@ -5,6 +5,7 @@ interface Props {
   icon?: IconPropModel | null;
   iconType?: 'solid' | 'regular' | 'brands';
   label?: string | null;
+  noHover?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -23,7 +24,7 @@ const props = withDefaults(defineProps<Props>(), {
     border="rounded"
     cursor="pointer"
     transition="default"
-    hover="bg-primary-50"
+    :hover="noHover ? '' : 'bg-primary-50'"
     whitespace="nowrap"
     select="none"
   >

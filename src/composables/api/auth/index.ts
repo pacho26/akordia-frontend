@@ -66,14 +66,11 @@ export const useAuth = () => {
     set(error, null);
 
     try {
-      const res = await auth.logout();
-      router.replace('/login');
       userStore.clearUserData();
-      return res;
+      router.replace('/login');
     } catch (err) {
       console.log(err);
       set(error, err);
-      return false;
     }
   };
 

@@ -37,6 +37,8 @@ export const useUserStore = defineStore('user', {
     },
     clearUserData() {
       this.$reset();
+      LocalStorageService.instance.removeUser();
+      LocalStorageService.instance.removeAccessToken();
     },
     async getCurrentUser() {
       try {
