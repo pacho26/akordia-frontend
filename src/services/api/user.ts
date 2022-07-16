@@ -9,7 +9,7 @@ export const updateCurrentUser = (userData: UserUpdate): Promise<User> =>
 
 export const deleteCurrentUser = (): Promise<User> => http.delete('/users/me');
 
-// All users (ADMIN ONLY)
+// ADMIN ONLY
 export const getUser = (id: string): Promise<User> => http.get(`/users/${id}`);
 
 export const getUsers = (): Promise<User[]> => http.get('/users');

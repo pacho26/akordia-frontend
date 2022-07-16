@@ -27,10 +27,10 @@ export const useNotification = () => {
       type: 'error',
     });
 
-  const showLoginError = (error: string | null) =>
+  const showLoginError = () =>
     showNotification({
       title: 'Invalid login',
-      message: error || 'Please check your details and try again',
+      message: 'Please check your details and try again',
       type: 'error',
     });
 
@@ -49,20 +49,11 @@ export const useNotification = () => {
     });
   };
 
-  // const showUpdateUserPrivilegiesNotification = (newRole: UserRole) => {
-  //   showNotification({
-  //     title: 'Updated user privileges',
-  //     message: `User has been given ${newRole.toUpperCase()} privileges`,
-  //     type: 'success',
-  //   });
-  // };
-
   return {
     showNotification,
     showLoginError,
     showRegisterError,
     showMutateSongError,
     showDeletedUserNotication,
-    // showUpdateUserPrivilegiesNotification,
   };
 };

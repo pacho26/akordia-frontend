@@ -8,7 +8,7 @@ import { get } from '@vueuse/core';
 
 export const useRegisterForm = () => {
   const form: UserRegister = reactive({
-    name: '',
+    username: '',
     email: '',
     password: '',
     role: UserRole.User,
@@ -24,10 +24,10 @@ export const useRegisterForm = () => {
     form.password.trim().toString() === get(repeatedPassword).trim().toString();
 
   const rules = reactive({
-    name: [
+    username: [
       {
         required: true,
-        message: 'Please enter your name',
+        message: 'Please enter your username',
         trigger: 'blur',
       },
       {

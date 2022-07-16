@@ -20,6 +20,7 @@ export const useUserStore = defineStore('user', {
   getters: {
     isAuthenticated: (state) => !!state.token,
     isAdmin: (state) => state.user?.role === 'admin',
+    username: (state) => state.user?.username,
   },
   actions: {
     setUserData({ user, token }: UserWithToken) {
@@ -28,6 +29,7 @@ export const useUserStore = defineStore('user', {
     },
     setUser(user: User) {
       this.user = user;
+      LocalStorageService.instance.setUser(user);
     },
     setToken(token: string) {
       this.token = token;

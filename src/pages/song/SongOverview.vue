@@ -141,14 +141,14 @@ const transpose = (mode: string) => {
     </div>
   </div>
 
-  <div flex="~ gap-8 wrap" justify="center sm:between" m="t-4 sm:t-6">
+  <div flex="~ gap-8 wrap" justify="sm:between" m="t-4 sm:t-6">
     <RichTextEditor
       v-if="song?.content"
       read-only
       :content="song.content"
       class="editor"
     />
-    <div v-if="youtubeLink" w="full sm:80">
+    <div v-if="youtubeLink" w="full sm:80" class="md:translate-y-1">
       <iframe :src="youtubeLink" w="full" border="none rounded" />
     </div>
   </div>

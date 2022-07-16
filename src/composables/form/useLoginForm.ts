@@ -35,7 +35,9 @@ export const useLoginForm = () => {
 
   const onSubmit = async (
     formEl: InstanceType<typeof ElForm> | null,
+    // eslint-disable-next-line @typescript-eslint/ban-types
     onSuccess: Function,
+    // eslint-disable-next-line @typescript-eslint/ban-types
     onError: Function
   ) => {
     if (!formEl) return;

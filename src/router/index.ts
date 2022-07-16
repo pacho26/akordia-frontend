@@ -8,6 +8,8 @@ import MySongbook from '@/pages/MySongbook.vue';
 import SongOverview from '@/pages/song/SongOverview.vue';
 import SongEdit from '@/pages/song/SongEdit.vue';
 
+import { useUserStore } from '@/stores/user';
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -60,6 +62,15 @@ const router = createRouter({
       ],
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  const user = localStorage.getItem('User');
+  if (user) {
+    const userStore = useUserStore();
+    userStore.setUser(JSON.parse(user));
+  }
+  next();
 });
 
 export default router;

@@ -11,7 +11,7 @@ const formRef = ref<FormInstance | null>(null);
 const router = useRouter();
 const { visible, toggleVisiblity } = usePasswordVisibility();
 
-const { form, rules, error, onSubmit } = useLoginForm();
+const { form, rules, onSubmit } = useLoginForm();
 const { showLoginError } = useNotification();
 
 const submitForm = () =>
@@ -21,7 +21,7 @@ const submitForm = () =>
       ElNotification.closeAll();
       router.replace('/');
     },
-    () => showLoginError(error.value)
+    () => showLoginError()
   );
 </script>
 

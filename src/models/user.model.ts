@@ -5,7 +5,7 @@ export interface UserWithToken {
 
 export interface User {
   _id: string;
-  name: string;
+  username: string;
   email: string;
   role: UserRole;
   createdAt: string;

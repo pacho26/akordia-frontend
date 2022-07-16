@@ -39,8 +39,8 @@ export const useAuth = () => {
 
     try {
       const userWithToken = await auth.register(userData);
-      userStore.setUserData(userWithToken);
-      return userWithToken;
+      userStore.setUserData(userWithToken?.data);
+      return userWithToken?.data;
     } catch (err: any) {
       console.error(err);
       set(error, err);
@@ -53,8 +53,8 @@ export const useAuth = () => {
 
     try {
       const userWithToken = await auth.login(credentials);
-      userStore.setUserData(userWithToken);
-      return userWithToken;
+      userStore.setUserData(userWithToken?.data);
+      return userWithToken?.data;
     } catch (err: any) {
       console.error(err);
       set(error, err);

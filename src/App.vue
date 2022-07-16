@@ -43,7 +43,7 @@ const onWindowHeightChange = () => {
         </div>
       </div>
     </div>
-    <div m="t-4 sm:(t-6 l-8)" w="full">
+    <div m="t-4 sm:t-6 md:l-8" w="full">
       <RouterView />
     </div>
   </Container>

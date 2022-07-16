@@ -43,8 +43,8 @@ const submitForm = () =>
     size="large"
     @submit.prevent="submitForm"
   >
-    <el-form-item label="Name" prop="name">
-      <el-input v-model="form.name" type="text">
+    <el-form-item label="Username" prop="username">
+      <el-input v-model="form.username" type="text">
         <template #prefix>
           <i text="base" class="fa-solid fa-user" />
         </template>
