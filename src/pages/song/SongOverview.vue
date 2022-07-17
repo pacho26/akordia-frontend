@@ -2,18 +2,21 @@
 import { useRoute } from 'vue-router';
 import { useSong } from '@/composables/api/songs';
 import { useUserStore } from '@/stores/user';
+import { useSongsStore } from '@/stores/songs';
 
 const route = useRoute();
 
 const { fetchSong, song } = useSong();
 
 const { user } = useUserStore();
+const { setRecentSong } = useSongsStore();
 
 const songId = computed(() => route.params.id as string);
 
 watchEffect(async () => {
   if (songId.value) {
     await fetchSong(songId.value);
+    setRecentSong(song.value);
     addMarginTopToChordsParagraphs();
   }
 });

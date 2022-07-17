@@ -18,6 +18,7 @@ declare module '@vue/runtime-core' {
     RichTextEditor: typeof import('./src/components/Base/RichTextEditor.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Sidebar: typeof import('./src/components/Base/Sidebar.vue')['default']
     SongForm: typeof import('./src/components/Song/SongForm.vue')['default']
     SongItem: typeof import('./src/components/Song/SongItem.vue')['default']
     SongList: typeof import('./src/components/Song/SongList.vue')['default']

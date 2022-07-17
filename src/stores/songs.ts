@@ -1,10 +1,12 @@
 import { defineStore } from 'pinia';
 import type { Song } from '@/models/song.model';
+import _ from 'lodash';
 
 interface State {
   songs: Song[];
   userSongs: Song[];
   foundSongs: Song[];
+  recentSongs: Song[];
   lastViewedArtist: string;
 }
 
@@ -14,6 +16,7 @@ export const useSongsStore = defineStore({
     songs: [],
     userSongs: [],
     foundSongs: [],
+    recentSongs: [],
     lastViewedArtist: '',
   }),
   persist: true,
@@ -39,6 +42,15 @@ export const useSongsStore = defineStore({
     },
     setSearchResuls(songs: Song[]) {
       this.foundSongs = songs;
+    },
+    setRecentSong(song: Song) {
+      const hasSong = this.recentSongs.find(({ _id }) => _id === song._id);
+      if (!hasSong) {
+        this.recentSongs.push(song);
+        if (this.recentSongs.length > 5) {
+          this.recentSongs.shift();
+        }
+      }
     },
   },
 });
