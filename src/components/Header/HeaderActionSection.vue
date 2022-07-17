@@ -26,6 +26,7 @@ const search = async () => {
     <div class="p-inputgroup">
       <InputText
         v-model="searchTerm"
+        v-on:keyup.enter="search"
         placeholder="Search for songs, artists..."
         class="p-inputtext"
       />
