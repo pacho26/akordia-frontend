@@ -22,6 +22,10 @@ export const getSongsBySearchTerm = (payload: {
   searchTerm: string;
 }): Promise<Song[]> => http.post('/songs/search', payload);
 
+export const getArtistsBySearchTerm = (payload: {
+  searchTerm: string;
+}): Promise<Song[]> => http.post('/songs/search/artists', payload);
+
 export const createSong = (song: SongCreate): Promise<Song> =>
   http.post('/songs', song);
 

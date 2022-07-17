@@ -5,6 +5,8 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ArtistItem: typeof import('./src/components/Artist/ArtistItem.vue')['default']
+    ArtistList: typeof import('./src/components/Artist/ArtistList.vue')['default']
     Container: typeof import('./src/components/Base/Container.vue')['default']
     FloatInput: typeof import('./src/components/Base/FloatInput.vue')['default']
     Header: typeof import('./src/components/Header/Header.vue')['default']
@@ -18,6 +20,7 @@ declare module '@vue/runtime-core' {
     RichTextEditor: typeof import('./src/components/Base/RichTextEditor.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SearchSectionTitle: typeof import('./src/components/Search/SearchSectionTitle.vue')['default']
     Sidebar: typeof import('./src/components/Base/Sidebar.vue')['default']
     SongForm: typeof import('./src/components/Song/SongForm.vue')['default']
     SongItem: typeof import('./src/components/Song/SongItem.vue')['default']

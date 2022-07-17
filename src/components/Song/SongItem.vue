@@ -8,23 +8,23 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const goToSongOverview = () => {
+const goToSongOverviewPage = () => {
   router.push(`/song/${props.song._id}`);
 };
 </script>
 
 <template>
   <div
+    @click="goToSongOverviewPage"
     bg="white hover:primary-50"
     p="4"
     m="b-0.75"
     border="rounded"
     shadow=""
-    transform="~ hover:translate-y--0.5"
+    transform="~ hover:translate-y--0.4"
     transition="default"
     cursor="pointer"
     select="none"
-    @click="goToSongOverview"
   >
     <Heading :label="song.title" :level="4" font="600" class="three-dots" />
     <p text="sm gray-500 sm:base" class="three-dots">

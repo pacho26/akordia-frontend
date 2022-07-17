@@ -6,6 +6,7 @@ interface State {
   songs: Song[];
   userSongs: Song[];
   foundSongs: Song[];
+  foundArtists: string[];
   recentSongs: Song[];
   lastViewedArtist: string;
 }
@@ -16,6 +17,7 @@ export const useSongsStore = defineStore({
     songs: [],
     userSongs: [],
     foundSongs: [],
+    foundArtists: [],
     recentSongs: [],
     lastViewedArtist: '',
   }),
@@ -40,8 +42,11 @@ export const useSongsStore = defineStore({
       localStorage.setItem('LastViewedArtist', artist);
       this.lastViewedArtist = artist;
     },
-    setSearchResuls(songs: Song[]) {
+    setFoundSongs(songs: Song[]) {
       this.foundSongs = songs;
+    },
+    setFoundArtists(artists: string[]) {
+      this.foundArtists = artists;
     },
     setRecentSong(song: Song) {
       const hasSong = this.recentSongs.find(({ _id }) => _id === song._id);

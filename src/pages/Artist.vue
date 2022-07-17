@@ -1,10 +1,12 @@
 <script lang="ts" setup>
 import type Song from '@/models/song.model';
 import { getSongsByArtist } from '@/services/api/songs';
+import { useSongsStore } from '@/stores/songs';
+
+const { lastViewedArtist } = useSongsStore();
+const artist = lastViewedArtist;
 
 const songs = ref<Song[] | null>(null);
-
-const artist = localStorage.getItem('LastViewedArtist');
 
 onBeforeMount(async () => {
   if (artist) {

@@ -1,10 +1,13 @@
 <script lang="ts" setup>
-import { getSongsBySearchTerm } from '@/services/api/songs';
+import {
+  getSongsBySearchTerm,
+  getArtistsBySearchTerm,
+} from '@/services/api/songs';
 import { useSongsStore } from '@/stores/songs';
 import { useNotification } from '@/composables/useNotification';
 import router from '@/router';
 
-const { setSearchResuls } = useSongsStore();
+const { setFoundSongs, setFoundArtists } = useSongsStore();
 
 const searchTerm = ref<string>('');
 
@@ -15,8 +18,13 @@ const search = async () => {
     showSearchTermNotication();
     return;
   }
-  const res = await getSongsBySearchTerm({ searchTerm: searchTerm.value });
-  setSearchResuls(res.data);
+  const resSongs = await getSongsBySearchTerm({ searchTerm: searchTerm.value });
+  const resArtists = await getArtistsBySearchTerm({
+    searchTerm: searchTerm.value,
+  });
+  setFoundSongs(resSongs.data);
+  setFoundArtists(resArtists.data);
+
   router.push(`/search/${searchTerm.value.toLowerCase()}`);
 };
 </script>
@@ -27,7 +35,7 @@ const search = async () => {
       <InputText
         v-model="searchTerm"
         v-on:keyup.enter="search"
-        placeholder="Search for songs, artists..."
+        placeholder="Search for songs and artists"
         class="p-inputtext"
       />
       <Button @click="search" icon="pi pi-search" class="p-button-success" />

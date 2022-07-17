@@ -39,7 +39,7 @@ const goToSongPage = (song: Song) => {
     <Heading label="Recent songs" class="uppercase" :level="4" as="h3" />
     <div flex="~ col gap-2" m="t-3">
       <div
-        v-for="song in recentSongs"
+        v-for="song in recentSongs.reverse()"
         :key="song._id"
         @click="goToSongPage(song)"
         w="260px"
