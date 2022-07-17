@@ -22,3 +22,7 @@ export const deleteSong = (id: string): Promise<Song> =>
 
 export const getSongsByUserId = (userId: string): Promise<Song[]> =>
   http.post(`/songs/user/${userId}`);
+
+export const getSongsByArtist = (payload: {
+  artist: string;
+}): Promise<Song[]> => http.post('/songs/artist', payload);

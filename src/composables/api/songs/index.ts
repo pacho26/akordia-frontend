@@ -9,13 +9,13 @@ const loading = ref(false);
 // TODO: This is unnecessary
 export const useSongs = () => {
   const { error, isError, isSuccess } = useResultState();
-  const store = useSongsStore();
+  const { setSongs } = useSongsStore();
 
   const fetchSongs = async () => {
     loading.value = true;
     try {
       const songs = await api.getSongs();
-      store.setSongs(songs);
+      setSongs(songs);
     } catch (error) {
       console.error(error);
     } finally {
@@ -35,6 +35,7 @@ export const useSongs = () => {
 export const useSong = () => {
   const song = ref<Song>();
   const { error, isError, isSuccess } = useResultState();
+  const { setLastViewedArtist } = useSongsStore();
 
   const fetchSong = async (id: string) => {
     try {
@@ -43,6 +44,7 @@ export const useSong = () => {
       const fetchedSong = await api.getSongById(id);
       if (fetchedSong) {
         set(song, fetchedSong.data);
+        setLastViewedArtist(fetchedSong.data.artist);
         return song;
       }
     } catch (err) {

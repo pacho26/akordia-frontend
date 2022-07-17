@@ -5,6 +5,7 @@ import Home from '@/pages/Home.vue';
 import Login from '@/pages/Login.vue';
 import Register from '@/pages/Register.vue';
 import Profile from '@/pages/Profile.vue';
+import Artist from '@/pages/Artist.vue';
 import SongAdd from '@/pages/song/SongAdd.vue';
 import MySongbook from '@/pages/MySongbook.vue';
 import SongOverview from '@/pages/song/SongOverview.vue';
@@ -47,7 +48,6 @@ const router = createRouter({
       path: '/my-songbook',
       name: 'my-songbook',
       component: MySongbook,
-      props: true,
       beforeEnter: async (to, from, next) => {
         const { user } = useUserStore();
         if (user) {
@@ -61,6 +61,11 @@ const router = createRouter({
           next('/login');
         }
       },
+    },
+    {
+      path: '/artist/:artist',
+      name: 'artist',
+      component: Artist,
     },
     {
       path: '/song',

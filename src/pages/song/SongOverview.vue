@@ -1,10 +1,13 @@
 <script lang="ts" setup>
 import { useRoute } from 'vue-router';
 import { useSong } from '@/composables/api/songs';
+import { useUserStore } from '@/stores/user';
 
 const route = useRoute();
 
 const { fetchSong, song } = useSong();
+
+const { user } = useUserStore();
 
 const songId = computed(() => route.params.id as string);
 
@@ -24,8 +27,7 @@ const addMarginTopToChordsParagraphs = () => {
   });
 };
 
-// TODO: Replace with real values
-const isAuthor = true;
+const isAuthor = computed(() => user?._id === song.value?.author);
 
 const youtubeLink = computed(() => {
   return song.value?.youtubeId
@@ -86,6 +88,19 @@ const transpose = (mode: string) => {
     }
   });
 };
+
+const replaceCroatianLetters = (str: string) =>
+  str
+    .replace(/[ČčĆć]/g, 'c')
+    .replace(/[Šš]/g, 's')
+    .replace(/[Đđ]/g, 'dj')
+    .replace(/[Žž]/g, 'z');
+
+const artistLinkSegment = computed(() => {
+  return song.value?.artist
+    ? replaceCroatianLetters(song.value?.artist).replace(' ', '_').toLowerCase()
+    : '';
+});
 </script>
 
 <template>
@@ -98,13 +113,17 @@ const transpose = (mode: string) => {
   >
     <div>
       <!-- TODO: Add link to fetch all songs by artist -->
-      <Heading
-        :label="song?.artist"
-        as="h2"
-        :level="3"
-        font="300"
-        class="uppercase"
-      />
+      <Link :to="`/artist/${artistLinkSegment}`">
+        <Heading
+          :label="song.artist"
+          as="h2"
+          :level="3"
+          text="primary-700 hover:primary-500"
+          font="300"
+          transition="default"
+          class="uppercase"
+        />
+      </Link>
       <Heading :label="song?.title" as="h1" :level="1" font="600" />
       <Heading
         v-if="song?.alternativeTitle"

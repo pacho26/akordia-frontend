@@ -20,6 +20,7 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     SongForm: typeof import('./src/components/Song/SongForm.vue')['default']
     SongItem: typeof import('./src/components/Song/SongItem.vue')['default']
+    SongList: typeof import('./src/components/Song/SongList.vue')['default']
   }
 }
 

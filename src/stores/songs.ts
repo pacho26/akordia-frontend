@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia';
 import type { Song } from '@/models/song.model';
+import { LocalStorageKey } from '@/services/local_storage';
 
 interface State {
   songs: Song[];
   userSongs: Song[];
+  lastViewedArtist: string;
 }
 
 export const useSongsStore = defineStore({
@@ -11,6 +13,7 @@ export const useSongsStore = defineStore({
   state: (): State => ({
     songs: [],
     userSongs: [],
+    lastViewedArtist: '',
   }),
   getters: {},
   actions: {
@@ -27,6 +30,10 @@ export const useSongsStore = defineStore({
     },
     setCurrentUserSongs(songs: Song[]) {
       this.userSongs = songs;
+    },
+    setLastViewedArtist(artist: string) {
+      localStorage.setItem('LastViewedArtist', artist);
+      this.lastViewedArtist = artist;
     },
   },
 });
