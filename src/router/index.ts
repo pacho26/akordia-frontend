@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
+
+//Pages
 import Home from '@/pages/Home.vue';
 import Login from '@/pages/Login.vue';
 import Register from '@/pages/Register.vue';
@@ -8,6 +10,10 @@ import MySongbook from '@/pages/MySongbook.vue';
 import SongOverview from '@/pages/song/SongOverview.vue';
 import SongEdit from '@/pages/song/SongEdit.vue';
 
+// Composables
+import { useNotification } from '@/composables/useNotification';
+
+// Stores
 import { useUserStore } from '@/stores/user';
 
 const router = createRouter({
@@ -37,6 +43,16 @@ const router = createRouter({
       path: '/my-songbook',
       name: 'my-songbook',
       component: MySongbook,
+      beforeEnter(to, from, next) {
+        const { user } = useUserStore();
+        if (user) {
+          next();
+        } else {
+          const { showNotLoggedInNotication } = useNotification();
+          showNotLoggedInNotication();
+          next('/login');
+        }
+      },
     },
     {
       path: '/song',
@@ -53,6 +69,16 @@ const router = createRouter({
           path: 'new',
           name: 'new',
           component: SongAdd,
+          beforeEnter(to, from, next) {
+            const { user } = useUserStore();
+            if (user) {
+              next();
+            } else {
+              const { showNotLoggedInNotication } = useNotification();
+              showNotLoggedInNotication();
+              next('/login');
+            }
+          },
         },
         {
           path: ':id/edit',

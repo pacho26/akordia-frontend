@@ -49,11 +49,20 @@ export const useNotification = () => {
     });
   };
 
+  const showNotLoggedInNotication = () => {
+    showNotification({
+      title: 'Not logged in',
+      message: 'You must be logged in to access this page',
+      type: 'warning',
+    });
+  };
+
   return {
     showNotification,
     showLoginError,
     showRegisterError,
     showMutateSongError,
     showDeletedUserNotication,
+    showNotLoggedInNotication,
   };
 };

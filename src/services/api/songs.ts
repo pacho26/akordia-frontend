@@ -19,3 +19,6 @@ export const updateSong = (id: string, song: SongEdit): Promise<Song> =>
 
 export const deleteSong = (id: string): Promise<Song> =>
   http.delete(`/songs/${id}`);
+
+export const getSongsByUserId = (userId: string): Promise<Song[]> =>
+  http.post(`/songs/user/${userId}`);

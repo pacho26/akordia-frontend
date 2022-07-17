@@ -6,6 +6,7 @@ import { useResultState } from '../index';
 
 const loading = ref(false);
 
+// TODO: This is unnecessary
 export const useSongs = () => {
   const { error, isError, isSuccess } = useResultState();
   const store = useSongsStore();
