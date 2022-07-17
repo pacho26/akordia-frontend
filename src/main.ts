@@ -1,5 +1,6 @@
 import { createApp } from 'vue/dist/vue.esm-bundler';
 import { createPinia } from 'pinia';
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 
 import App from './App.vue';
 import router from './router';
@@ -41,11 +42,15 @@ library.add(fas, far, fab);
 dom.watch();
 
 const app = createApp(App)
-  .use(createPinia())
   .use(router)
   .use(PrimeVue)
   .use(ElementPlus)
   .use(FloatingVue);
+
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
+
+app.use(pinia);
 
 // PrimeVue components
 app.component('font-awesome-icon', FontAwesomeIcon);

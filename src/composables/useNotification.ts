@@ -57,6 +57,14 @@ export const useNotification = () => {
     });
   };
 
+  const showSearchTermNotication = () => {
+    showNotification({
+      title: 'Search term is too short',
+      message: 'Search term must be at least 3 characters long',
+      type: 'warning',
+    });
+  };
+
   return {
     showNotification,
     showLoginError,
@@ -64,5 +72,6 @@ export const useNotification = () => {
     showMutateSongError,
     showDeletedUserNotication,
     showNotLoggedInNotication,
+    showSearchTermNotication,
   };
 };

@@ -6,8 +6,9 @@ import Login from '@/pages/Login.vue';
 import Register from '@/pages/Register.vue';
 import Profile from '@/pages/Profile.vue';
 import Artist from '@/pages/Artist.vue';
-import SongAdd from '@/pages/song/SongAdd.vue';
 import MySongbook from '@/pages/MySongbook.vue';
+import SearchResults from '@/pages/SearchResults.vue';
+import SongAdd from '@/pages/song/SongAdd.vue';
 import SongOverview from '@/pages/song/SongOverview.vue';
 import SongEdit from '@/pages/song/SongEdit.vue';
 
@@ -61,6 +62,12 @@ const router = createRouter({
           next('/login');
         }
       },
+    },
+    {
+      path: '/search/:query',
+      name: 'search',
+      component: SearchResults,
+      props: true,
     },
     {
       path: '/artist/:artist',

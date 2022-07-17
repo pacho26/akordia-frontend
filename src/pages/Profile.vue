@@ -20,6 +20,7 @@ const { user } = useUserStore();
       hover="rotate--2"
       transition="default"
       cursor="pointer"
+      select="none"
       class="uppercase"
     >
       <i class="fa-solid fa-crown -translate-y-0.25" />

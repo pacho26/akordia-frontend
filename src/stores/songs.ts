@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia';
 import type { Song } from '@/models/song.model';
-import { LocalStorageKey } from '@/services/local_storage';
 
 interface State {
   songs: Song[];
   userSongs: Song[];
+  foundSongs: Song[];
   lastViewedArtist: string;
 }
 
@@ -13,8 +13,10 @@ export const useSongsStore = defineStore({
   state: (): State => ({
     songs: [],
     userSongs: [],
+    foundSongs: [],
     lastViewedArtist: '',
   }),
+  persist: true,
   getters: {},
   actions: {
     // TODO: Is async necessary?
@@ -34,6 +36,9 @@ export const useSongsStore = defineStore({
     setLastViewedArtist(artist: string) {
       localStorage.setItem('LastViewedArtist', artist);
       this.lastViewedArtist = artist;
+    },
+    setSearchResuls(songs: Song[]) {
+      this.foundSongs = songs;
     },
   },
 });
