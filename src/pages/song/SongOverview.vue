@@ -107,6 +107,7 @@ const transpose = (mode: string) => {
       />
       <Heading :label="song?.title" as="h1" :level="1" font="600" />
       <Heading
+        v-if="song?.alternativeTitle"
         :label="'(' + song?.alternativeTitle + ')'"
         as="h2"
         :level="3"

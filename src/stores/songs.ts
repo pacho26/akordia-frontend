@@ -3,12 +3,14 @@ import type { Song } from '@/models/song.model';
 
 interface State {
   songs: Song[];
+  userSongs: Song[];
 }
 
 export const useSongsStore = defineStore({
   id: 'songs',
   state: (): State => ({
     songs: [],
+    userSongs: [],
   }),
   getters: {},
   actions: {
@@ -22,6 +24,9 @@ export const useSongsStore = defineStore({
     updateSong(song: Song) {
       const index = this.songs.findIndex(({ _id }) => _id === song._id);
       this.songs[index] = song;
+    },
+    setCurrentUserSongs(songs: Song[]) {
+      this.userSongs = songs;
     },
   },
 });

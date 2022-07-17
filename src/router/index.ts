@@ -13,8 +13,12 @@ import SongEdit from '@/pages/song/SongEdit.vue';
 // Composables
 import { useNotification } from '@/composables/useNotification';
 
+// Services
+import { getSongsByUserId } from '@/services/api/songs';
+
 // Stores
 import { useUserStore } from '@/stores/user';
+import { useSongsStore } from '@/stores/songs';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,9 +47,13 @@ const router = createRouter({
       path: '/my-songbook',
       name: 'my-songbook',
       component: MySongbook,
-      beforeEnter(to, from, next) {
+      props: true,
+      beforeEnter: async (to, from, next) => {
         const { user } = useUserStore();
         if (user) {
+          const songs = await getSongsByUserId(user._id);
+          const { setCurrentUserSongs } = useSongsStore();
+          setCurrentUserSongs(songs.data);
           next();
         } else {
           const { showNotLoggedInNotication } = useNotification();
