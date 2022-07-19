@@ -5,7 +5,8 @@ import Home from '@/pages/Home.vue';
 import Login from '@/pages/Login.vue';
 import Register from '@/pages/Register.vue';
 import Profile from '@/pages/Profile.vue';
-import Artist from '@/pages/Artist.vue';
+import Artist from '@/pages/Artist/Artist.vue';
+import ArtistByLetter from '@/pages/Artist/ArtistByLetter.vue';
 import MySongbook from '@/pages/MySongbook.vue';
 import SearchResults from '@/pages/SearchResults.vue';
 import SongAdd from '@/pages/song/SongAdd.vue';
@@ -16,7 +17,7 @@ import SongEdit from '@/pages/song/SongEdit.vue';
 import { useNotification } from '@/composables/useNotification';
 
 // Services
-import { getSongsByUserId } from '@/services/api/songs';
+import { getSongsByUserId, getArtistsBySearchTerm } from '@/services/api/songs';
 
 // Stores
 import { useUserStore } from '@/stores/user';
@@ -70,9 +71,25 @@ const router = createRouter({
       props: true,
     },
     {
-      path: '/artist/:artist',
+      path: '/artist',
       name: 'artist',
-      component: Artist,
+      component: {
+        template: '<router-view />',
+      },
+      children: [
+        {
+          path: ':artist',
+          name: 'artist-overview',
+          component: Artist,
+          props: true,
+        },
+        {
+          path: 'letter/:letter',
+          name: 'artist-by-letter-overview',
+          component: ArtistByLetter,
+          props: true,
+        },
+      ],
     },
     {
       path: '/song',

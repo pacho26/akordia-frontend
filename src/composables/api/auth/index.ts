@@ -72,7 +72,6 @@ export const useAuth = () => {
       songsStore.clearSongsData();
       router.replace('/login');
     } catch (err) {
-      console.log(err);
       set(error, err);
     }
   };

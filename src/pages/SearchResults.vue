@@ -2,7 +2,6 @@
 import { useRoute } from 'vue-router';
 import { useSongsStore } from '@/stores/songs';
 import { storeToRefs } from 'pinia';
-import ArtistList from '../components/Artist/ArtistList.vue';
 
 const route = useRoute();
 

@@ -5,14 +5,10 @@ import { useNotification } from '@/composables/useNotification';
 import { usePasswordVisibility } from '@/composables/form/usePasswordVisibility';
 import { useRegisterForm } from '@/composables/form/useRegisterForm';
 import type { FormInstance } from '@/models/element.model';
-// import { useIconStore } from '@/store/icons';
-
-// import { storeToRefs } from 'pinia';
 
 const formRef = ref<FormInstance | null>(null);
 
 const router = useRouter();
-// const { inputIconSize, iconWeight } = storeToRefs(useIconStore());
 const { visible, toggleVisiblity } = usePasswordVisibility();
 const { visible: repeatedVisible, toggleVisiblity: toggleRepeatedVisibility } =
   usePasswordVisibility();

@@ -5,6 +5,7 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AlphabetList: typeof import('./src/components/Header/AlphabetList.vue')['default']
     ArtistItem: typeof import('./src/components/Artist/ArtistItem.vue')['default']
     ArtistList: typeof import('./src/components/Artist/ArtistList.vue')['default']
     Container: typeof import('./src/components/Base/Container.vue')['default']

@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <div
-    flex="center gap-2"
+    flex="center gap-2.5"
     h="43px"
     min-w="43px"
     p="2 md:(y-2 x-3)"
