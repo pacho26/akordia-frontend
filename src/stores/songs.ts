@@ -39,7 +39,6 @@ export const useSongsStore = defineStore({
       this.userSongs = songs;
     },
     setLastViewedArtist(artist: string) {
-      localStorage.setItem('LastViewedArtist', artist);
       this.lastViewedArtist = artist;
     },
     setFoundSongs(songs: Song[]) {
