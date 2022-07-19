@@ -38,7 +38,6 @@ const artistLinkSegment = computed(() => {
     bg="white hover:primary-50"
     text="gray-700"
     shadow=""
-    transform="~ hover:translate-y--0.2"
     cursor="pointer"
     transition="default"
     class="three-dots"

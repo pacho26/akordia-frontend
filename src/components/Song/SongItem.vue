@@ -21,7 +21,7 @@ const goToSongOverviewPage = () => {
     m="b-0.75"
     border="rounded"
     shadow=""
-    transform="~ hover:translate-y--0.4"
+    transform="~ hover:translate-y--0.25"
     transition="default"
     cursor="pointer"
     select="none"
