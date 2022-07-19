@@ -13,10 +13,14 @@ const { setRecentSong } = useSongsStore();
 
 const songId = computed(() => route.params.id as string);
 
+const contentComponentKey = ref(0);
+
 watchEffect(async () => {
   if (songId.value) {
     await fetchSong(songId.value);
+    contentComponentKey.value++;
     setRecentSong(song.value);
+
     addMarginTopToChordsParagraphs();
   }
 });
@@ -167,6 +171,7 @@ const artistLinkSegment = computed(() => {
   <div flex="~ gap-8 wrap" justify="sm:between" m="t-4 sm:t-6">
     <RichTextEditor
       v-if="song?.content"
+      :key="contentComponentKey"
       read-only
       :content="song.content"
       class="editor"
