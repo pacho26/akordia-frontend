@@ -6,32 +6,6 @@ import { useResultState } from '../index';
 
 const loading = ref(false);
 
-// TODO: This is unnecessary
-export const useSongs = () => {
-  const { error, isError, isSuccess } = useResultState();
-  const { setSongs } = useSongsStore();
-
-  const fetchSongs = async () => {
-    loading.value = true;
-    try {
-      const songs = await api.getSongs();
-      setSongs(songs);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      loading.value = false;
-    }
-  };
-
-  return {
-    fetchSongs,
-    error,
-    isError,
-    isSuccess,
-    loading,
-  };
-};
-
 export const useSong = () => {
   const song = ref<Song>();
   const { error, isError, isSuccess } = useResultState();

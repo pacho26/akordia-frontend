@@ -19,7 +19,7 @@ const onWindowHeightChange = () => {
   windowHeight.value = window.innerHeight;
 
   if (sidebar.value?.style) {
-    sidebar.value.style.minHeight = `${windowHeight.value - 75}px`;
+    sidebar.value.style.minHeight = `${windowHeight.value - 126}px`;
   }
 };
 
