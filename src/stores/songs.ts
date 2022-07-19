@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import type { Song } from '@/models/song.model';
-import _ from 'lodash';
+import LocalStorageService from '@/services/local_storage';
 
 interface State {
   songs: Song[];
@@ -49,13 +49,16 @@ export const useSongsStore = defineStore({
       this.foundArtists = artists;
     },
     setRecentSong(song: Song) {
-      const hasSong = this.recentSongs.find(({ _id }) => _id === song._id);
-      if (!hasSong) {
-        this.recentSongs.push(song);
-        if (this.recentSongs.length > 5) {
-          this.recentSongs.shift();
-        }
+      this.recentSongs = this.recentSongs.filter(({ _id }) => _id !== song._id);
+      this.recentSongs.unshift(song);
+
+      if (this.recentSongs.length > 5) {
+        this.recentSongs.pop();
       }
+    },
+    clearSongsData() {
+      this.$reset();
+      LocalStorageService.instance.remove('songs');
     },
   },
 });

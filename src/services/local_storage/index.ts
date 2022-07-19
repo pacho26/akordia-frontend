@@ -62,7 +62,7 @@ export default class LocalStorageService {
   }
 
   public remove(key: string): localStorageItem {
-    return localStorage.getItem(key);
+    localStorage.removeItem(key);
   }
 }
 
