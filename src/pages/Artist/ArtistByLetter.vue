@@ -8,10 +8,10 @@ const { foundArtistsByLetter } = toRefs(useSongsStore());
 
 const notFoundMessage = computed(() => {
   if (letter.value === '0-9') {
-    return `There are no artists that starts with term '0-9'`;
+    return `There are no artists that start with the term '0-9'`;
   }
 
-  return `There are no artists that starts with the letter '${letter.value}'`;
+  return `There are no artists that start with the letter '${letter.value}'`;
 });
 </script>
 
