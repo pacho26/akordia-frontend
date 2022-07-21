@@ -1,27 +1,30 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 //Pages
-import Home from '@/pages/Home.vue';
-import Login from '@/pages/Login.vue';
-import Register from '@/pages/Register.vue';
-import Profile from '@/pages/Profile.vue';
 import Artist from '@/pages/Artist/Artist.vue';
 import ArtistByLetter from '@/pages/Artist/ArtistByLetter.vue';
+import Home from '@/pages/Home.vue';
+import Login from '@/pages/Login.vue';
 import MySongbook from '@/pages/MySongbook.vue';
+import Profile from '@/pages/Profile.vue';
+import Register from '@/pages/Register.vue';
+import Request from '@/pages/Request.vue';
 import SearchResults from '@/pages/SearchResults.vue';
 import SongAdd from '@/pages/song/SongAdd.vue';
-import SongOverview from '@/pages/song/SongOverview.vue';
 import SongEdit from '@/pages/song/SongEdit.vue';
+import SongOverview from '@/pages/song/SongOverview.vue';
 
 // Composables
 import { useNotification } from '@/composables/useNotification';
 
 // Services
-import { getSongsByUserId, getArtistsBySearchTerm } from '@/services/api/songs';
+import { getSongsByUserId } from '@/services/api/songs';
+import { getRandomRequest } from '@/services/api/requests';
 
 // Stores
-import { useUserStore } from '@/stores/user';
+import { useRequestsStore } from '@/stores/requests';
 import { useSongsStore } from '@/stores/songs';
+import { useUserStore } from '@/stores/user';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,6 +48,28 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: Profile,
+    },
+    {
+      path: '/requests',
+      name: 'requests',
+      component: Request,
+      beforeEnter: async (to, from, next) => {
+        // TODO: Check if logged user is admin
+        // if (useUserStore.isLoggedIn) {
+        //   next();
+        // } else {
+        //   next('/login');
+        // }
+
+        const request = await getRandomRequest();
+        if (request) {
+          const { setLastRequest } = useRequestsStore();
+          setLastRequest(request.data);
+          next();
+        } else {
+          next('/login');
+        }
+      },
     },
     {
       path: '/my-songbook',

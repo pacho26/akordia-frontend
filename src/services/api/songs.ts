@@ -1,9 +1,4 @@
-import type {
-  Song,
-  SongCreate,
-  SongEdit,
-  SongDTO,
-} from '../../models/song.model';
+import type { Song, SongCreate, SongEdit, SongDTO } from '@/models/song.model';
 import { http } from '../http';
 
 export const getSongs = (): Promise<Song[]> => http.get('/songs');
