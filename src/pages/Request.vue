@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { getRandomRequest } from '@/services/api/requests';
+import { getRandomRequest, voteRequest } from '@/services/api/requests';
 import { useRequestsStore } from '@/stores/requests';
 import { useSongsStore } from '@/stores/songs';
 import { useUserStore } from '@/stores/user';
@@ -12,9 +12,12 @@ const userStore = useRequestsStore();
 const { setLastRequest } = userStore;
 const { lastRequest } = storeToRefs(userStore);
 
+let rating = ref(0);
+
 const getNewRequest = async () => {
   const request = await getRandomRequest();
 
+  // TODO: If no more requests are available, prevent infinite loop and show error message.
   if (
     request.data.voters.includes(user._id) ||
     request.data._id === lastRequest.value._id
@@ -25,6 +28,7 @@ const getNewRequest = async () => {
 
   setLastRequest(request.data);
   setLastViewedArtist(request.data.artist);
+  rating.value = request.data.rating;
 };
 
 onBeforeMount(async () => {
@@ -39,16 +43,22 @@ const vote = async (value: 'up' | 'down') => {
     voterId: user._id,
     vote: value === 'up' ? 1 : -1,
   };
-  console.log(lastRequest._id);
+
+  rating.value += payload.vote;
+
+  await voteRequest(payload);
+  setTimeout(async () => {
+    await getNewRequest();
+  }, 500);
 };
 </script>
 
 <template>
   <div>
     <div m="b-3" flex="vcenter gap-8" justify="between sm:start">
-      <div flex="vcenter gap-3">
+      <div flex="vcenter gap-4">
         <ThumbsIcon @click="vote('up')" :orientation="'up'" />
-        <p text="3xl gray-500">2</p>
+        <p w="20px" text="3xl center gray-500">{{ rating }}</p>
         <ThumbsIcon @click="vote('down')" :orientation="'down'" />
       </div>
 

@@ -25,4 +25,10 @@ export interface RequestDTO {
   data: Request;
 }
 
+export interface Vote {
+  requestId: string;
+  voterId: string;
+  vote: number;
+}
+
 export default Request;
