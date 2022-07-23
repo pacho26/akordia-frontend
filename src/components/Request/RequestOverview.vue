@@ -1,27 +1,21 @@
 <script lang="ts" setup>
-import { useRoute } from 'vue-router';
-import { useSong } from '@/composables/api/songs';
-import { useUserStore } from '@/stores/user';
-import { useSongsStore } from '@/stores/songs';
+import type { Request } from '@/models/request.model';
 
-const route = useRoute();
+interface Props {
+  request: Request;
+}
 
-const { fetchSong, song } = useSong();
+const props = defineProps<Props>();
 
-const { user } = useUserStore();
-const { setRecentSong } = useSongsStore();
-
-const songId = computed(() => route.params.id as string);
+onBeforeMount(() => {
+  addMarginTopToChords();
+});
 
 const contentComponentKey = ref(0);
 
 watchEffect(async () => {
-  if (songId.value) {
-    await fetchSong(songId.value);
+  if (props.request) {
     contentComponentKey.value++;
-    setRecentSong(song.value);
-
-    addMarginTopToChords();
   }
 });
 
@@ -34,11 +28,9 @@ const addMarginTopToChords = () => {
   });
 };
 
-const isAuthor = computed(() => user?._id === song.value?.author);
-
 const youtubeLink = computed(() => {
-  return song.value?.youtubeId
-    ? `https://www.youtube.com/embed/${song.value?.youtubeId}`
+  return props.request?.youtubeId
+    ? `https://www.youtube.com/embed/${props.request.youtubeId}`
     : '';
 });
 
@@ -56,10 +48,6 @@ const CHORDS_KEYS = [
   'A#',
   'H',
 ];
-
-const editRoute = computed(() => {
-  return `${route.path}/edit`;
-});
 
 const transpose = (mode: string) => {
   const editorEl = document.querySelector('.editor');
@@ -104,15 +92,17 @@ const replaceCroatianLetters = (str: string) =>
     .replace(/[Žž]/g, 'z');
 
 const artistLinkSegment = computed(() => {
-  return song.value?.artist
-    ? replaceCroatianLetters(song.value?.artist).replace(' ', '_').toLowerCase()
+  return props.request.artist
+    ? replaceCroatianLetters(props.request?.artist)
+        .replace(' ', '_')
+        .toLowerCase()
     : '';
 });
 </script>
 
 <template>
   <div
-    v-if="song"
+    v-if="request"
     flex="~ col gap-4 sm:row"
     justify="between"
     p="b-4"
@@ -121,7 +111,7 @@ const artistLinkSegment = computed(() => {
     <div>
       <Link :to="`/artist/${artistLinkSegment}`">
         <Heading
-          :label="song.artist"
+          :label="request.artist"
           as="h2"
           :level="3"
           text="primary-700 hover:primary-500"
@@ -130,10 +120,10 @@ const artistLinkSegment = computed(() => {
           class="uppercase"
         />
       </Link>
-      <Heading :label="song?.title" as="h1" :level="1" font="600" />
+      <Heading :label="request?.title" as="h1" :level="1" font="600" />
       <Heading
-        v-if="song?.alternativeTitle"
-        :label="'(' + song?.alternativeTitle + ')'"
+        v-if="request?.alternativeTitle"
+        :label="'(' + request?.alternativeTitle + ')'"
         as="h2"
         :level="3"
         font="300"
@@ -158,21 +148,15 @@ const artistLinkSegment = computed(() => {
           <i class="fa-solid fa-chevron-down"></i>
         </Button>
       </div>
-
-      <Link v-if="isAuthor" :to="editRoute">
-        <Button v-tooltip.left="'Edit song'" class="p-button-secondary">
-          <i class="fa-solid fa-pen-to-square" />
-        </Button>
-      </Link>
     </div>
   </div>
 
   <div flex="~ gap-8 wrap" justify="sm:between" m="t-4 sm:t-6">
     <RichTextEditor
-      v-if="song?.content"
+      v-if="request.content"
       :key="contentComponentKey"
       read-only
-      :content="song.content"
+      :content="request.content"
       class="editor"
     />
     <div v-if="youtubeLink" w="full sm:80" class="md:translate-y-1">
@@ -180,9 +164,3 @@ const artistLinkSegment = computed(() => {
     </div>
   </div>
 </template>
-
-<style lang="scss">
-iframe {
-  aspect-ratio: 16/9 !important;
-}
-</style>

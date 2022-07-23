@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import { useAuth } from '@/composables/api/auth';
 import { useUserStore } from '@/stores/user';
+import { useChordsBreakpoints } from '@/composables/useChordsBreakpoints';
+
+const breakpoints = useChordsBreakpoints();
+const md = breakpoints.smaller('md');
 
 const { logout } = useAuth();
 
@@ -47,6 +51,10 @@ const userStore = useUserStore();
     <Link v-else to="/login">
       <HeaderNavItem icon="user" label="Login" />
     </Link>
-    <HeaderNavItem icon="bars" label="Menu" />
+    <Link to="/requests">
+      <Button h="43px" whitespace="nowrap" class="p-button-secondary">
+        {{ md ? 'Rate' : 'Rate requests' }}
+      </Button>
+    </Link>
   </div>
 </template>

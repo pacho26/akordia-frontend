@@ -19,6 +19,14 @@ onBeforeMount(async () => {
 <template>
   <div v-if="songs">
     <Heading :label="artist" :level="1" as="h1" m="b-4" />
-    <SongList :songs="songs" m="t-4" />
+    <SongList v-if="songs.length" :songs="songs" m="t-4" />
+    <Heading
+      v-else
+      label="The artist currently has no songs"
+      :level="1"
+      as="h1"
+      text="gray-700 center"
+      pos="relative top-36vh"
+    />
   </div>
 </template>

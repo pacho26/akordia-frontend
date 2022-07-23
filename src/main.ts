@@ -38,6 +38,9 @@ import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 import FloatingVue from 'floating-vue';
 import 'floating-vue/dist/style.css';
 
+// Iconify
+import { Icon } from '@iconify/vue';
+
 library.add(fas, far, fab);
 dom.watch();
 
@@ -59,5 +62,8 @@ app.component('Button', Button);
 
 // VueQuill rich text editor
 app.component('QuillEditor', QuillEditor);
+
+// Iconify
+app.component('Icon', Icon);
 
 app.mount('#app');

@@ -18,6 +18,7 @@ declare module '@vue/runtime-core' {
     Link: typeof import('./src/components/Base/Link.vue')['default']
     LoginForm: typeof import('./src/components/Auth/LoginForm.vue')['default']
     RegisterForm: typeof import('./src/components/Auth/RegisterForm.vue')['default']
+    RequestOverview: typeof import('./src/components/Request/RequestOverview.vue')['default']
     RichTextEditor: typeof import('./src/components/Base/RichTextEditor.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
@@ -26,6 +27,7 @@ declare module '@vue/runtime-core' {
     SongForm: typeof import('./src/components/Song/SongForm.vue')['default']
     SongItem: typeof import('./src/components/Song/SongItem.vue')['default']
     SongList: typeof import('./src/components/Song/SongList.vue')['default']
+    ThumbsIcon: typeof import('./src/components/Request/ThumbsIcon.vue')['default']
   }
 }
 

@@ -40,5 +40,6 @@ const { user } = useUserStore();
       </div>
     </div>
     <Heading :label="user.email" :level="6" as="h2" m="t-1" />
+    <div>Songs posted: PLACEHOLDER</div>
   </div>
 </template>

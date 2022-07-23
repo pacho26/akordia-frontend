@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { useCreateSongForm } from '@/composables/form/useCreateSongForm';
+import { useCreateRequestForm } from '@/composables/form/useCreateRequestForm';
 import type { SubmitFormArgs } from '@/models';
 import { SongAction } from '@/models/song.model';
 import { get } from '@vueuse/core';
 
-const { songModel, onSubmit, rules } = useCreateSongForm();
+const { requestModel, onSubmit, rules } = useCreateRequestForm();
 
 const submitForm = ({ formRef, form }: SubmitFormArgs) => {
   onSubmit(form, get(formRef), '/my-songbook');
@@ -16,7 +16,7 @@ const submitForm = ({ formRef, form }: SubmitFormArgs) => {
     :action="SongAction.CREATE"
     submit-msg="Add song"
     :rules="rules"
-    :model="songModel"
+    :model="requestModel"
     @submit="submitForm"
   />
 </template>
