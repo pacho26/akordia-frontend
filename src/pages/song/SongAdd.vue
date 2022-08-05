@@ -14,7 +14,7 @@ const submitForm = ({ formRef, form }: SubmitFormArgs) => {
 <template>
   <SongForm
     :action="SongAction.CREATE"
-    submit-msg="Add song"
+    submit-msg="Make request"
     :rules="rules"
     :model="requestModel"
     @submit="submitForm"

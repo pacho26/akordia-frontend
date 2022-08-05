@@ -14,7 +14,7 @@ const { userSongs } = useSongsStore();
     <Link to="/song/new">
       <Button flex="~ gap-3" class="p-button-secondary">
         <i text="xl" class="fa-solid fa-plus" />
-        Add new song
+        Make new request
       </Button>
     </Link>
   </div>

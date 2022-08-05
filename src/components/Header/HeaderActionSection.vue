@@ -44,7 +44,7 @@ const search = async () => {
     <Link to="/song/new">
       <HeaderNavItem
         icon="plus"
-        label="Add new"
+        label="Make request"
         bg="primary-500 hover:primary-600"
         text="white"
       />
