@@ -53,7 +53,7 @@ export const useSongsStore = defineStore({
       this.recentSongs = this.recentSongs.filter(({ _id }) => _id !== song._id);
       this.recentSongs.unshift(song);
 
-      if (this.recentSongs.length > 5) {
+      if (this.recentSongs.length > 6) {
         this.recentSongs.pop();
       }
     },

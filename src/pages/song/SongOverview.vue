@@ -3,6 +3,7 @@ import { useRoute } from 'vue-router';
 import { useSong } from '@/composables/api/songs';
 import { useUserStore } from '@/stores/user';
 import { useSongsStore } from '@/stores/songs';
+import { getUser } from '@/services/api/user';
 
 const route = useRoute();
 
@@ -15,13 +16,20 @@ const songId = computed(() => route.params.id as string);
 
 const contentComponentKey = ref(0);
 
+const authorUsername = ref('');
+
 watchEffect(async () => {
   if (songId.value) {
     await fetchSong(songId.value);
-    contentComponentKey.value++;
-    setRecentSong(song.value);
+    if (song.value) {
+      const userRes = await getUser(song.value.author);
+      authorUsername.value = userRes.data.username || '';
 
-    addMarginTopToChords();
+      contentComponentKey.value++;
+      setRecentSong(song.value);
+
+      addMarginTopToChords();
+    }
   }
 });
 
@@ -168,13 +176,18 @@ const artistLinkSegment = computed(() => {
   </div>
 
   <div flex="~ gap-8 wrap" justify="sm:between" m="t-4 sm:t-6">
-    <RichTextEditor
-      v-if="song?.content"
-      :key="contentComponentKey"
-      read-only
-      :content="song.content"
-      class="editor"
-    />
+    <div flex="~ col gap-4">
+      <RichTextEditor
+        v-if="song?.content"
+        :key="contentComponentKey"
+        read-only
+        :content="song.content"
+        class="editor"
+      />
+      <p text="gray-500 right">
+        by <span font="600">{{ authorUsername }}</span>
+      </p>
+    </div>
     <div v-if="youtubeLink" w="full sm:80" class="md:translate-y-1">
       <iframe :src="youtubeLink" w="full" border="none rounded" />
     </div>
