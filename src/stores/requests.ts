@@ -2,31 +2,21 @@ import { defineStore } from 'pinia';
 import type { Request } from '@/models/request.model';
 
 interface State {
-  lastRequest: Request;
+  lastRequest: Request | null;
 }
 
 export const useRequestsStore = defineStore({
   id: 'requests',
   state: (): State => ({
-    lastRequest: {
-      _id: '',
-      title: '',
-      artist: '',
-      content: '',
-      author: '',
-      rating: 0,
-      voters: [],
-      createdAt: '',
-      updatedAt: '',
-    },
+    lastRequest: null,
   }),
   persist: true,
   getters: {},
   actions: {
-    setLastRequest(request: Request) {
+    setLastRequest(request: Request | null) {
       this.lastRequest = request;
     },
-    clearSongsData() {
+    clearRequestsData() {
       this.$reset();
     },
   },

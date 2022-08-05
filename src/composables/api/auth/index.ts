@@ -4,6 +4,7 @@ import * as auth from '@/services/api/auth';
 import LocalStorageService from '@/services/local_storage';
 import { useUserStore } from '@/stores/user';
 import { useSongsStore } from '@/stores/songs';
+import { useRequestsStore } from '@/stores/requests';
 import { storeToRefs } from 'pinia';
 
 export const useStoredLogin = () => {
@@ -29,7 +30,8 @@ export const useStoredLogin = () => {
 export const useAuth = () => {
   const router = useRouter();
   const userStore = useUserStore();
-  const songsStore = useSongsStore();
+  const { clearSongsData } = useSongsStore();
+  const { clearRequestsData } = useRequestsStore();
   const { user, token } = storeToRefs(userStore);
 
   const error = ref<string | null>(null);
@@ -69,7 +71,8 @@ export const useAuth = () => {
 
     try {
       userStore.clearUserData();
-      songsStore.clearSongsData();
+      clearSongsData();
+      clearRequestsData();
       router.replace('/login');
     } catch (err) {
       set(error, err);

@@ -65,6 +65,22 @@ export const useNotification = () => {
     });
   };
 
+  const showApprovedRequestNotication = () => {
+    showNotification({
+      title: 'Request rejected',
+      message: 'Song request is added to the global songbook',
+      type: 'success',
+    });
+  };
+
+  const showRejectedRequestNotication = () => {
+    showNotification({
+      title: 'Request rejected',
+      message: 'Song request has been rejected permanently',
+      type: 'error',
+    });
+  };
+
   return {
     showNotification,
     showLoginError,
@@ -73,5 +89,7 @@ export const useNotification = () => {
     showDeletedUserNotication,
     showNotLoggedInNotication,
     showSearchTermNotication,
+    showApprovedRequestNotication,
+    showRejectedRequestNotication,
   };
 };

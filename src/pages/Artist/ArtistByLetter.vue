@@ -7,7 +7,8 @@ const letter = useRouteParams('letter');
 const { foundArtistsByLetter } = toRefs(useSongsStore());
 
 const notFoundMessage = computed(
-  () => `There are no artists that start with '${letter.value}'`
+  () =>
+    `There are no artists that start with <span font="600">${letter.value}</span>`
 );
 </script>
 
@@ -18,12 +19,10 @@ const notFoundMessage = computed(
     <div flex="~ col gap-2.5" m="t-5"></div>
   </div>
 
-  <Heading
+  <p
     v-else
-    :label="notFoundMessage"
-    :level="1"
-    as="h1"
-    text="gray-700 center"
+    v-html="notFoundMessage"
+    text="3xl center gray-500"
     pos="relative top-36vh"
   />
 </template>

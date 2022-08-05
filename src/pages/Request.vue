@@ -1,10 +1,15 @@
 <script lang="ts" setup>
-import { getRandomRequest, voteRequest } from '@/services/api/requests';
+import { useNotification } from '@/composables/useNotification';
+import {
+  deleteRequest,
+  getRandomRequest,
+  voteRequest,
+} from '@/services/api/requests';
+import { createSong } from '@/services/api/songs';
 import { useRequestsStore } from '@/stores/requests';
 import { useSongsStore } from '@/stores/songs';
 import { useUserStore } from '@/stores/user';
 import { storeToRefs } from 'pinia';
-import RequestOverview from '../components/Request/RequestOverview.vue';
 
 const { setLastViewedArtist } = useSongsStore();
 const { user } = useUserStore();
@@ -12,27 +17,53 @@ const userStore = useRequestsStore();
 const { setLastRequest } = userStore;
 const { lastRequest } = storeToRefs(userStore);
 
+const {
+  showNotification,
+  showApprovedRequestNotication,
+  showRejectedRequestNotication,
+} = useNotification();
+
 let rating = ref(0);
 
 const getNewRequest = async () => {
-  const request = await getRandomRequest();
+  try {
+    const fetchedRequest = await getRandomRequest({ userId: user?._id });
 
-  // TODO: If no more requests are available, prevent infinite loop and show error message.
-  if (
-    request.data.voters.includes(user._id) ||
-    request.data._id === lastRequest.value._id
-  ) {
-    getNewRequest();
-    return;
+    const { request, numberOfAvailable } = fetchedRequest.data;
+    console.log('numberOfAvailable :>> ', numberOfAvailable);
+
+    if (numberOfAvailable === 1) {
+      showNotification({
+        title: 'Last unvoted request',
+        message: 'This is the only one unvoted request.',
+        type: 'info',
+      });
+    } else if (
+      user !== null &&
+      (request.voters.includes(user._id) ||
+        request._id === lastRequest.value?._id ||
+        request.author === user._id)
+    ) {
+      getNewRequest();
+      return;
+    }
+
+    setLastRequest(request);
+    setLastViewedArtist(request.artist);
+    rating.value = request.rating;
+  } catch (err) {
+    console.error(err);
+    showNotification({
+      title: err.response.data.error,
+      message: 'You have rated all requests.',
+      type: 'info',
+    });
+    setLastRequest(null);
   }
-
-  setLastRequest(request.data);
-  setLastViewedArtist(request.data.artist);
-  rating.value = request.data.rating;
 };
 
 onBeforeMount(async () => {
-  if (!lastRequest) {
+  if (!lastRequest.value) {
     await getNewRequest();
   }
 });
@@ -46,7 +77,25 @@ const vote = async (value: 'up' | 'down') => {
 
   rating.value += payload.vote;
 
-  await voteRequest(payload);
+  console.log('rating.value :>> ', rating.value);
+
+  if (rating.value > 2) {
+    await createSong(lastRequest.value);
+    await deleteRequest(lastRequest.value._id);
+    showApprovedRequestNotication();
+  }
+
+  if (rating.value < -2) {
+    await deleteRequest(lastRequest.value._id);
+    showRejectedRequestNotication();
+  }
+
+  try {
+    await voteRequest(payload);
+  } catch (err) {
+    setLastRequest(null);
+    console.log(err);
+  }
   setTimeout(async () => {
     await getNewRequest();
   }, 500);
@@ -54,7 +103,7 @@ const vote = async (value: 'up' | 'down') => {
 </script>
 
 <template>
-  <div>
+  <div v-if="lastRequest">
     <div m="b-3" flex="vcenter gap-8" justify="between sm:start">
       <div flex="vcenter gap-4">
         <ThumbsIcon @click="vote('up')" :orientation="'up'" />
@@ -65,6 +114,12 @@ const vote = async (value: 'up' | 'down') => {
       <Button @click="getNewRequest" class="p-button-secondary">Skip</Button>
     </div>
 
-    <RequestOverview v-if="lastRequest" :request="lastRequest" />
+    <RequestOverview :request="lastRequest" />
+  </div>
+  <div v-else>
+    <!-- TODO: Add this as seperate component -->
+    <p text="3xl center gray-500" pos="relative top-36vh">
+      No unvoted requests available
+    </p>
   </div>
 </template>

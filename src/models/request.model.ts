@@ -22,7 +22,10 @@ export interface RequestCreate {
 }
 
 export interface RequestDTO {
-  data: Request;
+  data: {
+    request: Request;
+    numberOfAvailable: number;
+  };
 }
 
 export interface Vote {

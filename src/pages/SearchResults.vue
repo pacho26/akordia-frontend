@@ -23,12 +23,8 @@ const { foundSongs, foundArtists } = storeToRefs(songsStore);
       <div flex="~ col gap-2.5" m="t-5"></div>
     </div>
   </div>
-  <Heading
-    v-else
-    :label="`There are no songs or artists found for term '${route.params.query}'`"
-    :level="1"
-    as="h1"
-    text="gray-700 center"
-    pos="relative top-36vh"
-  />
+  <p v-else text="3xl center gray-500" pos="relative top-36vh">
+    There are no songs or artists found for term
+    <span font="600">{{ route.params.query }}</span>
+  </p>
 </template>
