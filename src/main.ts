@@ -58,7 +58,7 @@ app.use(pinia);
 // PrimeVue components
 app.component('font-awesome-icon', FontAwesomeIcon);
 app.component('InputText', InputText);
-app.component('Button', Button);
+app.component('ButtonPrime', Button);
 
 // VueQuill rich text editor
 app.component('QuillEditor', QuillEditor);

@@ -31,7 +31,7 @@ const userStore = useUserStore();
         />
         <i
           display="lg:none"
-          bg="primary-400"
+          bg="green-500"
           text="7px white"
           p="0.4"
           pos="absolute bottom-1.9 right-2"
@@ -42,9 +42,9 @@ const userStore = useUserStore();
       <template #popper>
         <div flex="~ col gap-4" items="center" p="4">
           <Link to="/profile">
-            <Button class="p-button-info">Profile</Button>
+            <Button variant="primary">Profile</Button>
           </Link>
-          <Button @click="logout" class="p-button-danger">Logout</Button>
+          <Button variant="secondary" @click="logout">Logout</Button>
         </div>
       </template>
     </VDropdown>
@@ -52,7 +52,7 @@ const userStore = useUserStore();
       <HeaderNavItem icon="user" label="Login" />
     </Link>
     <Link to="/requests">
-      <Button h="43px" whitespace="nowrap" class="p-button-secondary">
+      <Button variant="primary" h="!43px" whitespace="nowrap">
         {{ md ? 'Rate' : 'Rate requests' }}
       </Button>
     </Link>

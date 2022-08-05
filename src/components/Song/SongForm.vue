@@ -94,16 +94,14 @@ const hasEditorErrorMsg = computed(() => {
     </div>
 
     <el-form-item m="t-8">
-      <el-button
-        type="primary"
+      <Button
+        variant="primary"
         native-type="submit"
         @click="isPressedSubmitBtn = true"
       >
         {{ submitMsg }}
-      </el-button>
-      <el-button plain native-type="button" @click="router.back()">
-        Cancel
-      </el-button>
+      </Button>
+      <Button variant="secondary" @click="router.back()"> Cancel </Button>
     </el-form-item>
   </el-form>
 </template>

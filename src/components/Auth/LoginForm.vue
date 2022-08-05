@@ -58,10 +58,14 @@ const submitForm = () =>
       </el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" native-type="submit">Login</el-button>
-      <el-button native-type="button" @click="router.push('/register')">
+      <Button variant="primary" native-type="submit">Login</Button>
+      <Button
+        variant="secondary"
+        native-type="button"
+        @click="router.push('/register')"
+      >
         Register
-      </el-button>
+      </Button>
     </el-form-item>
   </el-form>
 </template>

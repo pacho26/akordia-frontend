@@ -132,18 +132,19 @@ const artistLinkSegment = computed(() => {
     </div>
 
     <div flex="~ row gap-4 sm:col" justify="between" items="end">
-      <div flex="~ gap-4">
+      <div flex="~">
         <Button
+          variant="secondary"
           @click="transpose('up')"
           v-tooltip="'Transpose up'"
-          class="p-button-success"
         >
           <i class="fa-solid fa-chevron-up"></i>
         </Button>
+
         <Button
+          variant="secondary"
           @click="transpose('down')"
           v-tooltip="'Transpose down'"
-          class="p-button-success"
         >
           <i class="fa-solid fa-chevron-down"></i>
         </Button>

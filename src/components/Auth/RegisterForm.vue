@@ -90,22 +90,39 @@ const submitForm = () =>
           v-for="role in roles"
           :key="role.label"
           :label="role.value"
-          type="info"
+          type="primary"
         />
       </el-radio-group>
     </el-form-item>
-    <el-form-item>
-      <el-button type="primary" native-type="submit">Register</el-button>
-      <el-button native-type="button" @click="router.push('/login')">
+    <el-form-item m="t-10">
+      <Button variant="primary" native-type="submit">Register</Button>
+      <Button
+        variant="secondary"
+        native-type="button"
+        @click="router.push('/login')"
+      >
         Login
-      </el-button>
+      </Button>
     </el-form-item>
   </el-form>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .fa-eye,
 .fa-eye-slash {
   transform: translateY(1px);
+}
+
+.el-radio-button__inner {
+  &:hover {
+    color: #6175de !important;
+  }
+}
+
+.el-radio-button__original-radio:checked + .el-radio-button__inner {
+  color: white !important;
+  background-color: #6175de !important;
+  border-color: #6175de !important;
+  box-shadow: none !important;
 }
 </style>

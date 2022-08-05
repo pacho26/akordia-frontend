@@ -12,9 +12,11 @@ const { userSongs } = useSongsStore();
   <div v-else flex="~ col gap-4" items="center" pos="relative top-36vh">
     <Heading label="You haven't entered any songs yet." :level="1" as="h1" />
     <Link to="/song/new">
-      <Button flex="~ gap-3" class="p-button-secondary">
-        <i text="xl" class="fa-solid fa-plus" />
-        Make new request
+      <Button variant="secondary">
+        <div flex="vcenter gap-3">
+          <i text="xl" class="fa-solid fa-plus" />
+          <p>Make new request</p>
+        </div>
       </Button>
     </Link>
   </div>

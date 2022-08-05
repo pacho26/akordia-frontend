@@ -15,7 +15,7 @@ const router = useRouter();
 const options = {
   formats: ['bold', 'color'],
   modules: {
-    toolbar: ['bold', { color: ['#000', '#689f38'] }],
+    toolbar: ['bold', { color: ['#000', '#3547a4'] }],
     clipboard: {
       matchVisual: false,
     },

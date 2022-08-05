@@ -111,7 +111,7 @@ const vote = async (value: 'up' | 'down') => {
         <ThumbsIcon @click="vote('down')" :orientation="'down'" />
       </div>
 
-      <Button @click="getNewRequest" class="p-button-secondary">Skip</Button>
+      <Button variant="secondary" @click="getNewRequest" h="!36px">Skip</Button>
     </div>
 
     <RequestOverview :request="lastRequest" />

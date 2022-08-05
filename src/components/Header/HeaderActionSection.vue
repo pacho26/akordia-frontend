@@ -38,7 +38,13 @@ const search = async () => {
         placeholder="Search for songs and artists"
         class="p-inputtext"
       />
-      <Button @click="search" icon="pi pi-search" class="p-button-success" />
+      <ButtonPrime
+        @click="search"
+        icon="pi pi-search"
+        bg="!primary-500"
+        border="!primary-500"
+        shadow="!none"
+      />
     </div>
 
     <Link to="/song/new">
@@ -51,3 +57,17 @@ const search = async () => {
     </Link>
   </div>
 </template>
+
+<style lang="scss">
+.p-inputtext.p-inputtext:enabled {
+  box-shadow: none !important;
+
+  &:hover {
+    border-color: #95aeed !important;
+  }
+
+  &:focus {
+    border-color: #95aeed !important;
+  }
+}
+</style>

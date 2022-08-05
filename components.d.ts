@@ -8,6 +8,7 @@ declare module '@vue/runtime-core' {
     AlphabetList: typeof import('./src/components/Header/AlphabetList.vue')['default']
     ArtistItem: typeof import('./src/components/Artist/ArtistItem.vue')['default']
     ArtistList: typeof import('./src/components/Artist/ArtistList.vue')['default']
+    Button: typeof import('./src/components/Base/Button.vue')['default']
     Container: typeof import('./src/components/Base/Container.vue')['default']
     FloatInput: typeof import('./src/components/Base/FloatInput.vue')['default']
     Header: typeof import('./src/components/Header/Header.vue')['default']

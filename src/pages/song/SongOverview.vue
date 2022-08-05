@@ -132,7 +132,7 @@ const artistLinkSegment = computed(() => {
           :label="song.artist"
           as="h2"
           :level="3"
-          text="primary-700 hover:primary-500"
+          text="primary-600 hover:primary-400"
           font="300"
           transition="default"
           class="uppercase"
@@ -150,27 +150,33 @@ const artistLinkSegment = computed(() => {
     </div>
 
     <div flex="~ row gap-4 sm:col" justify="between" items="end">
-      <div flex="~ gap-4">
+      <div flex="~">
         <Button
+          variant="secondary"
           @click="transpose('up')"
           v-tooltip="'Transpose up'"
-          class="p-button-success"
+          transition="default"
         >
-          <i class="fa-solid fa-chevron-up"></i>
+          <i class="fa-solid fa-chevron-up" />
         </Button>
+
         <Button
+          variant="secondary"
           @click="transpose('down')"
           v-tooltip="'Transpose down'"
-          class="p-button-success"
         >
-          <i class="fa-solid fa-chevron-down"></i>
+          <i class="fa-solid fa-chevron-down" />
         </Button>
       </div>
 
       <Link v-if="isAuthor" :to="editRoute">
-        <Button v-tooltip.left="'Edit song'" class="p-button-secondary">
+        <el-button
+          type="info"
+          v-tooltip.left="'Edit song'"
+          transition="!default"
+        >
           <i class="fa-solid fa-pen-to-square" />
-        </Button>
+        </el-button>
       </Link>
     </div>
   </div>
@@ -184,7 +190,7 @@ const artistLinkSegment = computed(() => {
         :content="song.content"
         class="editor"
       />
-      <p text="gray-500 right">
+      <p text="gray-400">
         by <span font="600">{{ authorUsername }}</span>
       </p>
     </div>
@@ -194,7 +200,7 @@ const artistLinkSegment = computed(() => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 iframe {
   aspect-ratio: 16/9 !important;
 }

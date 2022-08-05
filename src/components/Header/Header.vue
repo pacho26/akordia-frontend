@@ -12,7 +12,7 @@ const lg = breakpoints.smaller('lg');
   <div p="t-4 b-4 sm:t-4 lg:b-0" bg="white" shadow="sm">
     <Container flex="~ col gap-3">
       <div flex="vcenter" justify="between">
-        <div flex="vcenter gap-8 md:gap-12">
+        <div flex="vcenter gap-8 md:gap-10">
           <Link to="/">
             <img
               src="@/assets/img/logos/logo-placeholder.png"
