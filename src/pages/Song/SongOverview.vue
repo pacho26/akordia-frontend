@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import { useRoute } from 'vue-router';
 import { useSong } from '@/composables/api/songs';
-import { useUserStore } from '@/stores/user';
-import { useSongsStore } from '@/stores/songs';
+import router from '@/router';
 import { getUser } from '@/services/api/user';
+import { useSongsStore } from '@/stores/songs';
+import { useUserStore } from '@/stores/user';
+import { useRoute } from 'vue-router';
 
 const route = useRoute();
 
@@ -116,6 +117,11 @@ const artistLinkSegment = computed(() => {
     ? replaceCroatianLetters(song.value?.artist).replace(' ', '_').toLowerCase()
     : '';
 });
+
+const goToAuthorProfile = () => {
+  router.push(`/profile/${song.value?.author}`);
+  contentComponentKey.value++;
+};
 </script>
 
 <template>
@@ -191,7 +197,15 @@ const artistLinkSegment = computed(() => {
         class="editor"
       />
       <p text="gray-400">
-        by <span font="600">{{ authorUsername }}</span>
+        by
+        <span
+          text="primary-400 hover:primary-500"
+          font="600"
+          cursor="pointer"
+          transition="default"
+          @click="goToAuthorProfile"
+          >{{ authorUsername }}</span
+        >
       </p>
     </div>
     <div v-if="youtubeLink" w="full sm:80" class="md:translate-y-1">

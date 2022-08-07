@@ -51,12 +51,12 @@ const router = createRouter({
       },
       children: [
         {
-          path: '',
+          path: ':id',
           name: 'profile-overview',
           component: Profile,
         },
         {
-          path: 'edit',
+          path: ':id/edit',
           name: 'profile-edit',
           component: ProfileEdit,
         },

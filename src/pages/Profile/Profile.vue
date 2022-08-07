@@ -1,23 +1,48 @@
 <script lang="ts" setup>
-import router from '@/router';
-import { useSongsStore } from '@/stores/songs';
-import { useUserStore } from '@/stores/user';
-import Button from '../../components/Base/Button.vue';
-import ProfileSection from './ProfileSection.vue';
 import AccordionImg from '@/assets/img/instruments/accordion.png';
 import BassGuitarImg from '@/assets/img/instruments/bass-guitar.png';
 import DrumsImg from '@/assets/img/instruments/bass_drum.png';
 import GuitarImg from '@/assets/img/instruments/guitar.png';
 import PianoImg from '@/assets/img/instruments/piano.png';
 import SaxophoneImg from '@/assets/img/instruments/saxophone.png';
+import router from '@/router';
+import { getUser } from '@/services/api/user';
+import { useSongsStore } from '@/stores/songs';
+import { useUserStore } from '@/stores/user';
+import { useRoute } from 'vue-router';
+import Button from '../../components/Base/Button.vue';
+import ProfileSection from './ProfileSection.vue';
+import { useNotification } from '@/composables/useNotification';
 
-const { user } = useUserStore();
+const route = useRoute();
+const { user, userId } = useUserStore();
 const { userSongs } = useSongsStore();
+
+const selectedUser = ref(null);
+
+onBeforeMount(async () => {
+  if (userId === route.params.id) {
+    selectedUser.value = user;
+    return;
+  }
+  try {
+    const userRes = await getUser(route.params.id);
+    selectedUser.value = userRes.data;
+  } catch (err) {
+    const { showNotification } = useNotification();
+    showNotification({
+      title: 'User not found',
+      type: 'warning',
+      message: 'There is no user with the specified id.',
+    });
+    router.push({ name: 'home' });
+  }
+});
 
 const numberOfSongs = userSongs.length;
 
 const goToProfileEditPage = () => {
-  router.push(`/profile/edit`);
+  router.push(`${route.fullPath}/edit`);
 };
 
 const getInstrumentImg = (instrument: string) => {
@@ -41,47 +66,51 @@ const getInstrumentImg = (instrument: string) => {
 </script>
 
 <template>
-  <div v-if="user">
+  <div v-if="selectedUser">
     <div flex="~ gap-2 wrap" justify="between" border="b-1 gray-300" p="b-4">
-      <div
-        v-if="user?.role === 'admin'"
-        flex="~ gap-2"
-        items="center"
-        w="fit"
-        m="b-2.5"
-        p="x-2.5 y-1"
-        bg="primary-300"
-        text="white center"
-        font="700 tracking-wider"
-        border="rounded"
-        hover="rotate--2"
-        transition="default"
-        cursor="pointer"
-        select="none"
-        class="uppercase"
-      >
-        <i class="fa-solid fa-crown -translate-y-0.25" />
-        <div>{{ user.role }}</div>
-      </div>
-      <div
-        flex="~ gap-1.5"
-        items="center"
-        cursor="pointer"
-        select="none"
-        text="gray-700 !hover:primary-400"
-        transition="default"
-      >
-        <i text="2xl" class="fa-solid fa-at translate-y-0.25" />
-        <div text="3xl leading-6.5 sm:(text-3xl leading-8)" font="bold">
-          {{ user.username }}
+      <div>
+        <div
+          v-if="selectedUser?.role === 'admin'"
+          flex="~ gap-2"
+          items="center"
+          w="fit"
+          m="b-2.5"
+          p="x-2.5 y-1"
+          bg="primary-300"
+          text="white center"
+          font="700 tracking-wider"
+          border="rounded"
+          hover="rotate--2"
+          transition="default"
+          cursor="pointer"
+          select="none"
+          class="uppercase"
+        >
+          <i class="fa-solid fa-crown -translate-y-0.25" />
+          <div>{{ selectedUser.role }}</div>
+        </div>
+        <div
+          flex="~ gap-1.5"
+          items="center"
+          cursor="pointer"
+          select="none"
+          text="gray-700 !hover:primary-400"
+          transition="default"
+        >
+          <i text="2xl" class="fa-solid fa-at translate-y-0.25" />
+          <div text="3xl leading-6.5 sm:(text-3xl leading-8)" font="bold">
+            {{ selectedUser.username }}
+          </div>
         </div>
       </div>
-      <Button @click="goToProfileEditPage" variant="secondary">Edit</Button>
+      <Button @click="goToProfileEditPage" variant="secondary" h="!fit"
+        >Edit</Button
+      >
     </div>
 
     <ProfileSection
       title="Email"
-      :content="user.email"
+      :content="selectedUser.email"
       icon="envelope"
       m="t-4"
     />
@@ -92,34 +121,34 @@ const getInstrumentImg = (instrument: string) => {
       m="t-4 sm:t-5"
     />
     <ProfileSection
-      v-if="user?.location"
+      v-if="selectedUser?.location"
       title="Location"
-      :content="user.location"
+      :content="selectedUser.location"
       icon="location-dot"
       m="t-4 sm:t-5"
     />
     <ProfileSection
-      v-if="user?.contact"
+      v-if="selectedUser?.contact"
       title="Contact"
-      :content="user.contact"
+      :content="selectedUser.contact"
       icon="address-card"
       m="t-3 sm:t-5"
     />
     <ProfileSection
-      v-if="user?.band"
+      v-if="selectedUser?.band"
       title="Band"
-      :content="user.band"
+      :content="selectedUser.band"
       icon="people-group"
       m="t-3 sm:t-5"
     />
     <ProfileSection
-      v-if="user?.instruments?.length"
+      v-if="selectedUser?.instruments?.length"
       title="Instrument(s)"
       icon="people-group"
       m="t-3 sm:t-5"
     >
       <div
-        v-for="instrument in user.instruments"
+        v-for="instrument in selectedUser.instruments"
         :key="instrument"
         flex="vcenter gap-2"
         m="t-2"

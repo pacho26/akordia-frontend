@@ -9,8 +9,11 @@ import { useNotification } from '@/composables/useNotification';
 import router from '@/router/index.js';
 import { updateUser } from '@/services/api/user';
 import { useUserStore } from '@/stores/user';
+import { useRoute } from 'vue-router';
 
 const { user, userId, setUser } = useUserStore();
+const route = useRoute();
+const { showNotification } = useNotification();
 
 const form = ref({
   band: user?.band || '',
@@ -48,12 +51,22 @@ const getInstrumentImg = (instrument: string) => {
   }
 };
 
+onBeforeMount(() => {
+  if (userId !== route.params.id) {
+    showNotification({
+      title: 'Unauthorized',
+      message: 'You cannot change other users profile',
+      type: 'warning',
+    });
+    router.push({ name: 'home' });
+  }
+});
+
 const goToProfilePage = () => {
-  router.push('/profile');
+  router.push(`/profile/${userId}`);
 };
 
 const save = async () => {
-  const { showNotification } = useNotification();
   if (userId) {
     const userUpdated = await updateUser(userId, form.value);
     setUser(userUpdated.data);

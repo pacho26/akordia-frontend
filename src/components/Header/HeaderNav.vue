@@ -41,7 +41,7 @@ const userStore = useUserStore();
       </div>
       <template #popper>
         <div flex="~ col gap-4" items="center" p="4">
-          <Link to="/profile">
+          <Link :to="`/profile/${userStore.userId}`">
             <Button variant="primary">Profile</Button>
           </Link>
           <Button variant="secondary" @click="logout">Logout</Button>
