@@ -6,13 +6,14 @@ import ArtistByLetter from '@/pages/Artist/ArtistByLetter.vue';
 import Home from '@/pages/Home.vue';
 import Login from '@/pages/Login.vue';
 import MySongbook from '@/pages/MySongbook.vue';
-import Profile from '@/pages/Profile.vue';
+import Profile from '@/pages/Profile/Profile.vue';
+import ProfileEdit from '@/pages/Profile/ProfileEdit.vue';
 import Register from '@/pages/Register.vue';
 import Request from '@/pages/Request.vue';
 import SearchResults from '@/pages/SearchResults.vue';
-import SongAdd from '@/pages/song/SongAdd.vue';
-import SongEdit from '@/pages/song/SongEdit.vue';
-import SongOverview from '@/pages/song/SongOverview.vue';
+import SongAdd from '@/pages/Song/SongAdd.vue';
+import SongEdit from '@/pages/Song/SongEdit.vue';
+import SongOverview from '@/pages/Song/SongOverview.vue';
 
 // Composables
 import { useNotification } from '@/composables/useNotification';
@@ -45,7 +46,34 @@ const router = createRouter({
     {
       path: '/profile',
       name: 'profile',
-      component: Profile,
+      component: {
+        template: '<router-view />',
+      },
+      children: [
+        {
+          path: '',
+          name: 'profile-overview',
+          component: Profile,
+        },
+        {
+          path: 'edit',
+          name: 'profile-edit',
+          component: ProfileEdit,
+        },
+      ],
+      beforeEnter: async (to, from, next) => {
+        const { user } = useUserStore();
+        if (user) {
+          const songs = await getSongsByUserId(user._id);
+          const { setCurrentUserSongs } = useSongsStore();
+          setCurrentUserSongs(songs.data);
+          next();
+        } else {
+          const { showNotLoggedInNotication } = useNotification();
+          showNotLoggedInNotication();
+          next('/login');
+        }
+      },
     },
     {
       path: '/requests',

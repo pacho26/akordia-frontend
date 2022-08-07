@@ -23,7 +23,7 @@ body {
 }
 
 ::selection {
-  background-color: #bddea1;
+  background-color: #d4def8;
 }
 
 .three-dots {

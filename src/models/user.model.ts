@@ -7,9 +7,14 @@ export interface User {
   _id: string;
   username: string;
   email: string;
+  band?: string;
+  location?: string;
+  contact?: string;
+  instruments?: string[];
   role: UserRole;
   createdAt: string;
   updatedAt: string;
+  data?: any;
   __v?: number;
 }
 
