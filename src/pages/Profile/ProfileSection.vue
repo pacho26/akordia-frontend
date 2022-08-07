@@ -20,7 +20,7 @@ withDefaults(defineProps<Props>(), {
       <p class="uppercase">{{ title }}</p>
     </div>
 
-    <div text="xl gray-600 sm:2xl" font="600">
+    <div text="xl gray-600 sm:2xl" font="500">
       <p>{{ content }}</p>
       <slot />
     </div>

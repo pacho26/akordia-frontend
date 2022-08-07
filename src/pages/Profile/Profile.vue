@@ -129,7 +129,7 @@ const getInstrumentImg = (instrument: string) => {
           :src="getInstrumentImg(instrument)"
           alt="Accordion"
         />
-        <p font="500">{{ instrument }}</p>
+        <p>{{ instrument }}</p>
       </div>
     </ProfileSection>
   </div>
