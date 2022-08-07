@@ -42,7 +42,7 @@ const getInstrumentImg = (instrument: string) => {
 
 <template>
   <div v-if="user">
-    <div flex="~ gap-2 wrap" justify="between">
+    <div flex="~ gap-2 wrap" justify="between" border="b-1 gray-300" p="b-4">
       <div
         v-if="user?.role === 'admin'"
         flex="~ gap-2"
@@ -83,7 +83,7 @@ const getInstrumentImg = (instrument: string) => {
       title="Email"
       :content="user.email"
       icon="envelope"
-      m="t-8"
+      m="t-4"
     />
     <ProfileSection
       title="Songs posted"

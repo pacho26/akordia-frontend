@@ -43,7 +43,7 @@ const goToSongPage = (song: Song) => {
         :key="song._id"
         @click="goToSongPage(song)"
         w="260px"
-        text="xs hover:primary-600"
+        text="xs gray-700 hover:primary-600"
         cursor="pointer"
         transition="default"
         class="three-dots"
