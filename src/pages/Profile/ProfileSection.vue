@@ -15,7 +15,16 @@ withDefaults(defineProps<Props>(), {
 
 <template>
   <div>
-    <div flex="vcenter gap-2" text="sm gray-500" m="b-0.25 sm:b-1">
+    <div
+      flex="vcenter gap-2"
+      text="sm white"
+      w="fit"
+      p="x-2 y-0.5"
+      border="rounded"
+      bg="primary-300"
+      select="none"
+      m="b-0.25 sm:b-1.5"
+    >
       <i v-if="icon" :class="`fa-${iconType} fa-${icon}`" />
       <p class="uppercase">{{ title }}</p>
     </div>

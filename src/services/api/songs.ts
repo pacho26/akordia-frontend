@@ -6,7 +6,7 @@ export const getSongs = (): Promise<Song[]> => http.get('/songs');
 export const getSongById = (id: string): Promise<SongDTO> =>
   http.get(`/songs/${id}`);
 
-export const getSongsByUserId = (userId: string): Promise<Song[]> =>
+export const getSongsByUserId = (userId: string): Promise<SongDTO[]> =>
   http.post(`/songs/user/${userId}`);
 
 export const getSongsByArtist = (payload: {

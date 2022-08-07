@@ -5,41 +5,48 @@ import DrumsImg from '@/assets/img/instruments/bass_drum.png';
 import GuitarImg from '@/assets/img/instruments/guitar.png';
 import PianoImg from '@/assets/img/instruments/piano.png';
 import SaxophoneImg from '@/assets/img/instruments/saxophone.png';
+import { useNotification } from '@/composables/useNotification';
 import router from '@/router';
+import { getSongsByUserId } from '@/services/api/songs';
 import { getUser } from '@/services/api/user';
-import { useSongsStore } from '@/stores/songs';
 import { useUserStore } from '@/stores/user';
 import { useRoute } from 'vue-router';
 import Button from '../../components/Base/Button.vue';
 import ProfileSection from './ProfileSection.vue';
-import { useNotification } from '@/composables/useNotification';
 
 const route = useRoute();
 const { user, userId } = useUserStore();
-const { userSongs } = useSongsStore();
 
-const selectedUser = ref(null);
+const selectedUser: any = ref(null);
 
-onBeforeMount(async () => {
+const numberOfSongs = ref(0);
+
+const updateUserDetails = async () => {
   if (userId === route.params.id) {
     selectedUser.value = user;
-    return;
+  } else {
+    try {
+      const userRes = await getUser(route.params.id as string);
+      selectedUser.value = userRes.data;
+    } catch (err) {
+      const { showNotification } = useNotification();
+      showNotification({
+        title: 'User not found',
+        type: 'warning',
+        message: 'There is no user with the specified id.',
+      });
+      router.push({ name: 'home' });
+    }
   }
-  try {
-    const userRes = await getUser(route.params.id);
-    selectedUser.value = userRes.data;
-  } catch (err) {
-    const { showNotification } = useNotification();
-    showNotification({
-      title: 'User not found',
-      type: 'warning',
-      message: 'There is no user with the specified id.',
-    });
-    router.push({ name: 'home' });
+  const fetchedSongs = await getSongsByUserId(selectedUser.value._id);
+  numberOfSongs.value = fetchedSongs.data.length;
+};
+
+watchEffect(() => {
+  if (route.fullPath.includes('profile') && route.params.id) {
+    updateUserDetails();
   }
 });
-
-const numberOfSongs = userSongs.length;
 
 const goToProfileEditPage = () => {
   router.push(`${route.fullPath}/edit`);
@@ -118,34 +125,34 @@ const getInstrumentImg = (instrument: string) => {
       title="Songs posted"
       :content="numberOfSongs.toString()"
       icon="pen"
-      m="t-4 sm:t-5"
+      m="t-4 sm:t-5.5"
     />
     <ProfileSection
       v-if="selectedUser?.location"
       title="Location"
       :content="selectedUser.location"
       icon="location-dot"
-      m="t-4 sm:t-5"
+      m="t-4 sm:t-5.5"
     />
     <ProfileSection
       v-if="selectedUser?.contact"
       title="Contact"
       :content="selectedUser.contact"
       icon="address-card"
-      m="t-3 sm:t-5"
+      m="t-4 sm:t-5.5"
     />
     <ProfileSection
       v-if="selectedUser?.band"
       title="Band"
       :content="selectedUser.band"
       icon="people-group"
-      m="t-3 sm:t-5"
+      m="t-4 sm:t-5.5"
     />
     <ProfileSection
       v-if="selectedUser?.instruments?.length"
       title="Instrument(s)"
       icon="people-group"
-      m="t-3 sm:t-5"
+      m="t-4 sm:t-5.5"
     >
       <div
         v-for="instrument in selectedUser.instruments"
