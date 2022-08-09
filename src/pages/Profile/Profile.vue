@@ -180,7 +180,7 @@ const getInstrumentImg = (instrument: string) => {
     </ProfileSection>
     <ProfileSection
       title="Requests rated"
-      :content="selectedUser.numberOfVotes"
+      :content="selectedUser.numberOfVotes.toString()"
       icon="star"
       m="t-4 sm:t-5.5"
     />
