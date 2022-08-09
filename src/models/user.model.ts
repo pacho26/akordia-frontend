@@ -15,6 +15,7 @@ export interface User {
   createdAt: string;
   updatedAt: string;
   data?: any;
+  numberOfVotes?: number;
   __v?: number;
 }
 

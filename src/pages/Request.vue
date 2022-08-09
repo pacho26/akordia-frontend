@@ -30,7 +30,6 @@ const getNewRequest = async () => {
     const fetchedRequest = await getRandomRequest({ userId: user?._id });
 
     const { request, numberOfAvailable } = fetchedRequest.data;
-    console.log('numberOfAvailable :>> ', numberOfAvailable);
 
     if (numberOfAvailable === 1) {
       showNotification({
@@ -77,8 +76,6 @@ const vote = async (value: 'up' | 'down') => {
 
   rating.value += payload.vote;
 
-  console.log('rating.value :>> ', rating.value);
-
   if (rating.value > 2) {
     await createSong(lastRequest.value);
     await deleteRequest(lastRequest.value._id);
@@ -94,7 +91,7 @@ const vote = async (value: 'up' | 'down') => {
     await voteRequest(payload);
   } catch (err) {
     setLastRequest(null);
-    console.log(err);
+    console.error(err);
   }
   setTimeout(async () => {
     await getNewRequest();

@@ -115,14 +115,17 @@ const getInstrumentImg = (instrument: string) => {
       >
     </div>
 
+    <ProfileSection title="Email" icon="envelope" m="t-4">
+      <a
+        :href="`mailto:${selectedUser.email}`"
+        transition="default"
+        class="text-gray-600 no-underline hover:text-primary-400"
+      >
+        {{ selectedUser.email }}
+      </a>
+    </ProfileSection>
     <ProfileSection
-      title="Email"
-      :content="selectedUser.email"
-      icon="envelope"
-      m="t-4"
-    />
-    <ProfileSection
-      title="Songs posted"
+      title="Songs posted (approved)"
       :content="numberOfSongs.toString()"
       icon="pen"
       m="t-4 sm:t-5.5"
@@ -137,10 +140,17 @@ const getInstrumentImg = (instrument: string) => {
     <ProfileSection
       v-if="selectedUser?.contact"
       title="Contact"
-      :content="selectedUser.contact"
       icon="address-card"
       m="t-4 sm:t-5.5"
-    />
+    >
+      <a
+        :href="`tel:${selectedUser.contact}`"
+        transition="default"
+        class="text-gray-600 no-underline hover:text-primary-400"
+      >
+        {{ selectedUser.contact }}
+      </a>
+    </ProfileSection>
     <ProfileSection
       v-if="selectedUser?.band"
       title="Band"
@@ -168,5 +178,11 @@ const getInstrumentImg = (instrument: string) => {
         <p>{{ instrument }}</p>
       </div>
     </ProfileSection>
+    <ProfileSection
+      title="Requests rated"
+      :content="selectedUser.numberOfVotes"
+      icon="star"
+      m="t-4 sm:t-5.5"
+    />
   </div>
 </template>
