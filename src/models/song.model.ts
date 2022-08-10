@@ -6,6 +6,7 @@ export interface Song {
   youtubeId?: string;
   content: string;
   author: string;
+  authorUsername?: string;
   createdAt: string;
   updatedAt: string;
   __v?: number;

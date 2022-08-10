@@ -24,6 +24,7 @@ defineProps({
     :target="newTab ? '_blank' : ''"
     flex="vcenter"
     w="fit"
+    transition="default"
     class="no-underline"
   >
     <slot />

@@ -64,6 +64,7 @@ export default defineConfig({
           '2xs': '0.625rem', // 10px
           '2xl': '1.375rem', // 22px
           '3xl': '1.625rem', // 26px
+          '4xl': '1.875rem', // 26px
         },
         maxWidth: {
           base: '1280px',

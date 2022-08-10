@@ -29,3 +29,6 @@ export const updateSong = (id: string, song: SongEdit): Promise<Song> =>
 
 export const deleteSong = (id: string): Promise<Song> =>
   http.delete(`/songs/${id}`);
+
+export const getLastSongs = (limit: number): Promise<Song[]> =>
+  http.get(`/songs/last/${limit}`);

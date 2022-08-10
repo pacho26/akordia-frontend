@@ -21,3 +21,9 @@ export const updateUser = (id: string, userData: UserUpdate): Promise<User> =>
 
 export const deleteUser = (id: string): Promise<User> =>
   http.delete(`/users/${id}`);
+
+export const getTopVoters = (): Promise<User[]> =>
+  http.get('/users/top/voters');
+
+export const getTopAuthors = (): Promise<User[]> =>
+  http.get('/users/top/authors');

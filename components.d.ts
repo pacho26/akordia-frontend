@@ -17,6 +17,7 @@ declare module '@vue/runtime-core' {
     HeaderNavItem: typeof import('./src/components/Header/HeaderNavItem.vue')['default']
     Heading: typeof import('./src/components/Base/Heading.vue')['default']
     InstrumentsPicker: typeof import('./src/components/Profile/InstrumentsPicker.vue')['default']
+    LastSongsTable: typeof import('./src/components/Tables/LastSongsTable.vue')['default']
     Link: typeof import('./src/components/Base/Link.vue')['default']
     LoginForm: typeof import('./src/components/Auth/LoginForm.vue')['default']
     ProfileEditForm: typeof import('./src/components/Profile/ProfileEditForm.vue')['default']
@@ -30,7 +31,11 @@ declare module '@vue/runtime-core' {
     SongForm: typeof import('./src/components/Song/SongForm.vue')['default']
     SongItem: typeof import('./src/components/Song/SongItem.vue')['default']
     SongList: typeof import('./src/components/Song/SongList.vue')['default']
+    SongsTable: typeof import('./src/components/Tables/SongsTable.vue')['default']
     ThumbsIcon: typeof import('./src/components/Request/ThumbsIcon.vue')['default']
+    TopList: typeof import('./src/components/Tables/TopList.vue')['default']
+    TopUsersTable: typeof import('./src/components/Tables/TopUsersTable.vue')['default']
+    Welcome: typeof import('./src/components/Home/Welcome.vue')['default']
   }
 }
 
