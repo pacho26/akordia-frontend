@@ -17,12 +17,12 @@ defineProps<Props>();
   <div
     bg="#f0efee"
     w="full"
-    p="t-3 4 sm:(t-3 6)"
+    p="t-3 4 sm:t-3"
     shadow="md"
     border="rounded"
     class="songs-table-wrapper"
   >
-    <p text="center gray-600 xl" font="700" m="l-3 b-3" class="uppercase">
+    <p text="center gray-600 xl" font="700" m="l-3 b-2" class="uppercase">
       {{ title }}
     </p>
 

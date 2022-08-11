@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 //Pages
+import Advert from '@/pages/Advert/Advert.vue';
+import AdvertCreate from '@/pages/Advert/AdvertCreate.vue';
 import Artist from '@/pages/Artist/Artist.vue';
 import ArtistByLetter from '@/pages/Artist/ArtistByLetter.vue';
 import Home from '@/pages/Home.vue';
@@ -14,16 +16,16 @@ import SearchResults from '@/pages/SearchResults.vue';
 import SongAdd from '@/pages/Song/SongAdd.vue';
 import SongEdit from '@/pages/Song/SongEdit.vue';
 import SongOverview from '@/pages/Song/SongOverview.vue';
-import Advert from '@/pages/Advert/Advert.vue';
-import AdvertCreate from '@/pages/Advert/AdvertCreate.vue';
 
 // Composables
 import { useNotification } from '@/composables/useNotification';
 
 // Services
+import { getAdverts } from '@/services/api/adverts';
 import { getSongsByUserId } from '@/services/api/songs';
 
 // Stores
+import { useAdvertsStore } from '@/stores/adverts';
 import { useSongsStore } from '@/stores/songs';
 import { useUserStore } from '@/stores/user';
 
@@ -34,6 +36,12 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Home,
+      beforeEnter: async (to, from, next) => {
+        const adverts = await getAdverts();
+        const { setAdverts } = useAdvertsStore();
+        setAdverts(adverts);
+        next();
+      },
     },
     {
       path: '/login',
@@ -186,6 +194,16 @@ const router = createRouter({
           path: 'create',
           name: 'advert-create',
           component: AdvertCreate,
+          beforeEnter(to, from, next) {
+            const { user } = useUserStore();
+            if (!user) {
+              const { showNotLoggedInNotication } = useNotification();
+              showNotLoggedInNotication();
+              next('/login');
+              return;
+            }
+            next();
+          },
         },
       ],
     },

@@ -21,8 +21,8 @@ const title = computed(() => {
 </script>
 
 <template>
-  <div bg="#f0efee" w="fit" p="t-3 4 sm:(t-3 6)" shadow="md" border="rounded">
-    <p text="center gray-600 xl" font="700" m="l-3 b-3" class="uppercase">
+  <div bg="#f0efee" w="fit" p="t-3 4 sm:t-3" shadow="md" border="rounded">
+    <p text="center gray-600 xl" font="700" m="l-3 b-2" class="uppercase">
       {{ title }}
     </p>
     <el-table :data="data" w="!fit" class="rounded">

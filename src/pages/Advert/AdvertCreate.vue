@@ -19,21 +19,19 @@ const save = async () => {
     authorUsername: username as string,
   };
 
-  console.log('payload :>> ', payload);
-
   try {
     await createAdvert(payload);
     showNotification({
-      title: 'Advert created!',
-      message: 'Advert successfully created.',
+      title: 'Advert created',
+      message: 'Advert successfully created',
       type: 'success',
     });
     router.push('/');
   } catch (error) {
     console.log('error :>> ', error);
     showNotification({
-      title: 'Error!',
-      message: 'Something went wrong.',
+      title: 'Error',
+      message: 'Something went wrong',
       type: 'error',
     });
   }

@@ -2,7 +2,6 @@
 import { getTopVoters, getTopAuthors } from '@/services/api/user';
 import { getLastSongs } from '@/services/api/songs';
 import { getUser } from '@/services/api/user';
-import SongsTable from '../components/Tables/SongsTable.vue';
 
 const topAuthors = ref([]);
 const topVoters = ref([]);
@@ -11,7 +10,6 @@ const lastSongs = ref([]);
 onBeforeMount(async () => {
   await setTopVoters();
   await setTopAuthors();
-
   await setLastSongs();
 });
 
@@ -47,12 +45,13 @@ const setLastSongs = async () => {
 
 <template>
   <Welcome w="full" />
-  <SongsTable title="Last added chords" :data="lastSongs" m="t-10" />
-  <div flex="vcenter col gap-8 lg:row" justify="between" m="t-10">
-    <TopUsersTable type="voters" :data="topVoters" />
-    <TopUsersTable type="authors" :data="topAuthors" />
-    <div>
-      Prostor za oglase - tražim bend/glazbenika (obična stranica s rich textom)
+  <SongsTable title="Last added chords" :data="lastSongs" m="t-12" />
+  <div m="t-12" flex="~ col gap-8 lg:row" justify="between">
+    <AdvertsList :adverts="adverts" />
+    <div>{{ adverts }}</div>
+    <div flex="center row wrap gap-8 md:col">
+      <TopUsersTable type="voters" :data="topVoters" />
+      <TopUsersTable type="authors" :data="topAuthors" />
     </div>
   </div>
 </template>
