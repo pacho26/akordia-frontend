@@ -19,7 +19,7 @@ const { username, userId } = useUserStore();
       <Link
         :to="`profile/${userId}`"
         font="700"
-        transform="hover:rotate--2"
+        transform="hover:rotate--1"
         class="text-primary-600 hover:text-primary-800"
         >{{ username }}</Link
       >

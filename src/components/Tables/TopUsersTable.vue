@@ -21,7 +21,7 @@ const title = computed(() => {
 </script>
 
 <template>
-  <div bg="#f0efee" w="fit" p="t-3 6" shadow="md" border="rounded">
+  <div bg="#f0efee" w="fit" p="t-3 4 sm:(t-3 6)" shadow="md" border="rounded">
     <p text="center gray-600 xl" font="700" m="l-3 b-3" class="uppercase">
       {{ title }}
     </p>

@@ -1,5 +1,9 @@
 <script lang="ts" setup>
+import { useChordsBreakpoints } from '@/composables/useChordsBreakpoints';
 import type { Song } from '@/models/song.model';
+
+const breakpoints = useChordsBreakpoints();
+const sm = breakpoints.smaller('sm');
 
 interface Props {
   title: string;
@@ -13,7 +17,7 @@ defineProps<Props>();
   <div
     bg="#f0efee"
     w="full"
-    p="t-3 6"
+    p="t-3 4 sm:(t-3 6)"
     shadow="md"
     border="rounded"
     class="songs-table-wrapper"
@@ -21,8 +25,9 @@ defineProps<Props>();
     <p text="center gray-600 xl" font="700" m="l-3 b-3" class="uppercase">
       {{ title }}
     </p>
-    <el-table :data="data" w="full" class="rounded">
-      <el-table-column prop="title" label="title" width="33%">
+
+    <el-table v-if="!sm" :data="data" w="full" class="rounded">
+      <el-table-column prop="title" label="title" width="38%">
         <template #default="{ row }">
           <Link
             :to="`/song/${row._id}`"
@@ -32,8 +37,8 @@ defineProps<Props>();
           </Link>
         </template>
       </el-table-column>
-      <el-table-column prop="artist" label="Artist" width="33%" />
-      <el-table-column prop="authorUsername" label="Author" width="33%">
+      <el-table-column prop="artist" label="Artist" width="38%" />
+      <el-table-column prop="authorUsername" label="Author" width="24%">
         <template #default="{ row }">
           <Link
             :to="`/profile/${row.author}`"
@@ -43,6 +48,20 @@ defineProps<Props>();
           </Link>
         </template>
       </el-table-column>
+    </el-table>
+
+    <el-table v-else :data="data" w="full" class="rounded">
+      <el-table-column prop="title" label="title" width="55%">
+        <template #default="{ row }">
+          <Link
+            :to="`/song/${row._id}`"
+            class="text-primary-500 hover:text-primary-700 three-dots"
+          >
+            {{ row.title }}
+          </Link>
+        </template>
+      </el-table-column>
+      <el-table-column prop="artist" label="Artist" width="45%" />
     </el-table>
   </div>
 </template>

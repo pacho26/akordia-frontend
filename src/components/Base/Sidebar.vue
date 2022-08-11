@@ -33,7 +33,7 @@ const goToSongPage = (song: Song) => {
     ref="sidebar"
     w="380px"
     display="none md:block"
-    p="t-5 r-8"
+    p="t-6 r-8"
     border="r-1 gray-300"
   >
     <Heading label="Recent songs" class="uppercase" :level="4" as="h3" />

@@ -6,7 +6,7 @@ import { RouterView } from 'vue-router';
   <Header />
   <Container flex="~">
     <Sidebar />
-    <div m="t-4 sm:t-5 md:l-8" w="full">
+    <div m="t-4 b-10 sm:t-6 md:l-8" w="full">
       <RouterView />
     </div>
   </Container>

@@ -48,9 +48,11 @@ const setLastSongs = async () => {
 <template>
   <Welcome w="full" />
   <SongsTable title="Last added chords" :data="lastSongs" m="t-10" />
-  <div flex="~" justify="between" m="t-10">
+  <div flex="vcenter col gap-8 lg:row" justify="between" m="t-10">
     <TopUsersTable type="voters" :data="topVoters" />
     <TopUsersTable type="authors" :data="topAuthors" />
-    <div>Put something here</div>
+    <div>
+      Prostor za oglase - tražim bend/glazbenika (obična stranica s rich textom)
+    </div>
   </div>
 </template>

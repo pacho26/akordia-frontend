@@ -14,6 +14,8 @@ import SearchResults from '@/pages/SearchResults.vue';
 import SongAdd from '@/pages/Song/SongAdd.vue';
 import SongEdit from '@/pages/Song/SongEdit.vue';
 import SongOverview from '@/pages/Song/SongOverview.vue';
+import Advert from '@/pages/Advert/Advert.vue';
+import AdvertCreate from '@/pages/Advert/AdvertCreate.vue';
 
 // Composables
 import { useNotification } from '@/composables/useNotification';
@@ -165,6 +167,25 @@ const router = createRouter({
           path: ':id/edit',
           name: 'song-edit',
           component: SongEdit,
+        },
+      ],
+    },
+    {
+      path: '/advert',
+      name: 'advert',
+      component: {
+        template: '<router-view />',
+      },
+      children: [
+        {
+          path: ':id',
+          name: 'advert-overview',
+          component: Advert,
+        },
+        {
+          path: 'create',
+          name: 'advert-create',
+          component: AdvertCreate,
         },
       ],
     },
