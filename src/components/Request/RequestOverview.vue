@@ -7,6 +7,8 @@ interface Props {
 
 const props = defineProps<Props>();
 
+const hasFlatChords = ref(false);
+
 onBeforeMount(() => {
   addMarginTopToChords();
 });
@@ -16,6 +18,7 @@ const contentComponentKey = ref(0);
 watchEffect(async () => {
   if (props.request) {
     contentComponentKey.value++;
+    hasFlatChords.value = false;
   }
 });
 
@@ -56,8 +59,13 @@ const transpose = (mode: string) => {
     if (elem.textContent) {
       let newString = '';
 
+      if (elem.textContent.includes('B')) {
+        elem.textContent = elem.textContent.replace('B', 'A#');
+        hasFlatChords.value = true;
+      }
+
       for (let [i, char] of elem.textContent.split('').entries()) {
-        if (char === '#') {
+        if (char === '#' || char === 'b') {
           continue;
         }
 
@@ -78,6 +86,9 @@ const transpose = (mode: string) => {
             ];
         }
         newString += char;
+        if (hasFlatChords.value) {
+          newString = newString.replace('A#', 'Bb');
+        }
       }
       elem.textContent = newString;
     }
@@ -135,18 +146,18 @@ const artistLinkSegment = computed(() => {
       <div flex="~">
         <Button
           variant="secondary"
-          @click="transpose('up')"
-          v-tooltip="'Transpose up'"
-        >
-          <i class="fa-solid fa-chevron-up"></i>
-        </Button>
-
-        <Button
-          variant="secondary"
           @click="transpose('down')"
           v-tooltip="'Transpose down'"
         >
           <i class="fa-solid fa-chevron-down"></i>
+        </Button>
+
+        <Button
+          variant="secondary"
+          @click="transpose('up')"
+          v-tooltip="'Transpose up'"
+        >
+          <i class="fa-solid fa-chevron-up"></i>
         </Button>
       </div>
     </div>

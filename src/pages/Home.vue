@@ -46,9 +46,8 @@ const setLastSongs = async () => {
 <template>
   <Welcome w="full" />
   <SongsTable title="Last added chords" :data="lastSongs" m="t-12" />
-  <div m="t-12" flex="~ col gap-8 lg:row" justify="between">
-    <AdvertsList :adverts="adverts" />
-    <div>{{ adverts }}</div>
+  <div m="t-12" flex="~ col gap-8 xl:row" justify="between">
+    <AdvertsList />
     <div flex="center row wrap gap-8 md:col">
       <TopUsersTable type="voters" :data="topVoters" />
       <TopUsersTable type="authors" :data="topAuthors" />

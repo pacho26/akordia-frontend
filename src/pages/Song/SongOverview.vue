@@ -19,6 +19,8 @@ const contentComponentKey = ref(0);
 
 const authorUsername = ref('');
 
+const hasFlatChords = ref(false);
+
 watchEffect(async () => {
   if (songId.value) {
     await fetchSong(songId.value);
@@ -30,6 +32,7 @@ watchEffect(async () => {
       setRecentSong(song.value);
 
       addMarginTopToChords();
+      hasFlatChords.value = false;
     }
   }
 });
@@ -51,6 +54,10 @@ const youtubeLink = computed(() => {
     : '';
 });
 
+const editRoute = computed(() => {
+  return `${route.path}/edit`;
+});
+
 const CHORDS_KEYS = [
   'C',
   'C#',
@@ -66,10 +73,6 @@ const CHORDS_KEYS = [
   'H',
 ];
 
-const editRoute = computed(() => {
-  return `${route.path}/edit`;
-});
-
 const transpose = (mode: string) => {
   const editorEl = document.querySelector('.editor');
 
@@ -77,8 +80,13 @@ const transpose = (mode: string) => {
     if (elem.textContent) {
       let newString = '';
 
+      if (elem.textContent.includes('B')) {
+        elem.textContent = elem.textContent.replace('B', 'A#');
+        hasFlatChords.value = true;
+      }
+
       for (let [i, char] of elem.textContent.split('').entries()) {
-        if (char === '#') {
+        if (char === '#' || char === 'b') {
           continue;
         }
 
@@ -99,6 +107,9 @@ const transpose = (mode: string) => {
             ];
         }
         newString += char;
+        if (hasFlatChords.value) {
+          newString = newString.replace('A#', 'Bb');
+        }
       }
       elem.textContent = newString;
     }
@@ -159,19 +170,19 @@ const goToAuthorProfile = () => {
       <div flex="~">
         <Button
           variant="secondary"
+          @click="transpose('down')"
+          v-tooltip="'Transpose down'"
+        >
+          <i class="fa-solid fa-chevron-down" />
+        </Button>
+
+        <Button
+          variant="secondary"
           @click="transpose('up')"
           v-tooltip="'Transpose up'"
           transition="default"
         >
           <i class="fa-solid fa-chevron-up" />
-        </Button>
-
-        <Button
-          variant="secondary"
-          @click="transpose('down')"
-          v-tooltip="'Transpose down'"
-        >
-          <i class="fa-solid fa-chevron-down" />
         </Button>
       </div>
 
