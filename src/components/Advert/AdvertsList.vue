@@ -13,6 +13,7 @@ const { adverts } = storeToRefs(advertsStore);
     p="x-4 y-3"
     border="rounded"
     bg="white"
+    shadow="lg"
     class="advert-list"
   >
     <div m="b-3" text="center gray-600 xl" font="700" class="uppercase">
@@ -31,8 +32,6 @@ const { adverts } = storeToRefs(advertsStore);
   height: fit-content;
   overflow: auto;
   overscroll-behavior-y: contain;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
 .advert-list::-webkit-scrollbar {
