@@ -128,7 +128,7 @@ const vote = async (value: 'up' | 'down') => {
   <div v-else>
     <!-- TODO: Add this as seperate component -->
     <p text="3xl center gray-500" pos="relative top-36vh">
-      No unvoted requests available
+      No unvoted requests available.
     </p>
   </div>
 </template>
