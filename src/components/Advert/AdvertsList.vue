@@ -36,8 +36,13 @@ const { adverts } = storeToRefs(advertsStore);
       :key="advert._id"
       :advert="advert"
     />
-    <div v-if="!adverts?.length" m="t-4" p="y-4" text="xl center gray-500">
-      There are no adverts yet.
+    <div
+      v-if="!adverts?.length"
+      m="t-4"
+      p="y-4"
+      text="sm center gray-500 sm:lg"
+    >
+      There are no advertisements yet.
     </div>
   </div>
 </template>

@@ -62,7 +62,7 @@ const updateContent = (newContent: string) => {
       @blur="onEditorBlur"
       :content="form.content"
     />
-    <div p="t-1" text="xs red" :class="{ invisible: !hasEditorErrorMsg }">
+    <div p="t-1" text="xs red" :class="{ 'opacity-0': !hasEditorErrorMsg }">
       Please enter the content
     </div>
     <div flex="vcenter gap-4" justify="end" m="t-4">

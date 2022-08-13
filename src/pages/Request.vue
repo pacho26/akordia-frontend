@@ -12,7 +12,7 @@ import { useUserStore } from '@/stores/user';
 import { storeToRefs } from 'pinia';
 
 const { setLastViewedArtist } = useSongsStore();
-const { user } = useUserStore();
+const { user, userId } = useUserStore();
 const userStore = useRequestsStore();
 const { setLastRequest } = userStore;
 const { lastRequest } = storeToRefs(userStore);
@@ -27,9 +27,18 @@ let rating = ref(0);
 
 const getNewRequest = async () => {
   try {
-    const fetchedRequest = await getRandomRequest({ userId: user?._id || '' });
+    const fetchedRequest = await getRandomRequest({ userId: userId || '' });
 
     const { request, numberOfAvailable } = fetchedRequest;
+
+    if (numberOfAvailable === 0) {
+      showNotification({
+        title: "Couldn't fetch request",
+        message: 'You have rated all requests.',
+        type: 'info',
+      });
+      return;
+    }
 
     if (numberOfAvailable === 1) {
       showNotification({
@@ -39,9 +48,9 @@ const getNewRequest = async () => {
       });
     } else if (
       user !== null &&
-      (request.voters.includes(user._id) ||
+      (request.voters.includes(userId || '') ||
         request._id === lastRequest.value?._id ||
-        request.author === user._id)
+        request.author === userId)
     ) {
       getNewRequest();
       return;
@@ -53,8 +62,8 @@ const getNewRequest = async () => {
   } catch (err) {
     console.error(err);
     showNotification({
-      title: "Couldn't fetch request",
-      message: 'You have rated all requests.',
+      title: 'Error',
+      message: 'Something went wrong while fetching request.',
       type: 'info',
     });
     setLastRequest(null);
@@ -71,7 +80,7 @@ const vote = async (value: 'up' | 'down') => {
   if (lastRequest.value) {
     const payload = {
       requestId: lastRequest.value._id,
-      voterId: user?._id || '',
+      voterId: userId || '',
       vote: value === 'up' ? 1 : -1,
     };
 
@@ -90,6 +99,7 @@ const vote = async (value: 'up' | 'down') => {
 
     try {
       await voteRequest(payload);
+      setLastRequest(null);
     } catch (err) {
       setLastRequest(null);
       console.error(err);

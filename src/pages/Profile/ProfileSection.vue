@@ -21,7 +21,7 @@ withDefaults(defineProps<Props>(), {
       w="fit"
       p="x-2 y-0.5"
       border="rounded"
-      bg="primary-300"
+      bg="gray-500"
       select="none"
       m="b-0.25 sm:b-1.5"
     >
