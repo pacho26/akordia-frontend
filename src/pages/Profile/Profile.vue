@@ -5,19 +5,20 @@ import DrumsImg from '@/assets/img/instruments/bass_drum.png';
 import GuitarImg from '@/assets/img/instruments/guitar.png';
 import PianoImg from '@/assets/img/instruments/piano.png';
 import SaxophoneImg from '@/assets/img/instruments/saxophone.png';
+import Button from '@/components/Base/Button.vue';
 import { useNotification } from '@/composables/useNotification';
+import type { User } from '@/models/user.model';
 import router from '@/router';
 import { getSongsByUserId } from '@/services/api/songs';
 import { getUser } from '@/services/api/user';
 import { useUserStore } from '@/stores/user';
 import { useRoute } from 'vue-router';
-import Button from '../../components/Base/Button.vue';
 import ProfileSection from './ProfileSection.vue';
 
 const route = useRoute();
 const { user, userId } = useUserStore();
 
-const selectedUser: any = ref(null);
+const selectedUser = ref<User | null>();
 
 const numberOfSongs = ref(0);
 
@@ -27,7 +28,7 @@ const updateUserDetails = async () => {
   } else {
     try {
       const userRes = await getUser(route.params.id as string);
-      selectedUser.value = userRes.data;
+      selectedUser.value = userRes;
     } catch (err) {
       const { showNotification } = useNotification();
       showNotification({
@@ -38,8 +39,10 @@ const updateUserDetails = async () => {
       router.push({ name: 'home' });
     }
   }
-  const fetchedSongs = await getSongsByUserId(selectedUser.value._id);
-  numberOfSongs.value = fetchedSongs.data.length;
+  if (selectedUser.value) {
+    const fetchedSongs = await getSongsByUserId(selectedUser.value._id);
+    numberOfSongs.value = fetchedSongs.length;
+  }
 };
 
 watchEffect(() => {
@@ -110,7 +113,11 @@ const getInstrumentImg = (instrument: string) => {
           </div>
         </div>
       </div>
-      <Button @click="goToProfileEditPage" variant="secondary" h="!fit"
+      <Button
+        v-if="selectedUser._id === userId"
+        @click="goToProfileEditPage"
+        variant="secondary"
+        h="!fit"
         >Edit</Button
       >
     </div>
@@ -179,6 +186,7 @@ const getInstrumentImg = (instrument: string) => {
       </div>
     </ProfileSection>
     <ProfileSection
+      v-if="selectedUser?.numberOfVotes"
       title="Requests rated"
       :content="selectedUser.numberOfVotes.toString()"
       icon="star"

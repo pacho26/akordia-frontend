@@ -29,7 +29,7 @@ const getNewRequest = async () => {
   try {
     const fetchedRequest = await getRandomRequest({ userId: user?._id });
 
-    const { request, numberOfAvailable } = fetchedRequest.data;
+    const { request, numberOfAvailable } = fetchedRequest;
 
     if (numberOfAvailable === 1) {
       showNotification({
@@ -53,7 +53,7 @@ const getNewRequest = async () => {
   } catch (err) {
     console.error(err);
     showNotification({
-      title: err.response.data.error,
+      title: "Couldn't fetch request",
       message: 'You have rated all requests.',
       type: 'info',
     });
@@ -68,34 +68,36 @@ onBeforeMount(async () => {
 });
 
 const vote = async (value: 'up' | 'down') => {
-  const payload = {
-    requestId: lastRequest.value._id,
-    voterId: user._id,
-    vote: value === 'up' ? 1 : -1,
-  };
+  if (lastRequest.value) {
+    const payload = {
+      requestId: lastRequest.value._id,
+      voterId: user?._id || '',
+      vote: value === 'up' ? 1 : -1,
+    };
 
-  rating.value += payload.vote;
+    rating.value += payload.vote;
 
-  if (rating.value > 2) {
-    await createSong(lastRequest.value);
-    await deleteRequest(lastRequest.value._id);
-    showApprovedRequestNotication();
+    if (rating.value > 2) {
+      await createSong(lastRequest.value);
+      await deleteRequest(lastRequest.value._id);
+      showApprovedRequestNotication();
+    }
+
+    if (rating.value < -2) {
+      await deleteRequest(lastRequest.value._id);
+      showRejectedRequestNotication();
+    }
+
+    try {
+      await voteRequest(payload);
+    } catch (err) {
+      setLastRequest(null);
+      console.error(err);
+    }
+    setTimeout(async () => {
+      await getNewRequest();
+    }, 500);
   }
-
-  if (rating.value < -2) {
-    await deleteRequest(lastRequest.value._id);
-    showRejectedRequestNotication();
-  }
-
-  try {
-    await voteRequest(payload);
-  } catch (err) {
-    setLastRequest(null);
-    console.error(err);
-  }
-  setTimeout(async () => {
-    await getNewRequest();
-  }, 500);
 };
 </script>
 

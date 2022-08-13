@@ -21,13 +21,6 @@ export interface RequestCreate {
   content: string;
 }
 
-export interface RequestDTO {
-  data: {
-    request: Request;
-    numberOfAvailable: number;
-  };
-}
-
 export interface Vote {
   requestId: string;
   voterId: string;

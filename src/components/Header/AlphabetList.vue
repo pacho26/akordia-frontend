@@ -43,11 +43,11 @@ const letters = [
   '0-9',
 ];
 
-const gotoArtistByLetterPage = async (letter: string) => {
+const goToArtistByLetterPage = async (letter: string) => {
   const resArtists = await getArtistsBySearchTerm({
     searchTerm: letter as string,
   });
-  setFoundArtistsByLetter(resArtists.data);
+  setFoundArtistsByLetter(resArtists);
 
   router.push({ name: 'artist-by-letter-overview', params: { letter } });
 };
@@ -57,7 +57,7 @@ const gotoArtistByLetterPage = async (letter: string) => {
   <div
     v-for="letter in letters"
     :key="letter"
-    @click="gotoArtistByLetterPage(letter)"
+    @click="goToArtistByLetterPage(letter)"
     p="2"
     cursor="pointer"
     text="gray-700 hover:primary-500"

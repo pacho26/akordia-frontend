@@ -16,8 +16,8 @@ export const useRequest = () => {
       set(loading, true);
 
       const fetchedRequest = await api.getRandomRequest({ userId: user?._id });
-      if (fetchedRequest) {
-        set(request, fetchedRequest.data);
+      if (fetchedRequest.request) {
+        set(request, fetchedRequest.request);
         return request;
       }
     } catch (err) {

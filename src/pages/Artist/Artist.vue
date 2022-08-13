@@ -10,8 +10,7 @@ const songs = ref<Song[] | null>(null);
 
 onBeforeMount(async () => {
   if (artist) {
-    const res = await getSongsByArtist({ artist: artist as string });
-    songs.value = res.data;
+    songs.value = await getSongsByArtist({ artist: artist as string });
   }
 });
 </script>

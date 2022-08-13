@@ -14,7 +14,6 @@ export interface User {
   role: UserRole;
   createdAt: string;
   updatedAt: string;
-  data?: any;
   numberOfVotes?: number;
   __v?: number;
 }

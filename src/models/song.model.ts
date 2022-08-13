@@ -27,8 +27,4 @@ export interface SongCreate {
 
 export type SongEdit = Partial<SongCreate>;
 
-export interface SongDTO {
-  data: Song;
-}
-
 export default Song;

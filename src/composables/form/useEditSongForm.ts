@@ -85,7 +85,7 @@ export const useEditSongForm = () => {
     routeRedirect: string
   ) => {
     if (!formEl) return;
-    formEl.validate(async (valid: any) => {
+    formEl.validate(async (valid) => {
       if (valid) {
         const editedSong = await updateSong(id, song);
         if (isSuccess && editedSong) {

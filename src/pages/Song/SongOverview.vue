@@ -26,7 +26,7 @@ watchEffect(async () => {
     await fetchSong(songId.value);
     if (song.value) {
       const userRes = await getUser(song.value.author);
-      authorUsername.value = userRes.data.username || '';
+      authorUsername.value = userRes.username || '';
 
       contentComponentKey.value++;
       setRecentSong(song.value);

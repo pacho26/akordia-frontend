@@ -1,5 +1,3 @@
-// import type { UserRole } from 'models/user.model';
-
 import { ElNotification } from 'element-plus';
 
 interface NotificationOptions {

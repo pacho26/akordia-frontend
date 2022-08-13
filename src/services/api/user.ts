@@ -1,29 +1,57 @@
 import type { User, UserUpdate } from '@/models/user.model';
 import { http } from '@/services/http';
 
-// Current user
-export const getCurrentUser = (): Promise<User> => http.get('/users/me');
+export const getCurrentUser = async (): Promise<User> => {
+  const { data } = await http.get('/users/me');
+  return data;
+};
 
-export const updateCurrentUser = (userData: UserUpdate): Promise<User> =>
-  http.patch('/users/me', userData);
+export const updateCurrentUser = async (
+  userData: UserUpdate
+): Promise<User> => {
+  const { data } = await http.put('/users/me', userData);
+  return data;
+};
 
-export const deleteCurrentUser = (): Promise<User> => http.delete('/users/me');
+export const deleteCurrentUser = async (): Promise<User> => {
+  const { data } = await http.delete('/users/me');
+  return data;
+};
 
-export const getUser = (id: string): Promise<User> => http.get(`/users/${id}`);
+export const getUser = async (id: string): Promise<User> => {
+  const { data } = await http.get(`/users/${id}`);
+  return data;
+};
 
-export const getUsers = (): Promise<User[]> => http.get('/users');
+export const getUsers = async (): Promise<User[]> => {
+  const { data } = await http.get('/users');
+  return data;
+};
 
-export const createUser = (userData: User): Promise<User> =>
-  http.post('/users', userData);
+export const createUser = async (userData: User): Promise<User> => {
+  const { data } = await http.post('/users', userData);
+  return data;
+};
 
-export const updateUser = (id: string, userData: UserUpdate): Promise<User> =>
-  http.patch(`/users/${id}`, userData);
+export const updateUser = async (
+  id: string,
+  userData: UserUpdate
+): Promise<User> => {
+  const { data } = await http.patch(`/users/${id}`, userData);
+  return data;
+};
 
-export const deleteUser = (id: string): Promise<User> =>
-  http.delete(`/users/${id}`);
+export const deleteUser = async (id: string): Promise<User> => {
+  const { data } = await http.delete(`/users/${id}`);
+  return data;
+};
 
-export const getTopVoters = (): Promise<User[]> =>
-  http.get('/users/top/voters');
+export const getTopVoters = async (): Promise<User[]> => {
+  const { data } = await http.get('/users/top/voters');
+  return data;
+};
 
-export const getTopAuthors = (): Promise<User[]> =>
-  http.get('/users/top/authors');
+export const getTopAuthors = async (): Promise<User[]> => {
+  const { data } = await http.get('/users/top/authors');
+  return data;
+};

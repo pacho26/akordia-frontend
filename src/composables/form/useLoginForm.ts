@@ -41,7 +41,7 @@ export const useLoginForm = () => {
     onError: Function
   ) => {
     if (!formEl) return;
-    formEl.validate(async (valid: any) => {
+    formEl.validate(async (valid) => {
       if (valid) {
         const res = await auth.login(form);
         if (res) {

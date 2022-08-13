@@ -8,7 +8,7 @@ const router = useRouter();
 
 let windowHeight = ref(window.innerHeight);
 
-const sidebar = ref(null);
+const sidebar = ref<HTMLDivElement>();
 
 onMounted(() => {
   onWindowHeightChange();

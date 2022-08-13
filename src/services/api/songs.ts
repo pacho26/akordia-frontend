@@ -1,34 +1,58 @@
-import type { Song, SongCreate, SongEdit, SongDTO } from '@/models/song.model';
+import type { Song, SongCreate, SongEdit } from '@/models/song.model';
 import { http } from '../http';
 
-export const getSongs = (): Promise<Song[]> => http.get('/songs');
+export const getSongs = async (): Promise<Song[]> => {
+  const { data } = await http.get('/songs');
+  return data;
+};
 
-export const getSongById = (id: string): Promise<SongDTO> =>
-  http.get(`/songs/${id}`);
+export const getSongById = async (id: string): Promise<Song> => {
+  const { data } = await http.get(`/songs/${id}`);
+  return data;
+};
 
-export const getSongsByUserId = (userId: string): Promise<SongDTO[]> =>
-  http.post(`/songs/user/${userId}`);
+export const getSongsByUserId = async (userId: string): Promise<Song[]> => {
+  const { data } = await http.post(`/songs/user/${userId}`);
+  return data;
+};
 
-export const getSongsByArtist = (payload: {
+export const getSongsByArtist = async (payload: {
   artist: string;
-}): Promise<Song[]> => http.post('/songs/artist', payload);
+}): Promise<Song[]> => {
+  const { data } = await http.post('/songs/artist', payload);
+  return data;
+};
 
-export const getSongsBySearchTerm = (payload: {
+export const getSongsBySearchTerm = async (payload: {
   searchTerm: string;
-}): Promise<Song[]> => http.post('/songs/search', payload);
+}): Promise<Song[]> => {
+  const { data } = await http.post('/songs/search', payload);
+  return data;
+};
 
-export const getArtistsBySearchTerm = (payload: {
+export const getArtistsBySearchTerm = async (payload: {
   searchTerm: string;
-}): Promise<Song[]> => http.post('/songs/search/artists', payload);
+}): Promise<string[]> => {
+  const { data } = await http.post('/songs/search/artists', payload);
+  return data;
+};
 
-export const createSong = (song: SongCreate): Promise<Song> =>
-  http.post('/songs', song);
+export const createSong = async (song: SongCreate): Promise<Song> => {
+  const { data } = await http.post('/songs', song);
+  return data;
+};
 
-export const updateSong = (id: string, song: SongEdit): Promise<Song> =>
-  http.patch(`/songs/${id}`, song);
+export const updateSong = async (id: string, song: SongEdit): Promise<Song> => {
+  const { data } = await http.patch(`/songs/${id}`, song);
+  return data;
+};
 
-export const deleteSong = (id: string): Promise<Song> =>
-  http.delete(`/songs/${id}`);
+export const deleteSong = async (id: string): Promise<Song> => {
+  const { data } = await http.delete(`/songs/${id}`);
+  return data;
+};
 
-export const getLastSongs = (limit: number): Promise<Song[]> =>
-  http.get(`/songs/last/${limit}`);
+export const getLastSongs = async (limit: number): Promise<Song[]> => {
+  const { data } = await http.get(`/songs/last/${limit}`);
+  return data;
+};

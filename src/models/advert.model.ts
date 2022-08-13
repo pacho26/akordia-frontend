@@ -4,7 +4,6 @@ export interface Advert {
   content: string;
   authorId: string;
   authorUsername: string;
-  data?: string;
 }
 
 export default Advert;

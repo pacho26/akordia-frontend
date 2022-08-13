@@ -76,7 +76,7 @@ const router = createRouter({
         if (user) {
           const songs = await getSongsByUserId(user._id);
           const { setCurrentUserSongs } = useSongsStore();
-          setCurrentUserSongs(songs.data);
+          setCurrentUserSongs(songs);
           next();
         } else {
           const { showNotLoggedInNotication } = useNotification();
@@ -109,7 +109,7 @@ const router = createRouter({
         if (user) {
           const songs = await getSongsByUserId(user._id);
           const { setCurrentUserSongs } = useSongsStore();
-          setCurrentUserSongs(songs.data);
+          setCurrentUserSongs(songs);
           next();
         } else {
           const { showNotLoggedInNotication } = useNotification();

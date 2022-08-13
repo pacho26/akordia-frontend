@@ -6,11 +6,17 @@ export const getAdverts = async (): Promise<Advert[]> => {
   return data;
 };
 
-export const getAdvertById = (id: string): Promise<Advert> =>
-  http.get(`/adverts/${id}`);
+export const getAdvertById = async (id: string): Promise<Advert> => {
+  const { data } = await http.get(`/adverts/${id}`);
+  return data;
+};
 
-export const createAdvert = (advert: Advert): Promise<Advert> =>
-  http.post('/adverts/create', advert);
+export const createAdvert = async (advert: Advert): Promise<Advert> => {
+  const { data } = await http.post('/adverts/create', advert);
+  return data;
+};
 
-export const deleteAdvertById = (id: string): Promise<Advert> =>
-  http.delete(`/adverts/${id}`);
+export const deleteAdvertById = async (id: string): Promise<Advert> => {
+  const { data } = await http.delete(`/adverts/${id}`);
+  return data;
+};

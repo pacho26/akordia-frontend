@@ -8,7 +8,7 @@ const props = defineProps<Props>();
 
 const emits = defineEmits(['change']);
 
-const editor = ref(null);
+const editor = ref<any>();
 
 let isEditorSet = false;
 

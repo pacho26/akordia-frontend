@@ -80,7 +80,7 @@ export const useCreateRequestForm = () => {
     routeRedirect: string
   ) => {
     if (!formEl) return;
-    formEl.validate(async (valid: any) => {
+    formEl.validate(async (valid) => {
       if (valid) {
         const payload = {
           ...request,

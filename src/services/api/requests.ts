@@ -1,19 +1,26 @@
-import type {
-  Request,
-  RequestCreate,
-  RequestDTO,
-  Vote,
-} from '@/models/request.model';
+import type { Request, RequestCreate, Vote } from '@/models/request.model';
 import { http } from '../http';
 
-export const getRandomRequest = (payload: any): Promise<RequestDTO> =>
-  http.post('/requests/unvoted', payload);
+export const getRandomRequest = async (
+  payload: any
+): Promise<{ request: Request; numberOfAvailable: number }> => {
+  const { data } = await http.post('/requests/unvoted', payload);
+  return data;
+};
 
-export const createRequest = (request: RequestCreate): Promise<Request> =>
-  http.post('/requests', request);
+export const createRequest = async (
+  request: RequestCreate
+): Promise<Request> => {
+  const { data } = await http.post('/requests', request);
+  return data;
+};
 
-export const deleteRequest = (id: string): Promise<void> =>
-  http.delete(`/requests/${id}`);
+export const deleteRequest = async (id: string): Promise<void> => {
+  const { data } = await http.delete(`/requests/${id}`);
+  return data;
+};
 
-export const voteRequest = (voteData: Vote): Promise<Request> =>
-  http.post('/requests/vote', voteData);
+export const voteRequest = async (voteData: Vote): Promise<Request> => {
+  const { data } = await http.post('/requests/vote', voteData);
+  return data;
+};

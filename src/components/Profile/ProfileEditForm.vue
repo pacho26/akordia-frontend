@@ -69,7 +69,7 @@ const goToProfilePage = () => {
 const save = async () => {
   if (userId) {
     const userUpdated = await updateUser(userId, form.value);
-    setUser(userUpdated.data);
+    setUser(userUpdated);
     goToProfilePage();
     showNotification({
       title: 'Profile updated',

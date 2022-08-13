@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { getTopVoters, getTopAuthors } from '@/services/api/user';
+import type { Song } from '@/models/song.model';
+import type { User } from '@/models/user.model';
 import { getLastSongs } from '@/services/api/songs';
-import { getUser } from '@/services/api/user';
+import { getTopAuthors, getTopVoters, getUser } from '@/services/api/user';
 
-const topAuthors = ref([]);
-const topVoters = ref([]);
-const lastSongs = ref([]);
+const topAuthors = ref<User[]>();
+const topVoters = ref<User[]>();
+const lastSongs = ref<Song[]>();
 
 onBeforeMount(async () => {
   await setTopVoters();
@@ -14,28 +15,28 @@ onBeforeMount(async () => {
 });
 
 const setTopVoters = async () => {
-  const { data } = await getTopVoters();
-  topVoters.value = data.map((item: User, index: number) => ({
+  const res = await getTopVoters();
+  topVoters.value = res.map((item: User, index: number) => ({
     rank: `${index + 1}.`,
     ...item,
   }));
 };
 
 const setTopAuthors = async () => {
-  const { data } = await getTopAuthors();
-  topAuthors.value = data.map((item: User, index: number) => ({
+  const res = await getTopAuthors();
+  topAuthors.value = res.map((item: User, index: number) => ({
     rank: `${index + 1}.`,
     ...item,
   }));
 };
 
 const setLastSongs = async () => {
-  const { data } = await getLastSongs(5);
+  const lastSongsRes = await getLastSongs(5);
   lastSongs.value = await Promise.all(
-    data.map(async (item) => {
-      const { data } = await getUser(item.author);
+    lastSongsRes.map(async (item) => {
+      const userRes = await getUser(item.author);
       return {
-        authorUsername: data.username,
+        authorUsername: userRes.username,
         ...item,
       };
     })
@@ -45,12 +46,17 @@ const setLastSongs = async () => {
 
 <template>
   <Welcome w="full" />
-  <SongsTable title="Last added chords" :data="lastSongs" m="t-12" />
+  <SongsTable
+    v-if="lastSongs"
+    title="Last added chords"
+    :data="lastSongs"
+    m="t-12"
+  />
   <div m="t-12" flex="~ col gap-8 xl:row" justify="between">
     <AdvertsList />
     <div flex="center row wrap gap-8 md:col">
-      <TopUsersTable type="voters" :data="topVoters" />
-      <TopUsersTable type="authors" :data="topAuthors" />
+      <TopUsersTable v-if="topAuthors" type="authors" :data="topAuthors" />
+      <TopUsersTable v-if="topVoters" type="voters" :data="topVoters" />
     </div>
   </div>
 </template>

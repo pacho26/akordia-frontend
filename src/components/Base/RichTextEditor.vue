@@ -22,7 +22,7 @@ const options = {
   },
 };
 
-const editor = ref(null);
+const editor = ref<any>();
 
 let isEditorSet = false;
 

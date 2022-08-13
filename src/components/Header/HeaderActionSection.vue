@@ -22,8 +22,8 @@ const search = async () => {
   const resArtists = await getArtistsBySearchTerm({
     searchTerm: searchTerm.value,
   });
-  setFoundSongs(resSongs.data);
-  setFoundArtists(resArtists.data);
+  setFoundSongs(resSongs);
+  setFoundArtists(resArtists);
 
   router.push(`/search/${searchTerm.value.toLowerCase()}`);
 };

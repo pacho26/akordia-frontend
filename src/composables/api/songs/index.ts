@@ -17,8 +17,8 @@ export const useSong = () => {
 
       const fetchedSong = await api.getSongById(id);
       if (fetchedSong) {
-        set(song, fetchedSong.data);
-        setLastViewedArtist(fetchedSong.data.artist);
+        set(song, fetchedSong);
+        setLastViewedArtist(fetchedSong.artist);
         return song;
       }
     } catch (err) {

@@ -1,10 +1,10 @@
-import { get, set } from '@vueuse/core';
 import type { UserLogin, UserRegister } from '@/models/auth.model';
 import * as auth from '@/services/api/auth';
 import LocalStorageService from '@/services/local_storage';
-import { useUserStore } from '@/stores/user';
-import { useSongsStore } from '@/stores/songs';
 import { useRequestsStore } from '@/stores/requests';
+import { useSongsStore } from '@/stores/songs';
+import { useUserStore } from '@/stores/user';
+import { get, set } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
 
 export const useStoredLogin = () => {
@@ -43,9 +43,9 @@ export const useAuth = () => {
 
     try {
       const userWithToken = await auth.register(userData);
-      userStore.setUserData(userWithToken?.data);
-      return userWithToken?.data;
-    } catch (err: any) {
+      userStore.setUserData(userWithToken);
+      return userWithToken;
+    } catch (err) {
       console.error(err);
       set(error, err);
       return false;
@@ -57,9 +57,9 @@ export const useAuth = () => {
 
     try {
       const userWithToken = await auth.login(credentials);
-      userStore.setUserData(userWithToken?.data);
-      return userWithToken?.data;
-    } catch (err: any) {
+      userStore.setUserData(userWithToken);
+      return userWithToken;
+    } catch (err) {
       console.error(err);
       set(error, err);
       return false;
