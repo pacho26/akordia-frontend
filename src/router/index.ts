@@ -11,7 +11,7 @@ import ProfileEdit from '@/pages/Profile/ProfileEdit.vue';
 import Register from '@/pages/Register.vue';
 import Request from '@/pages/Request.vue';
 import SearchResults from '@/pages/SearchResults.vue';
-import SongAdd from '@/pages/Song/SongAdd.vue';
+import SongCreate from '@/pages/Song/SongCreate.vue';
 import SongEdit from '@/pages/Song/SongEdit.vue';
 import SongOverview from '@/pages/Song/SongOverview.vue';
 import { getAdverts } from '@/services/api/adverts';
@@ -151,7 +151,7 @@ const router = createRouter({
         {
           path: 'new',
           name: 'new',
-          component: SongAdd,
+          component: SongCreate,
           beforeEnter(to, from, next) {
             const { user } = useUserStore();
             if (user) {

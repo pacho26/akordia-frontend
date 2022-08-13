@@ -6,4 +6,9 @@ export interface Advert {
   authorUsername: string;
 }
 
+export interface AdvertCreate {
+  title: string;
+  content: string;
+}
+
 export default Advert;

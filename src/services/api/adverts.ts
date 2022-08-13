@@ -1,4 +1,4 @@
-import type { Advert } from '@/models/advert.model';
+import type { Advert, AdvertCreate } from '@/models/advert.model';
 import { http } from '../http';
 
 export const getAdverts = async (): Promise<Advert[]> => {
@@ -11,7 +11,7 @@ export const getAdvertById = async (id: string): Promise<Advert> => {
   return data;
 };
 
-export const createAdvert = async (advert: Advert): Promise<Advert> => {
+export const createAdvert = async (advert: AdvertCreate): Promise<Advert> => {
   const { data } = await http.post('/adverts/create', advert);
   return data;
 };

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useAdvertsStore } from '@/stores/adverts';
 import { storeToRefs } from 'pinia';
+import Link from '../Base/Link.vue';
 
 const advertsStore = useAdvertsStore();
 const { adverts } = storeToRefs(advertsStore);
@@ -16,14 +17,28 @@ const { adverts } = storeToRefs(advertsStore);
     shadow="lg"
     class="advert-list"
   >
-    <div m="b-3" text="center gray-600 xl" font="700" class="uppercase">
-      Advertisements
+    <div pos="relative">
+      <div m="b-2" text="center gray-600 xl" font="700" class="uppercase">
+        <p>Advertisements</p>
+      </div>
+      <Link
+        to="/advert/create"
+        v-tooltip="'Add new advert'"
+        pos="absolute right-0 top-0"
+      >
+        <Button variant="primary" w="!28px" h="!28px">
+          <i text="base" class="fa-solid fa-plus" />
+        </Button>
+      </Link>
     </div>
     <AdvertsListItem
       v-for="advert in adverts"
       :key="advert._id"
       :advert="advert"
     />
+    <div v-if="!adverts?.length" m="t-4" p="y-4" text="xl center gray-500">
+      There are no adverts yet.
+    </div>
   </div>
 </template>
 

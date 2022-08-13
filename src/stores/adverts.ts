@@ -8,13 +8,13 @@ interface State {
 export const useAdvertsStore = defineStore({
   id: 'adverts',
   state: (): State => ({
-    adverts: null,
+    adverts: [],
   }),
   persist: true,
   getters: {},
   actions: {
     setAdverts(adverts: Advert[] | null) {
-      this.adverts = adverts;
+      this.adverts = adverts?.reverse() || [];
     },
     clearRequestsData() {
       this.$reset();

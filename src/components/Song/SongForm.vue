@@ -15,10 +15,12 @@ const router = useRouter();
 const form = reactive(props.model);
 const formRef = ref<FormInstance | null>(null);
 
-const emitSubmit = () => emits('submit', { formRef, form });
+const emitSubmit = () => {
+  emits('submit', { formRef, form });
+};
 
-const updateContent = (content: string) => {
-  form.content = content;
+const updateContent = (newContent: string) => {
+  form.content = newContent;
   isPressedSubmitBtn.value = false;
 };
 
@@ -88,7 +90,7 @@ const hasEditorErrorMsg = computed(() => {
         @change="updateContent"
         :content="form.content"
       />
-      <div v-if="hasEditorErrorMsg" p="t-1" text="xs red">
+      <div p="t-1" text="xs red" :class="{ invisible: !hasEditorErrorMsg }">
         Please enter the content
       </div>
     </div>

@@ -1,49 +1,47 @@
 <script lang="ts" setup>
-import { useNotification } from '@/composables/useNotification';
-import router from '@/router';
-import { createAdvert } from '@/services/api/adverts';
-import { useUserStore } from '@/stores/user';
+import { useCreateAdvertForm } from '@/composables/form/useCreateAdvertForm';
+import type { FormInstance } from '@/models/element.model';
+import { get } from '@vueuse/core';
 
-const { userId, username } = useUserStore();
+const { advertModel, onSubmit, rules } = useCreateAdvertForm();
 
-const title = ref('');
-const content = ref('');
+const form = reactive(advertModel);
+const formRef = ref<FormInstance | null>(null);
 
 const save = async () => {
-  const { showNotification } = useNotification();
-
-  const payload = {
-    title: title.value,
-    content: content.value,
-    authorId: userId as string,
-    authorUsername: username as string,
-  };
-
-  try {
-    await createAdvert(payload);
-    showNotification({
-      title: 'Advert created',
-      message: 'Advert successfully created',
-      type: 'success',
-    });
-    router.push('/');
-  } catch (error) {
-    console.log('error :>> ', error);
-    showNotification({
-      title: 'Error',
-      message: 'Something went wrong',
-      type: 'error',
-    });
-  }
+  onSubmit(form, get(formRef));
 };
 
+const isEditorBlurred = ref(false);
+const isPressedSubmitBtn = ref(false);
+
+const onEditorBlur = () => {
+  isEditorBlurred.value = true;
+};
+
+const hasEditorErrorMsg = computed(() => {
+  return (
+    ((!form.content || form.content === '<p><br></p>') &&
+      isEditorBlurred.value) ||
+    isPressedSubmitBtn.value
+  );
+});
+
 const updateContent = (newContent: string) => {
-  content.value = newContent;
+  form.content = newContent;
+  isPressedSubmitBtn.value = false;
 };
 </script>
 
 <template>
-  <div>
+  <el-form
+    ref="formRef"
+    label-position="top"
+    :model="form"
+    :rules="rules"
+    size="large"
+    @submit.prevent="save"
+  >
     <el-form-item
       label="Title"
       prop="title"
@@ -53,18 +51,25 @@ const updateContent = (newContent: string) => {
       m="!b-8"
     >
       <el-input
-        v-model="title"
+        v-model="form.title"
         type="text"
         size="large"
         placeholder="e.g. Heavy metal band is looking for a drummer"
       />
     </el-form-item>
-    <AdvertRichTextEditor @change="updateContent" :content="content" />
+    <AdvertRichTextEditor
+      @change="updateContent"
+      @blur="onEditorBlur"
+      :content="form.content"
+    />
+    <div p="t-1" text="xs red" :class="{ invisible: !hasEditorErrorMsg }">
+      Please enter the content
+    </div>
     <div flex="vcenter gap-4" justify="end" m="t-4">
       <Link to="/">
         <Button variant="secondary">Discard</Button>
       </Link>
       <Button variant="primary" @click="save">Save</Button>
     </div>
-  </div>
+  </el-form>
 </template>
