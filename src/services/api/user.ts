@@ -1,30 +1,8 @@
 import type { User, UserUpdate } from '@/models/user.model';
 import { http } from '@/services/http';
 
-export const getCurrentUser = async (): Promise<User> => {
-  const { data } = await http.get('/users/me');
-  return data;
-};
-
-export const updateCurrentUser = async (
-  userData: UserUpdate
-): Promise<User> => {
-  const { data } = await http.put('/users/me', userData);
-  return data;
-};
-
-export const deleteCurrentUser = async (): Promise<User> => {
-  const { data } = await http.delete('/users/me');
-  return data;
-};
-
 export const getUser = async (id: string): Promise<User> => {
   const { data } = await http.get(`/users/${id}`);
-  return data;
-};
-
-export const getUsers = async (): Promise<User[]> => {
-  const { data } = await http.get('/users');
   return data;
 };
 
@@ -43,6 +21,23 @@ export const updateUser = async (
 
 export const deleteUser = async (id: string): Promise<User> => {
   const { data } = await http.delete(`/users/${id}`);
+  return data;
+};
+
+export const getCurrentUser = async (): Promise<User> => {
+  const { data } = await http.get('/users/me');
+  return data;
+};
+
+export const updateCurrentUser = async (
+  userData: UserUpdate
+): Promise<User> => {
+  const { data } = await http.put('/users/me', userData);
+  return data;
+};
+
+export const deleteCurrentUser = async (): Promise<User> => {
+  const { data } = await http.delete('/users/me');
   return data;
 };
 
