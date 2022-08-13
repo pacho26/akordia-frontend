@@ -1,9 +1,9 @@
 import type { Request, RequestCreate, Vote } from '@/models/request.model';
 import { http } from '../http';
 
-export const getRandomRequest = async (
-  payload: any
-): Promise<{ request: Request; numberOfAvailable: number }> => {
+export const getRandomRequest = async (payload: {
+  userId: string;
+}): Promise<{ request: Request; numberOfAvailable: number }> => {
   const { data } = await http.post('/requests/unvoted', payload);
   return data;
 };

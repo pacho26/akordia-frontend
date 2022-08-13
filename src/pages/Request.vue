@@ -27,7 +27,7 @@ let rating = ref(0);
 
 const getNewRequest = async () => {
   try {
-    const fetchedRequest = await getRandomRequest({ userId: user?._id });
+    const fetchedRequest = await getRandomRequest({ userId: user?._id || '' });
 
     const { request, numberOfAvailable } = fetchedRequest;
 

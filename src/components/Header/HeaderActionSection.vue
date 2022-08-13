@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import {
-  getSongsBySearchTerm,
-  getArtistsBySearchTerm,
-} from '@/services/api/songs';
-import { useSongsStore } from '@/stores/songs';
 import { useNotification } from '@/composables/useNotification';
 import router from '@/router';
+import {
+  getArtistsBySearchTerm,
+  getSongsBySearchTerm,
+} from '@/services/api/songs';
+import { useSongsStore } from '@/stores/songs';
 
 const { setFoundSongs, setFoundArtists } = useSongsStore();
 

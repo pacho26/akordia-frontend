@@ -1,6 +1,6 @@
-import { createApp } from 'vue/dist/vue.esm-bundler';
 import { createPinia } from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
+import { createApp } from 'vue/dist/vue.esm-bundler';
 
 import App from './App.vue';
 import router from './router';
@@ -9,21 +9,21 @@ import router from './router';
 import 'uno.css';
 
 // FontAwesome
-import { library, dom } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-import { far } from '@fortawesome/free-regular-svg-icons';
+import { dom, library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 // PrimeVue
-import 'primevue/resources/themes/saga-green/theme.css';
-import PrimeVue from 'primevue/config';
 import 'primeicons/primeicons.css';
+import PrimeVue from 'primevue/config';
 import 'primevue/resources/primevue.min.css';
+import 'primevue/resources/themes/saga-green/theme.css';
 
 // VuePrime components
-import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
+import InputText from 'primevue/inputtext';
 
 // Element Plus
 import ElementPlus from 'element-plus';
@@ -31,8 +31,8 @@ import 'element-plus/dist/index.css';
 
 // VueQuill
 import { QuillEditor } from '@vueup/vue-quill';
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import '@vueup/vue-quill/dist/vue-quill.bubble.css';
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 // FloatingVue
 import FloatingVue from 'floating-vue';

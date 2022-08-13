@@ -1,7 +1,7 @@
-import { defineStore } from 'pinia';
 import type { Song } from '@/models/song.model';
 import LocalStorageService from '@/services/local_storage';
 import _ from 'lodash';
+import { defineStore } from 'pinia';
 
 interface State {
   songs: Song[];

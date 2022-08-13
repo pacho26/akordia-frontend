@@ -1,3 +1,4 @@
+import type { GenericErrorResponse } from '@/models';
 import type {
   AxiosError,
   AxiosInstance,
@@ -5,7 +6,6 @@ import type {
   AxiosResponse,
 } from 'axios';
 import axios from 'axios';
-import type { GenericErrorResponse } from '@/models';
 // import {
 //   RequestAuthInterceptor,
 //   ResponseAuthInterceptor,

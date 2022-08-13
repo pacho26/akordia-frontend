@@ -1,7 +1,7 @@
+import type { Song, SongEdit } from '@/models/song.model';
+import { ElForm, ElNotification } from 'element-plus';
 import { useSongUpdate } from '../api/songs/index';
 import { useNotification } from '../useNotification';
-import { ElNotification, ElForm } from 'element-plus';
-import type { Song, SongEdit } from '@/models/song.model';
 
 export const useEditSongForm = () => {
   const { updateSong, isSuccess } = useSongUpdate();

@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia';
 import type { Request } from '@/models/request.model';
+import { defineStore } from 'pinia';
 
 interface State {
   lastRequest: Request | null;

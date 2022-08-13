@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { useRoute } from 'vue-router';
 import { useSong } from '@/composables/api/songs';
 import { useEditSongForm } from '@/composables/form/useEditSongForm';
-import { SongAction } from '@/models/song.model';
 import type { SubmitFormArgs } from '@/models';
+import { SongAction } from '@/models/song.model';
 import { get } from '@vueuse/core';
+import { useRoute } from 'vue-router';
 
 const route = useRoute();
 

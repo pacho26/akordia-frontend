@@ -1,11 +1,11 @@
 <script lang="ts" setup>
+import Link from '@/components/Base/Link.vue';
 import { useNotification } from '@/composables/useNotification';
 import type Advert from '@/models/advert.model';
 import router from '@/router';
 import { deleteAdvertById, getAdvertById } from '@/services/api/adverts';
 import { useUserStore } from '@/stores/user';
 import { useRoute } from 'vue-router';
-import Link from '@/components/Base/Link.vue';
 
 const { showNotification } = useNotification();
 const { userId } = useUserStore();

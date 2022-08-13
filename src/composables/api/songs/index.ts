@@ -1,7 +1,7 @@
-import { set } from '@vueuse/core';
 import type { Song, SongCreate, SongEdit } from '@/models/song.model';
 import * as api from '@/services/api/songs';
 import { useSongsStore } from '@/stores/songs';
+import { set } from '@vueuse/core';
 import { useResultState } from '../index';
 
 const loading = ref(false);

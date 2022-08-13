@@ -1,6 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
-
-//Pages
+import { useNotification } from '@/composables/useNotification';
 import Advert from '@/pages/Advert/Advert.vue';
 import AdvertCreate from '@/pages/Advert/AdvertCreate.vue';
 import Artist from '@/pages/Artist/Artist.vue';
@@ -16,18 +14,12 @@ import SearchResults from '@/pages/SearchResults.vue';
 import SongAdd from '@/pages/Song/SongAdd.vue';
 import SongEdit from '@/pages/Song/SongEdit.vue';
 import SongOverview from '@/pages/Song/SongOverview.vue';
-
-// Composables
-import { useNotification } from '@/composables/useNotification';
-
-// Services
 import { getAdverts } from '@/services/api/adverts';
 import { getSongsByUserId } from '@/services/api/songs';
-
-// Stores
 import { useAdvertsStore } from '@/stores/adverts';
 import { useSongsStore } from '@/stores/songs';
 import { useUserStore } from '@/stores/user';
+import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia';
 import type { Advert } from '@/models/advert.model';
+import { defineStore } from 'pinia';
 
 interface State {
   adverts: Advert[] | null;

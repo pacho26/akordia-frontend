@@ -1,10 +1,10 @@
-import type { ElForm } from 'element-plus';
-import * as EmailValidator from 'email-validator';
 import type { UserRegister } from '@/models/auth.model';
 import { UserRole } from '@/models/user.model';
+import { get } from '@vueuse/core';
+import type { ElForm } from 'element-plus';
+import * as EmailValidator from 'email-validator';
 import { reactive } from 'vue';
 import { useAuth } from '../api/auth';
-import { get } from '@vueuse/core';
 
 export const useRegisterForm = () => {
   const form: UserRegister = reactive({

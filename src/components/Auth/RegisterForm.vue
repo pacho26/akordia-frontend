@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { ElNotification } from 'element-plus';
-import { get } from '@vueuse/core';
-import { useNotification } from '@/composables/useNotification';
 import { usePasswordVisibility } from '@/composables/form/usePasswordVisibility';
 import { useRegisterForm } from '@/composables/form/useRegisterForm';
+import { useNotification } from '@/composables/useNotification';
 import type { FormInstance } from '@/models/element.model';
+import { get } from '@vueuse/core';
+import { ElNotification } from 'element-plus';
 
 const formRef = ref<FormInstance | null>(null);
 

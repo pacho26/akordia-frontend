@@ -1,6 +1,6 @@
+import type { UserLogin } from '@/models/auth.model';
 import type { ElForm } from 'element-plus';
 import * as EmailValidator from 'email-validator';
-import type { UserLogin } from '@/models/auth.model';
 import { useAuth } from '../api/auth';
 
 export const useLoginForm = () => {
