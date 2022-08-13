@@ -26,7 +26,7 @@ const { adverts } = storeToRefs(advertsStore);
         v-tooltip="'Add new advert'"
         pos="absolute right-0 top-0"
       >
-        <Button variant="primary" w="!28px" h="!28px">
+        <Button variant="primary" w="!28px" h="!28px" p="!0">
           <i text="base" class="fa-solid fa-plus" />
         </Button>
       </Link>
