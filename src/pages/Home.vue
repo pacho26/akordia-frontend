@@ -75,7 +75,7 @@ watchEffect(() => {
   <SongsTable
     @vue:mounted="incrementRenderCount"
     v-if="lastSongs"
-    title="Last added chords"
+    :title="$t('homepage.lastAddedChords')"
     :data="lastSongs"
   />
   <div m="t-10 sm:t-12" flex="~ col gap-8 xl:row" justify="between">

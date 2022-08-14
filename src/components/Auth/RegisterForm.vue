@@ -39,21 +39,21 @@ const submitForm = () =>
     size="large"
     @submit.prevent="submitForm"
   >
-    <el-form-item label="Username" prop="username">
+    <el-form-item :label="$t('auth.username')" prop="username">
       <el-input v-model="form.username" type="text">
         <template #prefix>
           <i text="base" class="fa-solid fa-user" />
         </template>
       </el-input>
     </el-form-item>
-    <el-form-item label="Email" prop="email">
+    <el-form-item :label="$t('auth.email')" prop="email">
       <el-input v-model="form.email" type="text">
         <template #prefix>
           <i text="base" class="fa-solid fa-envelope" />
         </template>
       </el-input>
     </el-form-item>
-    <el-form-item label="Password" prop="password">
+    <el-form-item :label="$t('auth.password')" prop="password">
       <el-input v-model="form.password" :type="visible ? 'text' : 'password'">
         <template #prefix>
           <div @click.stop="toggleVisiblity" cursor="pointer">
@@ -67,7 +67,7 @@ const submitForm = () =>
         </template>
       </el-input>
     </el-form-item>
-    <el-form-item label="Repeated password" prop="repeatedPassword">
+    <el-form-item :label="$t('auth.passwordRepeat')" prop="repeatedPassword">
       <el-input
         v-model="repeatedPassword"
         :type="repeatedVisible ? 'text' : 'password'"
@@ -84,7 +84,7 @@ const submitForm = () =>
         </template>
       </el-input>
     </el-form-item>
-    <el-form-item label="Role" prop="role">
+    <el-form-item :label="$t('auth.role')" prop="role">
       <el-radio-group v-model="form.role" size="large">
         <el-radio-button
           v-for="role in roles"
@@ -95,13 +95,15 @@ const submitForm = () =>
       </el-radio-group>
     </el-form-item>
     <el-form-item m="t-10">
-      <Button variant="primary" native-type="submit">Register</Button>
+      <Button variant="primary" native-type="submit">{{
+        $t('auth.register')
+      }}</Button>
       <Button
         variant="secondary"
         native-type="button"
         @click="router.push('/login')"
       >
-        Login
+        {{ $t('auth.login') }}
       </Button>
     </el-form-item>
   </el-form>

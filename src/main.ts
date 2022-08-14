@@ -41,6 +41,9 @@ import 'floating-vue/dist/style.css';
 // Iconify
 import { Icon } from '@iconify/vue';
 
+// i18n
+import i18n from './i18n/i18n';
+
 library.add(fas, far, fab);
 dom.watch();
 
@@ -48,7 +51,8 @@ const app = createApp(App)
   .use(router)
   .use(PrimeVue)
   .use(ElementPlus)
-  .use(FloatingVue);
+  .use(FloatingVue)
+  .use(i18n);
 
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);

@@ -94,7 +94,7 @@ const save = async () => {
     size="large"
     @submit.prevent=""
   >
-    <el-form-item label="Band" prop="band">
+    <el-form-item :label="$t('profile.band')" prop="band">
       <el-input v-model="form.band" type="text">
         <template #prefix>
           <i text="base" class="fa-solid fa-people-group" />
@@ -102,7 +102,7 @@ const save = async () => {
       </el-input>
     </el-form-item>
 
-    <el-form-item label="Location" prop="location">
+    <el-form-item :label="$t('profile.location')" prop="location">
       <el-input v-model="form.location" type="text">
         <template #prefix>
           <i text="base" class="fa-solid fa-location-dot" />
@@ -110,7 +110,7 @@ const save = async () => {
       </el-input>
     </el-form-item>
 
-    <el-form-item label="Contact" prop="contact">
+    <el-form-item :label="$t('profile.contact')" prop="contact">
       <el-input v-model="form.contact" type="text">
         <template #prefix>
           <i text="base" class="fa-solid fa-address-card" />
@@ -118,7 +118,9 @@ const save = async () => {
       </el-input>
     </el-form-item>
 
-    <div m="b-3" leading="5.5" text="#606266 sm">Instrument(s)</div>
+    <div m="b-3" leading="5.5" text="#606266 sm">
+      {{ $t('profile.instruments') }}
+    </div>
     <el-checkbox-group v-model="form.instruments" size="large">
       <el-checkbox-button
         v-for="instrument in instruments"
@@ -137,9 +139,11 @@ const save = async () => {
     </el-checkbox-group>
 
     <el-form-item m="t-12">
-      <Button @click="save" variant="primary" native-type="submit">Save</Button>
+      <Button @click="save" variant="primary" native-type="submit">{{
+        $t('profile.save')
+      }}</Button>
       <Button @click="goToProfilePage" variant="secondary" native-type="button">
-        Discard changes</Button
+        {{ $t('profile.discardChanges') }}</Button
       >
     </el-form-item>
   </el-form>

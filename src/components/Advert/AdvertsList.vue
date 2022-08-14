@@ -19,7 +19,7 @@ const { adverts } = storeToRefs(advertsStore);
   >
     <div pos="relative">
       <div m="b-2" text="center gray-600 xl" font="700" class="uppercase">
-        <p>Advertisements</p>
+        <p>{{ $t('homepage.advertisements') }}</p>
       </div>
       <Link
         to="/advert/create"
@@ -42,7 +42,7 @@ const { adverts } = storeToRefs(advertsStore);
       p="y-4"
       text="sm center gray-500 sm:lg"
     >
-      There are no advertisements yet.
+      {{ $t('homepage.noAvailableAdvertisements') }}
     </div>
   </div>
 </template>

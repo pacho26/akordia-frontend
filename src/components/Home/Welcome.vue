@@ -15,7 +15,7 @@ const { username, userId } = useUserStore();
       border="rounded"
       class="transparent-bg"
     >
-      Welcome back
+      {{ $t('homepage.welcomeBack') }}
       <Link
         :to="`profile/${userId}`"
         font="700"

@@ -31,7 +31,7 @@ const submitForm = ({ formRef, form }: SubmitFormArgs) => {
 <template>
   <SongForm
     :song="song"
-    submit-msg="Edit song"
+    :submit-msg="$t('chords.editSong')"
     :action="SongAction.EDIT"
     :model="songModel"
     :rules="rules"

@@ -14,13 +14,13 @@ const userStore = useUserStore();
 <template>
   <div flex="vcenter gap-3 md:gap-5">
     <Link to="/my-songbook">
-      <HeaderNavItem icon="music" label="My songbook" />
+      <HeaderNavItem icon="music" :label="$t('header.mySongbook')" />
     </Link>
     <VDropdown
       v-if="userStore.user"
       :triggers="['hover', 'click', 'focus']"
       :popperTriggers="['hover']"
-      :distance="8"
+      :distance="10"
       pos="relative"
     >
       <div>
@@ -42,9 +42,13 @@ const userStore = useUserStore();
       <template #popper>
         <div flex="~ col gap-4" items="center" p="4">
           <Link :to="`/profile/${userStore.userId}`">
-            <Button variant="primary">Profile</Button>
+            <Button variant="primary" w="92px" h="!38px">{{
+              $t('auth.profile')
+            }}</Button>
           </Link>
-          <Button variant="secondary" @click="logout">Logout</Button>
+          <Button variant="secondary" @click="logout" w="92px" h="!38px"
+            >{{ $t('auth.logout') }}
+          </Button>
         </div>
       </template>
     </VDropdown>
@@ -53,8 +57,9 @@ const userStore = useUserStore();
     </Link>
     <Link to="/requests">
       <Button variant="primary" h="!43px" whitespace="nowrap">
-        {{ md ? 'Rate' : 'Rate requests' }}
+        {{ md ? $t('header.rate') : $t('header.rateRequests') }}
       </Button>
     </Link>
+    <LanguagePicker />
   </div>
 </template>

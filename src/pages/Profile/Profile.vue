@@ -9,7 +9,6 @@ import Button from '@/components/Base/Button.vue';
 import { useNotification } from '@/composables/useNotification';
 import type { User } from '@/models/user.model';
 import router from '@/router';
-import { getSongsByUserId } from '@/services/api/songs';
 import { getUser } from '@/services/api/user';
 import { useUserStore } from '@/stores/user';
 import { useRoute } from 'vue-router';
@@ -19,8 +18,6 @@ const route = useRoute();
 const { user, userId } = useUserStore();
 
 const selectedUser = ref<User | null>();
-
-const numberOfSongs = ref(0);
 
 const updateUserDetails = async () => {
   if (userId === route.params.id) {
@@ -39,10 +36,6 @@ const updateUserDetails = async () => {
       router.push({ name: 'home' });
     }
   }
-  if (selectedUser.value) {
-    const fetchedSongs = await getSongsByUserId(selectedUser.value._id);
-    numberOfSongs.value = fetchedSongs.length;
-  }
 };
 
 watchEffect(() => {
@@ -55,6 +48,7 @@ const goToProfileEditPage = () => {
   router.push(`${route.fullPath}/edit`);
 };
 
+// TODO: On similar way add croatian instruments names
 const getInstrumentImg = (instrument: string) => {
   switch (instrument) {
     case 'Accordion':
@@ -122,7 +116,7 @@ const getInstrumentImg = (instrument: string) => {
       >
     </div>
 
-    <ProfileSection title="Email" icon="envelope" m="t-4">
+    <ProfileSection :title="$t('profile.email')" icon="envelope" m="t-4">
       <a
         :href="`mailto:${selectedUser.email}`"
         transition="default"
@@ -132,21 +126,15 @@ const getInstrumentImg = (instrument: string) => {
       </a>
     </ProfileSection>
     <ProfileSection
-      title="Songs posted (approved)"
-      :content="numberOfSongs.toString()"
-      icon="pen"
-      m="t-4 sm:t-5.5"
-    />
-    <ProfileSection
       v-if="selectedUser?.location"
-      title="Location"
+      :title="$t('profile.location')"
       :content="selectedUser.location"
       icon="location-dot"
       m="t-4 sm:t-5.5"
     />
     <ProfileSection
       v-if="selectedUser?.contact"
-      title="Contact"
+      :title="$t('profile.contact')"
       icon="address-card"
       m="t-4 sm:t-5.5"
     >
@@ -160,14 +148,14 @@ const getInstrumentImg = (instrument: string) => {
     </ProfileSection>
     <ProfileSection
       v-if="selectedUser?.band"
-      title="Band"
+      :title="$t('profile.band')"
       :content="selectedUser.band"
       icon="people-group"
       m="t-4 sm:t-5.5"
     />
     <ProfileSection
       v-if="selectedUser?.instruments?.length"
-      title="Instrument(s)"
+      :title="$t('profile.instruments')"
       icon="people-group"
       m="t-4 sm:t-5.5"
     >
@@ -186,8 +174,13 @@ const getInstrumentImg = (instrument: string) => {
       </div>
     </ProfileSection>
     <ProfileSection
-      v-if="selectedUser?.numberOfVotes"
-      title="Requests rated"
+      :title="$t('profile.numberOfChords')"
+      :content="selectedUser.numberOfSongs.toString()"
+      icon="pen"
+      m="t-4 sm:t-5.5"
+    />
+    <ProfileSection
+      :title="$t('profile.numberOfVotes')"
       :content="selectedUser.numberOfVotes.toString()"
       icon="star"
       m="t-4 sm:t-5.5"

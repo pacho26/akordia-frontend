@@ -6,28 +6,30 @@ interface Props {
   data: User[];
 }
 
-const props = defineProps<Props>();
-
-const title = computed(() => {
-  switch (props.type) {
-    case 'voters':
-      return 'Top 5 voters';
-    case 'authors':
-      return 'Top 5 authors';
-    default:
-      return '';
-  }
-});
+defineProps<Props>();
 </script>
 
 <template>
   <div bg="#f0efee" w="fit" p="t-3 4 sm:t-3" shadow="md" border="rounded">
     <p text="center gray-600 xl" font="700" m="l-3 b-2" class="uppercase">
-      {{ title }}
+      {{
+        type === 'authors'
+          ? $t('homepage.top5Authors')
+          : $t('homepage.top5Voters')
+      }}
     </p>
     <el-table :data="data" w="!fit" class="rounded">
-      <el-table-column fixed prop="rank" label="Rank" width="61" />
-      <el-table-column prop="username" label="Username" width="130">
+      <el-table-column
+        fixed
+        prop="rank"
+        :label="$t('homepage.rank')"
+        width="62"
+      />
+      <el-table-column
+        prop="username"
+        :label="$t('homepage.username')"
+        width="131"
+      >
         <template #default="{ row }">
           <Link
             :to="`/profile/${row._id}`"
@@ -39,8 +41,10 @@ const title = computed(() => {
       </el-table-column>
       <el-table-column
         :prop="type === 'voters' ? 'numberOfVotes' : 'numberOfSongs'"
-        label="Votes"
-        width="70"
+        :label="
+          type === 'voters' ? $t('homepage.votes') : $t('homepage.chords')
+        "
+        width="78"
       />
     </el-table>
   </div>

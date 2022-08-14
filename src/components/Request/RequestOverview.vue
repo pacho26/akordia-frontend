@@ -147,7 +147,7 @@ const artistLinkSegment = computed(() => {
         <Button
           variant="secondary"
           @click="transpose('down')"
-          v-tooltip="'Transpose down'"
+          v-tooltip="$t('requests.transposeDown')"
         >
           <i class="fa-solid fa-chevron-down"></i>
         </Button>
@@ -155,7 +155,7 @@ const artistLinkSegment = computed(() => {
         <Button
           variant="secondary"
           @click="transpose('up')"
-          v-tooltip="'Transpose up'"
+          v-tooltip="$t('requests.transposeUp')"
         >
           <i class="fa-solid fa-chevron-up"></i>
         </Button>

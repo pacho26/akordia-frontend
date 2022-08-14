@@ -50,28 +50,31 @@ const hasEditorErrorMsg = computed(() => {
     @submit.prevent="emitSubmit"
   >
     <div>
-      <el-form-item label="Title" prop="title">
+      <el-form-item :label="$t('chords.title')" prop="title">
         <el-input v-model="form.title" type="text">
           <template #prefix>
             <i text="base" class="fa-solid fa-music" />
           </template>
         </el-input>
       </el-form-item>
-      <el-form-item label="Alternative title" prop="alternativeTitle">
+      <el-form-item
+        :label="$t('chords.alternativeTitle')"
+        prop="alternativeTitle"
+      >
         <el-input v-model="form.alternativeTitle" type="text">
           <template #prefix>
             <i text="base" class="fa-solid fa-music" />
           </template>
         </el-input>
       </el-form-item>
-      <el-form-item label="Artist" prop="artist">
+      <el-form-item :label="$t('chords.artist')" prop="artist">
         <el-input v-model="form.artist" type="text">
           <template #prefix>
             <i text="base" class="fa-solid fa-microphone" />
           </template>
         </el-input>
       </el-form-item>
-      <el-form-item label="Youtube ID" prop="youtubeId">
+      <el-form-item :label="$t('chords.youtubeId')" prop="youtubeId">
         <el-input v-model="form.youtubeId" type="text">
           <template #prefix>
             <i text="base" class="fa-brands fa-youtube" />
@@ -83,15 +86,15 @@ const hasEditorErrorMsg = computed(() => {
     <div m="t-8" text="sm">
       <div m="b-3" flex="~">
         <div m="r-1" text="#f56c6c">*</div>
-        <div text="#606266">Content</div>
+        <div text="#606266">{{ $t('chords.content') }}</div>
       </div>
       <RichTextEditor
         @blur="onEditorBlur"
         @change="updateContent"
         :content="form.content"
       />
-      <div p="t-1" text="xs red" :class="{ invisible: !hasEditorErrorMsg }">
-        Please enter the content
+      <div p="t-1" text="xs red" :class="{ 'opacity-0': !hasEditorErrorMsg }">
+        {{ $t('chords.plaseEnterContent') }}
       </div>
     </div>
 
@@ -103,7 +106,9 @@ const hasEditorErrorMsg = computed(() => {
       >
         {{ submitMsg }}
       </Button>
-      <Button variant="secondary" @click="router.back()"> Cancel </Button>
+      <Button variant="secondary" @click="router.back()">
+        {{ $t('chords.cancel') }}
+      </Button>
     </el-form-item>
   </el-form>
 </template>

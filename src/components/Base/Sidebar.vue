@@ -36,7 +36,12 @@ const goToSongPage = (song: Song) => {
     p="t-6 r-8"
     border="r-1 gray-300"
   >
-    <Heading label="Recent songs" class="uppercase" :level="4" as="h3" />
+    <Heading
+      :label="$t('sidebar.recentSongs')"
+      class="uppercase"
+      :level="4"
+      as="h3"
+    />
     <div flex="~ col gap-2" m="t-3">
       <div
         v-for="song in recentSongs"

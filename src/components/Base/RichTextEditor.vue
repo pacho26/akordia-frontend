@@ -48,7 +48,7 @@ const emitChange = () => {
   <QuillEditor
     ref="editor"
     :theme="readOnly ? 'bubble' : 'snow'"
-    :placeholder="readOnly ? '' : 'Add chords content here...'"
+    :placeholder="readOnly ? '' : `${$t('chords.addChordsHere')}...`"
     :options="options"
     :read-only="readOnly"
     :spellcheck="false"

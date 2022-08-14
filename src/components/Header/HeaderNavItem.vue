@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<Props>(), {
     whitespace="nowrap"
     select="none"
   >
-    <i text="xl" :class="`fa-${iconType} fa-${props.icon}`" />
+    <i v-if="icon" text="xl" :class="`fa-${iconType} fa-${props.icon}`" />
     <div display="none lg:block">
       <slot>{{ label }}</slot>
     </div>

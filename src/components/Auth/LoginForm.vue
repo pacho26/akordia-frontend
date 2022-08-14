@@ -36,14 +36,14 @@ const submitForm = () =>
     size="large"
     @submit.prevent="submitForm"
   >
-    <el-form-item label="Email" prop="email">
+    <el-form-item :label="$t('auth.email')" prop="email">
       <el-input v-model="form.email" type="text">
         <template #prefix>
           <i text="base" class="fa-solid fa-envelope" />
         </template>
       </el-input>
     </el-form-item>
-    <el-form-item label="Password" prop="password">
+    <el-form-item :label="$t('auth.password')" prop="password">
       <el-input v-model="form.password" :type="visible ? 'text' : 'password'">
         <template #prefix>
           <div @click.stop="toggleVisiblity" cursor="pointer">
@@ -58,13 +58,15 @@ const submitForm = () =>
       </el-input>
     </el-form-item>
     <el-form-item m="t-8">
-      <Button variant="primary" native-type="submit">Login</Button>
+      <Button variant="primary" native-type="submit">{{
+        $t('auth.login')
+      }}</Button>
       <Button
         variant="secondary"
         native-type="button"
         @click="router.push('/register')"
       >
-        Register
+        {{ $t('auth.register') }}
       </Button>
     </el-form-item>
   </el-form>

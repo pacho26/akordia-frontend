@@ -171,7 +171,7 @@ const goToAuthorProfile = () => {
         <Button
           variant="secondary"
           @click="transpose('down')"
-          v-tooltip="'Transpose down'"
+          v-tooltip="$t('requests.transposeDown')"
         >
           <i class="fa-solid fa-chevron-down" />
         </Button>
@@ -179,7 +179,7 @@ const goToAuthorProfile = () => {
         <Button
           variant="secondary"
           @click="transpose('up')"
-          v-tooltip="'Transpose up'"
+          v-tooltip="$t('requests.transposeUp')"
           transition="default"
         >
           <i class="fa-solid fa-chevron-up" />
@@ -208,7 +208,7 @@ const goToAuthorProfile = () => {
         class="editor"
       />
       <p text="gray-400">
-        by
+        {{ $t('chords.by') }}
         <span
           text="primary-400 hover:primary-500"
           font="600"

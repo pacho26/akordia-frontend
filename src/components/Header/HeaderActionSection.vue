@@ -35,7 +35,7 @@ const search = async () => {
       <InputText
         v-model="searchTerm"
         v-on:keyup.enter="search"
-        placeholder="Search for songs and artists"
+        :placeholder="$t('header.searchPlaceholder')"
         class="p-inputtext"
       />
       <ButtonPrime
@@ -50,7 +50,7 @@ const search = async () => {
     <Link to="/song/new">
       <HeaderNavItem
         icon="plus"
-        label="Make request"
+        :label="$t('header.makeRequest')"
         bg="primary-500 hover:primary-600"
         text="white"
       />

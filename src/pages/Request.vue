@@ -10,12 +10,27 @@ import { useRequestsStore } from '@/stores/requests';
 import { useSongsStore } from '@/stores/songs';
 import { useUserStore } from '@/stores/user';
 import { storeToRefs } from 'pinia';
+import messages from '@/i18n/translations';
 
 const { setLastViewedArtist } = useSongsStore();
 const { user, userId } = useUserStore();
 const userStore = useRequestsStore();
 const { setLastRequest } = userStore;
 const { lastRequest } = storeToRefs(userStore);
+
+const lang = ref('hr');
+
+onBeforeMount(async () => {
+  lang.value = localStorage.getItem('lang') || 'hr';
+});
+
+watchEffect(() => {
+  if (localStorage.getItem('lang') !== lang.value) {
+    lang.value = localStorage.getItem('lang') || 'hr';
+  }
+});
+
+const translations = computed(() => messages[lang.value].requests);
 
 const {
   showNotification,
@@ -33,8 +48,8 @@ const getNewRequest = async () => {
 
     if (numberOfAvailable === 0) {
       showNotification({
-        title: "Couldn't fetch request",
-        message: 'You have rated all requests.',
+        title: translations.value.couldNotFetchRequests,
+        message: translations.value.youRatedAllRequests,
         type: 'info',
       });
       return;
@@ -42,8 +57,8 @@ const getNewRequest = async () => {
 
     if (numberOfAvailable === 1) {
       showNotification({
-        title: 'Last unvoted request',
-        message: 'This is the only one unvoted request.',
+        title: translations.value.lastUnvotedRequest,
+        message: translations.value.lastUnvotedRequestText,
         type: 'info',
       });
     } else if (
@@ -62,8 +77,8 @@ const getNewRequest = async () => {
   } catch (err) {
     console.error(err);
     showNotification({
-      title: 'Error',
-      message: 'Something went wrong while fetching request.',
+      title: translations.value.error,
+      message: translations.value.somethingWentWrong,
       type: 'info',
     });
     setLastRequest(null);
@@ -120,15 +135,16 @@ const vote = async (value: 'up' | 'down') => {
         <ThumbsIcon @click="vote('down')" :orientation="'down'" />
       </div>
 
-      <Button variant="secondary" @click="getNewRequest" h="!36px">Skip</Button>
+      <Button variant="secondary" @click="getNewRequest" h="!36px">{{
+        $t('requests.skip')
+      }}</Button>
     </div>
 
     <RequestOverview :request="lastRequest" />
   </div>
   <div v-else>
-    <!-- TODO: Add this as seperate component -->
     <p text="3xl center gray-500" pos="relative top-36vh">
-      No unvoted requests available.
+      {{ $t('requests.noRequests') }}
     </p>
   </div>
 </template>
