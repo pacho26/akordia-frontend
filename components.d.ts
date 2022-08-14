@@ -35,6 +35,7 @@ declare module '@vue/runtime-core' {
     SongItem: typeof import('./src/components/Song/SongItem.vue')['default']
     SongList: typeof import('./src/components/Song/SongList.vue')['default']
     SongsTable: typeof import('./src/components/Tables/SongsTable.vue')['default']
+    Spinner: typeof import('./src/components/Base/Spinner.vue')['default']
     ThumbsIcon: typeof import('./src/components/Request/ThumbsIcon.vue')['default']
     TopList: typeof import('./src/components/Tables/TopList.vue')['default']
     TopUsersTable: typeof import('./src/components/Tables/TopUsersTable.vue')['default']

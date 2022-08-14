@@ -29,7 +29,7 @@ const { username, userId } = useUserStore();
 
 <style lang="scss" scoped>
 .welcome-wrapper {
-  background-image: url('../../assets/img/instruments-cover.jpg');
+  background-image: url('../../assets/img/instruments-cover.png');
   background-repeat: repeat;
   background-size: contain;
 

@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
+import { useSpinnerStore } from '@/stores/spinner';
+import { storeToRefs } from 'pinia';
+
+const spinnerStore = useSpinnerStore();
+const { isLoading } = storeToRefs(spinnerStore);
 </script>
 
 <template>
@@ -7,6 +12,7 @@ import { RouterView } from 'vue-router';
   <Container flex="~">
     <Sidebar />
     <div m="t-4 b-12 sm:t-6 md:l-8" w="full">
+      <Spinner v-if="isLoading" />
       <RouterView />
     </div>
   </Container>

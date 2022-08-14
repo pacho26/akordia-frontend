@@ -19,6 +19,7 @@ import { getSongsByUserId } from '@/services/api/songs';
 import { useAdvertsStore } from '@/stores/adverts';
 import { useSongsStore } from '@/stores/songs';
 import { useUserStore } from '@/stores/user';
+import { useSpinnerStore } from '@/stores/spinner';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
@@ -29,6 +30,8 @@ const router = createRouter({
       name: 'home',
       component: Home,
       beforeEnter: async (to, from, next) => {
+        const { setIsLoading } = useSpinnerStore();
+        setIsLoading(true);
         const adverts = await getAdverts();
         const { setAdverts } = useAdvertsStore();
         setAdverts(adverts);

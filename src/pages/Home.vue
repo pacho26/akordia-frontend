@@ -3,10 +3,16 @@ import type { Song } from '@/models/song.model';
 import type { User } from '@/models/user.model';
 import { getLastSongs } from '@/services/api/songs';
 import { getTopAuthors, getTopVoters, getUser } from '@/services/api/user';
+import { useSpinnerStore } from '@/stores/spinner';
 
 const topAuthors = ref<User[]>();
 const topVoters = ref<User[]>();
 const lastSongs = ref<Song[]>();
+
+const { setIsLoading } = useSpinnerStore();
+
+const numberOfRenderdComponents = ref(0);
+const NUMBER_OF_COMPONENTS = 5;
 
 onBeforeMount(async () => {
   await setTopVoters();
@@ -42,21 +48,45 @@ const setLastSongs = async () => {
     })
   );
 };
+
+const incrementRenderCount = () => {
+  numberOfRenderdComponents.value++;
+};
+
+watchEffect(() => {
+  if (numberOfRenderdComponents.value === NUMBER_OF_COMPONENTS) {
+    // To prevent flashing of the spinner
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }
+});
 </script>
 
 <template>
-  <Welcome w="full" />
+  <Welcome @vue:mounted="incrementRenderCount" w="full" />
   <SongsTable
+    @vue:mounted="incrementRenderCount"
     v-if="lastSongs"
     title="Last added chords"
     :data="lastSongs"
     m="t-12"
   />
   <div m="t-12" flex="~ col gap-8 xl:row" justify="between">
-    <AdvertsList />
+    <AdvertsList @vue:mounted="incrementRenderCount" />
     <div flex="center row wrap gap-8 md:col">
-      <TopUsersTable v-if="topAuthors" type="authors" :data="topAuthors" />
-      <TopUsersTable v-if="topVoters" type="voters" :data="topVoters" />
+      <TopUsersTable
+        @vue:mounted="incrementRenderCount"
+        v-if="topAuthors"
+        type="authors"
+        :data="topAuthors"
+      />
+      <TopUsersTable
+        @vue:mounted="incrementRenderCount"
+        v-if="topVoters"
+        type="voters"
+        :data="topVoters"
+      />
     </div>
   </div>
 </template>

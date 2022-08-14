@@ -13,7 +13,7 @@ export const useAdvertsStore = defineStore({
   persist: true,
   getters: {},
   actions: {
-    setAdverts(adverts: Advert[] | null) {
+    setAdverts(adverts: Advert[] | []) {
       this.adverts = adverts?.reverse() || [];
     },
     clearRequestsData() {
