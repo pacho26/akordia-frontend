@@ -188,7 +188,7 @@ const goToAuthorProfile = () => {
       <Link v-if="isAuthor" :to="editRoute">
         <el-button
           type="info"
-          v-tooltip.left="'Edit song'"
+          v-tooltip.left="$t('chords.editSong')"
           transition="!default"
         >
           <i class="fa-solid fa-pen-to-square" />

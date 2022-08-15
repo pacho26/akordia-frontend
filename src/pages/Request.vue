@@ -1,12 +1,14 @@
 <script lang="ts" setup>
 import { useNotification } from '@/composables/useNotification';
 import messages from '@/i18n/translations';
+import router from '@/router';
 import {
   deleteRequest,
   getRandomRequest,
   voteRequest,
 } from '@/services/api/requests';
 import { createSong } from '@/services/api/songs';
+import { getUser } from '@/services/api/user';
 import { useRequestsStore } from '@/stores/requests';
 import { useSongsStore } from '@/stores/songs';
 import { useUserStore } from '@/stores/user';
@@ -17,6 +19,8 @@ const { user, userId } = useUserStore();
 const userStore = useRequestsStore();
 const { setLastRequest } = userStore;
 const { lastRequest } = storeToRefs(userStore);
+
+const authorUsername = ref('');
 
 type Language = 'en' | 'hr';
 const lang = ref<Language>('hr');
@@ -31,8 +35,12 @@ onBeforeMount(async () => {
   updateLanguage();
 });
 
-watchEffect(() => {
+watchEffect(async () => {
   updateLanguage();
+  if (lastRequest.value?.author) {
+    const userRes = await getUser(lastRequest.value.author);
+    authorUsername.value = userRes.username || '';
+  }
 });
 
 const translations = computed(() => messages[lang.value].requests);
@@ -57,6 +65,7 @@ const getNewRequest = async () => {
         message: translations.value.youRatedAllRequests,
         type: 'info',
       });
+      setLastRequest(null);
       return;
     }
 
@@ -93,7 +102,9 @@ const getNewRequest = async () => {
 onBeforeMount(async () => {
   if (!lastRequest.value) {
     await getNewRequest();
+    return;
   }
+  rating.value = lastRequest.value.rating;
 });
 
 const vote = async (value: 'up' | 'down') => {
@@ -119,30 +130,47 @@ const vote = async (value: 'up' | 'down') => {
 
     try {
       await voteRequest(payload);
-      setLastRequest(null);
     } catch (err) {
-      setLastRequest(null);
       console.error(err);
     }
+
     setTimeout(async () => {
       await getNewRequest();
     }, 500);
   }
 };
+
+const goToAuthorProfile = () => {
+  router.push(`/profile/${lastRequest.value?.author}`);
+};
 </script>
 
 <template>
   <div v-if="lastRequest">
-    <div m="b-3" flex="vcenter gap-8" justify="between sm:start">
-      <div flex="vcenter gap-4">
-        <ThumbsIcon @click="vote('up')" :orientation="'up'" />
-        <p w="20px" text="3xl center gray-500">{{ rating }}</p>
-        <ThumbsIcon @click="vote('down')" :orientation="'down'" />
+    <div flex="~ gap-1.5 wrap" justify="between">
+      <div m="b-3" flex="vcenter gap-2 sm:gap-8" justify="between sm:start">
+        <div flex="vcenter gap-4">
+          <ThumbsIcon @click="vote('up')" :orientation="'up'" />
+          <p w="20px" text="3xl center gray-500">{{ rating }}</p>
+          <ThumbsIcon @click="vote('down')" :orientation="'down'" />
+        </div>
+
+        <Button variant="secondary" @click="getNewRequest" h="!36px">{{
+          $t('requests.skip')
+        }}</Button>
       </div>
 
-      <Button variant="secondary" @click="getNewRequest" h="!36px">{{
-        $t('requests.skip')
-      }}</Button>
+      <p text="gray-400 right" leading="4.5" m="b-4">
+        {{ $t('chords.by') }}
+        <span
+          text="primary-400 hover:primary-500"
+          font="600"
+          cursor="pointer"
+          class="transition-default"
+          @click="goToAuthorProfile"
+          >{{ authorUsername }}</span
+        >
+      </p>
     </div>
 
     <RequestOverview :request="lastRequest" />

@@ -94,7 +94,7 @@ const hasEditorErrorMsg = computed(() => {
         :content="form.content"
       />
       <div p="t-1" text="xs red" :class="{ 'opacity-0': !hasEditorErrorMsg }">
-        {{ $t('chords.plaseEnterContent') }}
+        {{ $t('chords.pleaseEnterContent') }}
       </div>
     </div>
 

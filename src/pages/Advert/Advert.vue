@@ -40,6 +40,12 @@ onMounted(() => {
   }
 });
 
+watchEffect(() => {
+  if (advert.value) {
+    editor.value.setHTML(advert.value.content || '');
+  }
+});
+
 const isCurrentUserAuthor = computed(() => {
   return advert.value ? advert.value.authorId === userId : false;
 });
@@ -80,7 +86,7 @@ const deleteAdvert = async () => {
     </div>
     <QuillEditor ref="editor" theme="bubble" read-only class="no-padding" />
     <p flex="vcenter gap-1.5" justify="end" text="right gray-600" m="t-4">
-      by
+      {{ $t('advert.author') }}:
       <Link
         v-if="advert"
         :to="`/profile/${advert.authorId}`"

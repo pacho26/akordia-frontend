@@ -76,6 +76,7 @@ export default {
     numberOfChords: 'Akorda objavljeno (odobrenih)',
     discardChanges: 'Odbaci promjene',
     save: 'Spremi',
+    edit: 'Uredi',
   },
   notifications: {
     error: 'Greška',
@@ -83,7 +84,7 @@ export default {
     registrationErrorText: 'Molimo provjerite unesene podatke.',
     loginErrorTitle: 'Greška prilikom prijave',
     loginErrorText: 'Molimo provjerite unesene podatke.',
-    songFormErrorTitle: 'Greška prilikom spremanja zahtjeva',
+    songFormErrorTitle: 'Greška prilikom spremanja',
     songFormErrorText: 'Molimo provjerite unesene podatke.',
     notLoggedInTitle: 'Niste prijavljeni',
     notLoggedInText:
@@ -112,5 +113,17 @@ export default {
     advertDeletedText: 'Oglas je uspješno obrisan.',
     requestCreatedTitle: 'Zahtjev kreiran',
     requestCreatedText: 'Zahtjev za akorde je uspješno kreiran.',
+  },
+  instruments: {
+    accordion: 'Harmonika',
+    bassGuitar: 'Bas gitara',
+    drums: 'Bubnjevi',
+    guitar: 'Gitara',
+    piano: 'Klavir',
+    saxophone: 'Saksofon',
+    other: 'Ostalo',
+  },
+  advert: {
+    author: 'Autor',
   },
 };

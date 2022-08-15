@@ -76,6 +76,7 @@ export default {
     numberOfChords: 'Chords posted (approved)',
     discardChanges: 'Discard changes',
     save: 'Save',
+    edit: 'Edit',
   },
   notifications: {
     error: 'Error',
@@ -110,5 +111,17 @@ export default {
     advertDeletedText: 'Advertisement has been deleted successfully.',
     requestCreatedTitle: 'Request created',
     requestCreatedText: 'Request has been created successfully.',
+  },
+  instruments: {
+    accordion: 'Accordion',
+    bassGuitar: 'Bass guitar',
+    drums: 'Drums',
+    guitar: 'Guitar',
+    piano: 'Piano',
+    saxophone: 'Saxophone',
+    other: 'Other',
+  },
+  advert: {
+    author: 'Author',
   },
 };

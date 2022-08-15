@@ -15,28 +15,25 @@ import { useRoute } from 'vue-router';
 import ProfileSection from './ProfileSection.vue';
 
 const route = useRoute();
-const { user, userId } = useUserStore();
+const { userId } = useUserStore();
 
 const selectedUser = ref<User | null>();
 
+type Language = 'en' | 'hr';
+
 const updateUserDetails = async () => {
-  if (userId === route.params.id) {
-    selectedUser.value = user;
-  } else {
-    try {
-      const userRes = await getUser(route.params.id as string);
-      selectedUser.value = userRes;
-    } catch (err) {
-      const { showNotification } = useNotification();
-      type Language = 'en' | 'hr';
-      const lang = localStorage.getItem('lang') as Language;
-      showNotification({
-        title: messages[lang].notifications.userNotFoundTitle,
-        message: messages[lang].notifications.userNotFoundText,
-        type: 'warning',
-      });
-      router.push({ name: 'home' });
-    }
+  try {
+    const userRes = await getUser(route.params.id as string);
+    selectedUser.value = userRes;
+  } catch (err) {
+    const { showNotification } = useNotification();
+    const lang = localStorage.getItem('lang') as Language;
+    showNotification({
+      title: messages[lang].notifications.userNotFoundTitle,
+      message: messages[lang].notifications.userNotFoundText,
+      type: 'warning',
+    });
+    router.push({ name: 'home' });
   }
 };
 
@@ -57,14 +54,38 @@ const getInstrumentImg = (instrument: string) => {
       return AccordionImg;
     case 'Bass guitar':
       return BassGuitarImg;
+    case 'Drums':
+      return DrumsImg;
     case 'Guitar':
       return GuitarImg;
     case 'Piano':
       return PianoImg;
-    case 'Drums':
-      return DrumsImg;
     case 'Saxophone':
       return SaxophoneImg;
+    default:
+      return '';
+  }
+};
+
+const getInstrumentName = (instrument: string) => {
+  const lang = localStorage.getItem('lang') as Language;
+  const { instruments } = messages[lang];
+
+  switch (instrument) {
+    case 'Accordion':
+      return instruments.accordion;
+    case 'Bass guitar':
+      return instruments.bassGuitar;
+    case 'Drums':
+      return instruments.drums;
+    case 'Guitar':
+      return instruments.guitar;
+    case 'Other':
+      return instruments.other;
+    case 'Piano':
+      return instruments.piano;
+    case 'Saxophone':
+      return instruments.saxophone;
     default:
       return '';
   }
@@ -113,7 +134,7 @@ const getInstrumentImg = (instrument: string) => {
         @click="goToProfileEditPage"
         variant="secondary"
         h="!fit"
-        >Edit</Button
+        >{{ $t('profile.edit') }}</Button
       >
     </div>
 
@@ -169,7 +190,7 @@ const getInstrumentImg = (instrument: string) => {
           :src="getInstrumentImg(instrument)"
           alt="Accordion"
         />
-        <p>{{ instrument }}</p>
+        <p>{{ getInstrumentName(instrument) }}</p>
       </div>
     </ProfileSection>
     <ProfileSection
