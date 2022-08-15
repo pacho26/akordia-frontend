@@ -20,7 +20,7 @@ onBeforeMount(async () => {
   try {
     advert.value = await getAdvertById(route.params.id as string);
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     const lang = localStorage.getItem('lang') as Language;
     showNotification({
@@ -59,7 +59,7 @@ const deleteAdvert = async () => {
     });
     router.push('/');
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 </script>
