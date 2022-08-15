@@ -7,8 +7,8 @@ const { username, userId } = useUserStore();
 <template>
   <div flex="center" border="rounded" class="welcome-wrapper">
     <div
-      flex="~ col vcenter gap-2 md:gap-4"
-      p="x-4.5 y-3.5"
+      flex="~ col vcenter gap-1 md:gap-4"
+      p="x-3 y-2 sm:(x-4.5 y-3.5)"
       m="y-12.5"
       text="xl gray-800 md:3xl lg:4xl"
       font="500"

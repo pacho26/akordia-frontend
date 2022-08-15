@@ -8,10 +8,14 @@
     h="100vh"
     z="99999"
   >
-    <div class="cube"></div>
-    <div class="cube"></div>
-    <div class="cube"></div>
-    <div class="cube"></div>
+    <div
+      v-for="i in 4"
+      :key="i"
+      w="32px sm:40px"
+      h="32px sm:40px"
+      m="r-10px"
+      class="cube"
+    ></div>
   </div>
 </template>
 
@@ -19,10 +23,6 @@
 $colors: #253586, #495dc6, #95aeed, #f0f4fe;
 
 .cube {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-
   @for $i from 1 through length($colors) {
     &:nth-child(#{$i}) {
       background-color: nth($colors, $i);
