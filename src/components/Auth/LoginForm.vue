@@ -21,7 +21,11 @@ const submitForm = () =>
       ElNotification.closeAll();
       router.replace('/');
     },
-    () => showLoginError()
+    () => {
+      type Language = 'en' | 'hr';
+      const lang = localStorage.getItem('lang') as Language;
+      showLoginError(lang);
+    }
   );
 </script>
 

@@ -1,10 +1,13 @@
 import { ElNotification } from 'element-plus';
+import messages from '@/i18n/translations';
 
 interface NotificationOptions {
   title: string;
   message: string;
   type: NotificationType;
 }
+
+type Language = 'en' | 'hr';
 
 type NotificationType = 'error' | 'warning' | 'info' | 'success';
 
@@ -18,63 +21,55 @@ export const useNotification = () => {
     });
   };
 
-  const showRegisterError = (error: string | null) =>
+  const showRegisterError = (lang: Language) =>
     showNotification({
-      title: 'Invalid registration',
-      message: error || 'Please check your details and try again',
+      title: messages[lang].notifications.registrationErrorTitle,
+      message: messages[lang].notifications.registrationErrorText,
       type: 'error',
     });
 
-  const showLoginError = () =>
+  const showLoginError = (lang: Language) =>
     showNotification({
-      title: 'Invalid login',
-      message: 'Please check your details and try again',
+      title: messages[lang].notifications.loginErrorTitle,
+      message: messages[lang].notifications.loginErrorText,
       type: 'error',
     });
 
-  const showMutateSongError = (error: string | null) =>
+  const showMutateSongError = (lang: Language) =>
     showNotification({
-      title: 'Invalid song form',
-      message: error || 'Please check song details and try again',
+      title: messages[lang].notifications.songFormErrorTitle,
+      message: messages[lang].notifications.songFormErrorText,
       type: 'error',
     });
 
-  const showDeletedUserNotication = () => {
+  const showNotLoggedInNotication = (lang: Language) => {
     showNotification({
-      title: 'User deleted',
-      message: 'User and its songs have been deleted successfully',
-      type: 'success',
-    });
-  };
-
-  const showNotLoggedInNotication = () => {
-    showNotification({
-      title: 'Not logged in',
-      message: 'You must be logged in to access this page',
+      title: messages[lang].notifications.notLoggedInTitle,
+      message: messages[lang].notifications.notLoggedInText,
       type: 'warning',
     });
   };
 
-  const showSearchTermNotication = () => {
+  const showSearchTermNotication = (lang: Language) => {
     showNotification({
-      title: 'Search term is too short',
-      message: 'Search term must be at least 3 characters long',
+      title: messages[lang].notifications.searchTermTooShortTitle,
+      message: messages[lang].notifications.searchTermTooShortText,
       type: 'warning',
     });
   };
 
-  const showApprovedRequestNotication = () => {
+  const showApprovedRequestNotication = (lang: Language) => {
     showNotification({
-      title: 'Request rejected',
-      message: 'Song request is added to the global songbook',
+      title: messages[lang].notifications.requestApprovedTitle,
+      message: messages[lang].notifications.requestApprovedText,
       type: 'success',
     });
   };
 
-  const showRejectedRequestNotication = () => {
+  const showRejectedRequestNotication = (lang: Language) => {
     showNotification({
-      title: 'Request rejected',
-      message: 'Song request has been rejected permanently',
+      title: messages[lang].notifications.requestRejectedTitle,
+      message: messages[lang].notifications.requestRejectedText,
       type: 'error',
     });
   };
@@ -84,7 +79,6 @@ export const useNotification = () => {
     showLoginError,
     showRegisterError,
     showMutateSongError,
-    showDeletedUserNotication,
     showNotLoggedInNotication,
     showSearchTermNotication,
     showApprovedRequestNotication,

@@ -95,7 +95,9 @@ export const useCreateRequestForm = () => {
           return;
         }
       }
-      showMutateSongError(null);
+      type Language = 'en' | 'hr';
+      const lang = localStorage.getItem('lang') as Language;
+      showMutateSongError(lang);
     });
   };
 

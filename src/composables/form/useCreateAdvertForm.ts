@@ -4,6 +4,7 @@ import { createAdvert } from '@/services/api/adverts';
 import { useUserStore } from '@/stores/user';
 import { ElForm, ElNotification } from 'element-plus';
 import { useNotification } from '../useNotification';
+import messages from '@/i18n/translations';
 
 export const useCreateAdvertForm = () => {
   const advertModel: AdvertCreate = reactive({
@@ -47,26 +48,28 @@ export const useCreateAdvertForm = () => {
   ) => {
     if (!formEl) return;
     formEl.validate(async (valid) => {
+      type Language = 'en' | 'hr';
+      const lang = localStorage.getItem('lang') as Language;
+
       if (valid) {
         const payload = {
           ...advert,
           authorId: userId,
           authorUsername: username,
         };
-        console.log('payload :>> ', payload);
         await createAdvert(payload);
         ElNotification.closeAll();
         showNotification({
-          title: 'Advert created',
-          message: 'Advertisement created successfully',
+          title: messages[lang].notifications.advertCreatedTitle,
+          message: messages[lang].notifications.advertCreatedText,
           type: 'success',
         });
         router.push({ name: 'home' });
         return;
       }
       showNotification({
-        title: 'Invalid advert form',
-        message: 'Please check advert details and try again',
+        title: messages[lang].notifications.advertInvalidFormTitle,
+        message: messages[lang].notifications.advertInvalidFormText,
         type: 'error',
       });
     });

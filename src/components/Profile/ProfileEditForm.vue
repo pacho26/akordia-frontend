@@ -6,6 +6,7 @@ import GuitarImg from '@/assets/img/instruments/guitar.png';
 import PianoImg from '@/assets/img/instruments/piano.png';
 import SaxophoneImg from '@/assets/img/instruments/saxophone.png';
 import { useNotification } from '@/composables/useNotification';
+import messages from '@/i18n/translations';
 import router from '@/router/index.js';
 import { updateUser } from '@/services/api/user';
 import { useUserStore } from '@/stores/user';
@@ -14,6 +15,9 @@ import { useRoute } from 'vue-router';
 const { user, userId, setUser } = useUserStore();
 const route = useRoute();
 const { showNotification } = useNotification();
+
+type Language = 'en' | 'hr';
+const lang = ref<Language>('hr');
 
 const form = ref({
   band: user?.band || '',
@@ -52,15 +56,28 @@ const getInstrumentImg = (instrument: string) => {
 };
 
 onBeforeMount(() => {
+  updateLanguage();
   if (userId !== route.params.id) {
     showNotification({
-      title: 'Unauthorized',
-      message: 'You cannot change other users profile',
+      title: translations.value.unathorizedEditTitle,
+      message: translations.value.unathorizedEditText,
       type: 'warning',
     });
     router.push({ name: 'home' });
   }
 });
+
+watchEffect(() => {
+  updateLanguage();
+});
+
+const updateLanguage = () => {
+  if (localStorage.getItem('lang')) {
+    lang.value = localStorage.getItem('lang') as Language;
+  }
+};
+
+const translations = computed(() => messages[lang.value].notifications);
 
 const goToProfilePage = () => {
   router.push(`/profile/${userId}`);
@@ -72,14 +89,14 @@ const save = async () => {
     setUser(userUpdated);
     goToProfilePage();
     showNotification({
-      title: 'Profile updated',
-      message: 'Your profile has been updated successfully',
+      title: translations.value.profileUpdatedTitle,
+      message: translations.value.profileUpdatedText,
       type: 'success',
     });
   } else {
     showNotification({
-      title: 'Error',
-      message: 'You have to be logged in to edit your profile.',
+      title: translations.value.error,
+      message: translations.value.notLoggedInToEditProfile,
       type: 'error',
     });
   }

@@ -15,7 +15,9 @@ const search = async () => {
   searchTerm.value = searchTerm.value.trim();
   if (searchTerm.value.length < 3) {
     const { showSearchTermNotication } = useNotification();
-    showSearchTermNotication();
+    type Language = 'en' | 'hr';
+    const lang = localStorage.getItem('lang') as Language;
+    showSearchTermNotication(lang);
     return;
   }
   const resSongs = await getSongsBySearchTerm({ searchTerm: searchTerm.value });

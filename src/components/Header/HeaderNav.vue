@@ -26,7 +26,7 @@ const userStore = useUserStore();
       <div>
         <HeaderNavItem
           icon="user"
-          :label="userStore.user ? userStore.username : 'Login'"
+          :label="userStore.user ? userStore.username : $t('header.login')"
           no-hover
         />
         <i
@@ -53,7 +53,7 @@ const userStore = useUserStore();
       </template>
     </VDropdown>
     <Link v-else to="/login">
-      <HeaderNavItem icon="user" label="Login" />
+      <HeaderNavItem icon="user" :label="$t('header.login')" />
     </Link>
     <Link to="/requests">
       <Button variant="primary" h="!43px" whitespace="nowrap">

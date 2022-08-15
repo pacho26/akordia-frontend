@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useNotification } from '@/composables/useNotification';
+import messages from '@/i18n/translations';
 import {
   deleteRequest,
   getRandomRequest,
@@ -10,7 +11,6 @@ import { useRequestsStore } from '@/stores/requests';
 import { useSongsStore } from '@/stores/songs';
 import { useUserStore } from '@/stores/user';
 import { storeToRefs } from 'pinia';
-import messages from '@/i18n/translations';
 
 const { setLastViewedArtist } = useSongsStore();
 const { user, userId } = useUserStore();
@@ -18,17 +18,22 @@ const userStore = useRequestsStore();
 const { setLastRequest } = userStore;
 const { lastRequest } = storeToRefs(userStore);
 
-const lang = ref('hr');
+type Language = 'en' | 'hr';
+const lang = ref<Language>('hr');
 
 onBeforeMount(async () => {
-  lang.value = localStorage.getItem('lang') || 'hr';
+  updateLanguage();
 });
 
 watchEffect(() => {
-  if (localStorage.getItem('lang') !== lang.value) {
-    lang.value = localStorage.getItem('lang') || 'hr';
-  }
+  updateLanguage();
 });
+
+const updateLanguage = () => {
+  if (localStorage.getItem('lang')) {
+    lang.value = localStorage.getItem('lang') as Language;
+  }
+};
 
 const translations = computed(() => messages[lang.value].requests);
 
@@ -104,12 +109,12 @@ const vote = async (value: 'up' | 'down') => {
     if (rating.value > 2) {
       await createSong(lastRequest.value);
       await deleteRequest(lastRequest.value._id);
-      showApprovedRequestNotication();
+      showApprovedRequestNotication(lang.value);
     }
 
     if (rating.value < -2) {
       await deleteRequest(lastRequest.value._id);
-      showRejectedRequestNotication();
+      showRejectedRequestNotication(lang.value);
     }
 
     try {

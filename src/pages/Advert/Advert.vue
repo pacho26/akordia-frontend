@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import Link from '@/components/Base/Link.vue';
 import { useNotification } from '@/composables/useNotification';
+import messages from '@/i18n/translations';
 import type Advert from '@/models/advert.model';
 import router from '@/router';
 import { deleteAdvertById, getAdvertById } from '@/services/api/adverts';
@@ -14,15 +15,18 @@ const route = useRoute();
 const editor = ref<any>();
 const advert = ref<Advert>();
 
+type Language = 'en' | 'hr';
+
 onBeforeMount(async () => {
   try {
     advert.value = await getAdvertById(route.params.id as string);
   } catch (error) {
     console.log(error);
 
+    const lang = localStorage.getItem('lang') as Language;
     showNotification({
-      title: 'Advertisement not found',
-      message: 'Advertisement with given id is not found',
+      title: messages[lang].notifications.advertNotFoundTitle,
+      message: messages[lang].notifications.advertNotFoundText,
       type: 'error',
     });
     setTimeout(() => {
@@ -48,9 +52,10 @@ const advertTitle = computed(() => {
 const deleteAdvert = async () => {
   try {
     await deleteAdvertById(route.params.id as string);
+    const lang = localStorage.getItem('lang') as Language;
     showNotification({
-      title: 'Advert deleted',
-      message: 'Advert deleted successfully',
+      title: messages[lang].notifications.advertCreatedTitle,
+      message: messages[lang].notifications.advertCreatedText,
       type: 'success',
     });
     router.push('/');

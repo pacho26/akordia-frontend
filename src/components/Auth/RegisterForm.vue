@@ -13,8 +13,7 @@ const { visible, toggleVisiblity } = usePasswordVisibility();
 const { visible: repeatedVisible, toggleVisiblity: toggleRepeatedVisibility } =
   usePasswordVisibility();
 
-const { form, repeatedPassword, rules, error, onSubmit, roles } =
-  useRegisterForm();
+const { form, repeatedPassword, rules, onSubmit, roles } = useRegisterForm();
 const { showRegisterError } = useNotification();
 
 const submitForm = () =>
@@ -24,7 +23,11 @@ const submitForm = () =>
       ElNotification.closeAll();
       router.replace('/');
     },
-    () => showRegisterError(error.value)
+    () => {
+      type Language = 'en' | 'hr';
+      const lang = localStorage.getItem('lang') as Language;
+      showRegisterError(lang);
+    }
   );
 </script>
 

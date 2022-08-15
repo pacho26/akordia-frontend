@@ -7,6 +7,7 @@ import PianoImg from '@/assets/img/instruments/piano.png';
 import SaxophoneImg from '@/assets/img/instruments/saxophone.png';
 import Button from '@/components/Base/Button.vue';
 import { useNotification } from '@/composables/useNotification';
+import messages from '@/i18n/translations';
 import type { User } from '@/models/user.model';
 import router from '@/router';
 import { getUser } from '@/services/api/user';
@@ -28,10 +29,12 @@ const updateUserDetails = async () => {
       selectedUser.value = userRes;
     } catch (err) {
       const { showNotification } = useNotification();
+      type Language = 'en' | 'hr';
+      const lang = localStorage.getItem('lang') as Language;
       showNotification({
-        title: 'User not found',
+        title: messages[lang].notifications.userNotFoundTitle,
+        message: messages[lang].notifications.userNotFoundText,
         type: 'warning',
-        message: 'There is no user with the specified id.',
       });
       router.push({ name: 'home' });
     }
