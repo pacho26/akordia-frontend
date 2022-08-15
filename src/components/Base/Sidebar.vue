@@ -50,8 +50,7 @@ const goToSongPage = (song: Song) => {
         w="260px"
         text="xs gray-700 hover:primary-600"
         cursor="pointer"
-        transition="default"
-        class="three-dots"
+        class="three-dots transition-default"
       >
         {{ song.artist }} - {{ song.title }}
       </div>

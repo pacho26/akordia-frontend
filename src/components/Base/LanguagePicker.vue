@@ -70,9 +70,8 @@ const changeLanguage = (language: Language) => {
           flex="vcenter gap-3"
           min-w="138px"
           p="y-2 x-4"
-          transition="default"
           select="none"
-          class="country-container"
+          class="country-container transition-default"
           :class="
             lang === currentLang
               ? 'bg-primary-100'

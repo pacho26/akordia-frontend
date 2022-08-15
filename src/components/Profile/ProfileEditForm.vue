@@ -55,6 +55,12 @@ const getInstrumentImg = (instrument: string) => {
   }
 };
 
+const updateLanguage = () => {
+  if (localStorage.getItem('lang')) {
+    lang.value = localStorage.getItem('lang') as Language;
+  }
+};
+
 onBeforeMount(() => {
   updateLanguage();
   if (userId !== route.params.id) {
@@ -70,12 +76,6 @@ onBeforeMount(() => {
 watchEffect(() => {
   updateLanguage();
 });
-
-const updateLanguage = () => {
-  if (localStorage.getItem('lang')) {
-    lang.value = localStorage.getItem('lang') as Language;
-  }
-};
 
 const translations = computed(() => messages[lang.value].notifications);
 

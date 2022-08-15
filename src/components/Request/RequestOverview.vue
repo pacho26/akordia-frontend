@@ -127,8 +127,7 @@ const artistLinkSegment = computed(() => {
           :level="3"
           text="primary-700 hover:primary-500"
           font="300"
-          transition="default"
-          class="uppercase"
+          class="uppercase transition-default"
         />
       </Link>
       <Heading :label="request?.title" as="h1" :level="1" font="600" />

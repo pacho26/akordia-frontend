@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import ArtistItem from './ArtistItem.vue';
 interface Props {
   artists: string[];
 }

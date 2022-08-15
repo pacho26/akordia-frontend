@@ -22,9 +22,9 @@ const goToSongOverviewPage = () => {
     border="rounded"
     shadow=""
     transform="~ hover:translate-y--0.25"
-    transition="default"
     cursor="pointer"
     select="none"
+    class="transition-default"
   >
     <Heading :label="song.title" :level="4" font="600" class="three-dots" />
     <p text="sm gray-500 sm:base" class="three-dots">

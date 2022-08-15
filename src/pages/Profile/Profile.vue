@@ -5,7 +5,6 @@ import DrumsImg from '@/assets/img/instruments/bass_drum.png';
 import GuitarImg from '@/assets/img/instruments/guitar.png';
 import PianoImg from '@/assets/img/instruments/piano.png';
 import SaxophoneImg from '@/assets/img/instruments/saxophone.png';
-import Button from '@/components/Base/Button.vue';
 import { useNotification } from '@/composables/useNotification';
 import messages from '@/i18n/translations';
 import type { User } from '@/models/user.model';
@@ -13,7 +12,6 @@ import router from '@/router';
 import { getUser } from '@/services/api/user';
 import { useUserStore } from '@/stores/user';
 import { useRoute } from 'vue-router';
-import ProfileSection from './ProfileSection.vue';
 
 const route = useRoute();
 const { user, userId } = useUserStore();
@@ -88,10 +86,9 @@ const getInstrumentImg = (instrument: string) => {
           font="700 tracking-wider"
           border="rounded"
           hover="rotate--2"
-          transition="default"
           cursor="pointer"
           select="none"
-          class="uppercase"
+          class="uppercase transition-default"
         >
           <i class="fa-solid fa-crown -translate-y-0.25" />
           <div>{{ selectedUser.role }}</div>
@@ -102,7 +99,7 @@ const getInstrumentImg = (instrument: string) => {
           cursor="pointer"
           select="none"
           text="gray-700 !hover:primary-400"
-          transition="default"
+          class="transition-default"
         >
           <i text="2xl" class="fa-solid fa-at translate-y-0.25" />
           <div text="3xl leading-6.5 sm:(text-3xl leading-8)" font="bold">
@@ -122,8 +119,7 @@ const getInstrumentImg = (instrument: string) => {
     <ProfileSection :title="$t('profile.email')" icon="envelope" m="t-4">
       <a
         :href="`mailto:${selectedUser.email}`"
-        transition="default"
-        class="text-gray-600 no-underline hover:text-primary-400"
+        class="text-gray-600 no-underline transition-default hover:text-primary-400"
       >
         {{ selectedUser.email }}
       </a>
@@ -143,8 +139,7 @@ const getInstrumentImg = (instrument: string) => {
     >
       <a
         :href="`tel:${selectedUser.contact}`"
-        transition="default"
-        class="text-gray-600 no-underline hover:text-primary-400"
+        class="text-gray-600 no-underline transition-default hover:text-primary-400"
       >
         {{ selectedUser.contact }}
       </a>

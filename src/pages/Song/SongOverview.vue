@@ -151,8 +151,7 @@ const goToAuthorProfile = () => {
           :level="3"
           text="primary-600 hover:primary-400"
           font="300"
-          transition="default"
-          class="uppercase"
+          class="uppercase transition-default"
         />
       </Link>
       <Heading :label="song?.title" as="h1" :level="1" font="600" />
@@ -180,7 +179,7 @@ const goToAuthorProfile = () => {
           variant="secondary"
           @click="transpose('up')"
           v-tooltip="$t('requests.transposeUp')"
-          transition="default"
+          class="transition-default"
         >
           <i class="fa-solid fa-chevron-up" />
         </Button>
@@ -213,7 +212,7 @@ const goToAuthorProfile = () => {
           text="primary-400 hover:primary-500"
           font="600"
           cursor="pointer"
-          transition="default"
+          class="transition-default"
           @click="goToAuthorProfile"
           >{{ authorUsername }}</span
         >

@@ -39,8 +39,7 @@ const artistLinkSegment = computed(() => {
     text="gray-700"
     shadow=""
     cursor="pointer"
-    transition="default"
-    class="three-dots"
+    class="three-dots transition-default"
   >
     {{ artist }}
   </div>

@@ -23,13 +23,13 @@ const props = withDefaults(defineProps<Props>(), {
     font="medium"
     border="rounded"
     cursor="pointer"
-    transition="default"
     :hover="noHover ? '' : 'bg-primary-50'"
     whitespace="nowrap"
     select="none"
+    class="transition-default"
   >
     <i v-if="icon" text="xl" :class="`fa-${iconType} fa-${props.icon}`" />
-    <div display="none lg:block">
+    <div display="none xl:block">
       <slot>{{ label }}</slot>
     </div>
   </div>

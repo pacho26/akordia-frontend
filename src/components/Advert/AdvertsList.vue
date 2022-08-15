@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { useAdvertsStore } from '@/stores/adverts';
 import { storeToRefs } from 'pinia';
-import Link from '../Base/Link.vue';
 
 const advertsStore = useAdvertsStore();
 const { adverts } = storeToRefs(advertsStore);

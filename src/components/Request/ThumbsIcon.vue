@@ -20,7 +20,7 @@ defineProps<Props>();
     <Icon
       :icon="`emojione-v1:reverse-thumbs-${orientation}`"
       text="24px"
-      transition="default"
+      class="transition-default"
     />
   </div>
 </template>

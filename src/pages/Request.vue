@@ -21,6 +21,12 @@ const { lastRequest } = storeToRefs(userStore);
 type Language = 'en' | 'hr';
 const lang = ref<Language>('hr');
 
+const updateLanguage = () => {
+  if (localStorage.getItem('lang')) {
+    lang.value = localStorage.getItem('lang') as Language;
+  }
+};
+
 onBeforeMount(async () => {
   updateLanguage();
 });
@@ -28,12 +34,6 @@ onBeforeMount(async () => {
 watchEffect(() => {
   updateLanguage();
 });
-
-const updateLanguage = () => {
-  if (localStorage.getItem('lang')) {
-    lang.value = localStorage.getItem('lang') as Language;
-  }
-};
 
 const translations = computed(() => messages[lang.value].requests);
 

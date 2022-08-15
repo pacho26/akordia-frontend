@@ -58,12 +58,22 @@ const goToArtistByLetterPage = async (letter: string) => {
     v-for="letter in letters"
     :key="letter"
     @click="goToArtistByLetterPage(letter)"
-    p="2"
+    flex="center"
+    w="34.75px"
+    h="34.75px"
+    p="0.6"
     cursor="pointer"
-    text="gray-700 hover:primary-500"
+    text="gray-700 hover:primary-600"
     font="500"
-    transition="default"
+    hover="bg-primary-100"
+    class="test transition-default"
   >
     {{ letter }}
   </div>
 </template>
+
+<style lang="scss" scoped>
+.test {
+  border-radius: 50%;
+}
+</style>

@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import Link from '@/components/Base/Link.vue';
 import { useNotification } from '@/composables/useNotification';
 import messages from '@/i18n/translations';
 import type Advert from '@/models/advert.model';

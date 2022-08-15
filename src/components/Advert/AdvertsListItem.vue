@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type Advert from '@/models/advert.model';
-import Link from '../Base/Link.vue';
 
 interface Props {
   advert: Advert;
@@ -18,8 +17,8 @@ defineProps<Props>();
       m="y-2"
       bg="#f0efee hover:primary-100"
       cursor="pointer"
-      transition="default"
       select="none"
+      class="transition-default"
     >
       <div text="gray-700" font="500">
         {{ advert.title }}
