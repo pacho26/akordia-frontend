@@ -2,9 +2,11 @@ import type { RequestCreate } from '@/models/request.model';
 import { ElForm, ElNotification } from 'element-plus';
 import { useRequestCreate } from '../api/requests';
 import { useNotification } from '../useNotification';
-
 import { useUserStore } from '@/stores/user';
 import { storeToRefs } from 'pinia';
+import messages from '@/i18n/translations';
+
+type Language = 'en' | 'hr';
 
 export const useCreateRequestForm = () => {
   const { user } = storeToRefs(useUserStore());
@@ -72,7 +74,7 @@ export const useCreateRequestForm = () => {
     ],
   });
 
-  const { showMutateSongError } = useNotification();
+  const { showMutateSongError, showNotification } = useNotification();
 
   const onSubmit = async (
     request: RequestCreate,
@@ -81,6 +83,8 @@ export const useCreateRequestForm = () => {
   ) => {
     if (!formEl) return;
     formEl.validate(async (valid) => {
+      const lang = localStorage.getItem('lang') as Language;
+
       if (valid) {
         const payload = {
           ...request,
@@ -91,12 +95,15 @@ export const useCreateRequestForm = () => {
         const newRequest = await createRequest(payload);
         if (isSuccess && newRequest) {
           ElNotification.closeAll();
+          showNotification({
+            title: messages[lang].notifications.requestCreatedTitle,
+            message: messages[lang].notifications.requestCreatedText,
+            type: 'success',
+          });
           router.replace(routeRedirect);
           return;
         }
       }
-      type Language = 'en' | 'hr';
-      const lang = localStorage.getItem('lang') as Language;
       showMutateSongError(lang);
     });
   };

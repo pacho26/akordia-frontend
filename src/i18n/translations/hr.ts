@@ -110,5 +110,7 @@ export default {
     advertNotFoundText: 'Oglas s tim ID-em nije pronađen.',
     advertDeletedTitle: 'Oglas obrisan',
     advertDeletedText: 'Oglas je uspješno obrisan.',
+    requestCreatedTitle: 'Zahtjev kreiran',
+    requestCreatedText: 'Zahtjev za akorde je uspješno kreiran.',
   },
 };

@@ -108,5 +108,7 @@ export default {
     advertNotFoundText: 'Advertisement with given ID does not exist.',
     advertDeletedTitle: 'Advertisement deleted',
     advertDeletedText: 'Advertisement has been deleted successfully.',
+    requestCreatedTitle: 'Request created',
+    requestCreatedText: 'Request has been created successfully.',
   },
 };

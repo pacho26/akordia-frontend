@@ -7,7 +7,7 @@ import { get } from '@vueuse/core';
 const { requestModel, onSubmit, rules } = useCreateRequestForm();
 
 const submitForm = ({ formRef, form }: SubmitFormArgs) => {
-  onSubmit(form, get(formRef), '/my-songbook');
+  onSubmit(form, get(formRef), '/');
 };
 </script>
 

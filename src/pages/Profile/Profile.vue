@@ -12,6 +12,7 @@ import router from '@/router';
 import { getUser } from '@/services/api/user';
 import { useUserStore } from '@/stores/user';
 import { useRoute } from 'vue-router';
+import ProfileSection from './ProfileSection.vue';
 
 const route = useRoute();
 const { user, userId } = useUserStore();
