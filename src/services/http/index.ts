@@ -6,10 +6,6 @@ import type {
   AxiosResponse,
 } from 'axios';
 import axios from 'axios';
-// import {
-//   RequestAuthInterceptor,
-//   ResponseAuthInterceptor,
-// } from '../interceptors';
 
 type RequestInterceptor = (config: AxiosRequestConfig) => AxiosRequestConfig;
 type ResponseInterceptor = (response: AxiosResponse) => any;
@@ -57,11 +53,8 @@ export class HttpClient extends HttpClientBase {
 
   private constructor() {
     super({
-      // TODO: Replace with baseURL: import.meta.env.API_URL_VARIABLE_NAME as string,
-      baseURL: 'http://localhost:8081/api' as string,
+      baseURL: import.meta.env.VITE_API_URL as string,
     });
-    // this.registerRequestInterceptor(RequestAuthInterceptor);
-    // this.registerResponseInterceptor(ResponseAuthInterceptor);
   }
 
   static get instance(): AxiosInstance {
