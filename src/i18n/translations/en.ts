@@ -123,5 +123,6 @@ export default {
   },
   advert: {
     author: 'Author',
+    addAdvert: 'Add advert',
   },
 };

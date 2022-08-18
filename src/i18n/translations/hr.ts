@@ -125,5 +125,6 @@ export default {
   },
   advert: {
     author: 'Autor',
+    addAdvert: 'Dodaj oglas',
   },
 };

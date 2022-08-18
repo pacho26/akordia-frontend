@@ -22,7 +22,7 @@ const { adverts } = storeToRefs(advertsStore);
       </div>
       <Link
         to="/advert/create"
-        v-tooltip="'Add new advert'"
+        v-tooltip="$t('advert.addAdvert')"
         pos="absolute right-0 top-0"
       >
         <Button variant="primary" w="!28px" h="!28px" p="!0">
