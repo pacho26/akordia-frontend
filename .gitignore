@@ -25,5 +25,3 @@ coverage
 *.njsproj
 *.sln
 *.sw?
-auto-imports.d.ts
-.eslintrc-auto-import.json
