@@ -1,42 +1,7 @@
 import type { Request, RequestCreate } from '@/models/request.model';
 import * as api from '@/services/api/requests';
-import { useUserStore } from '@/stores/user';
 import { set } from '@vueuse/core';
 import { useResultState } from '../index';
-
-const loading = ref(false);
-
-export const useRequest = () => {
-  const request = ref<Request>();
-  const { error, isError, isSuccess } = useResultState();
-  const { user } = useUserStore();
-
-  const fetchRequest = async () => {
-    try {
-      set(loading, true);
-
-      const fetchedRequest = await api.getRandomRequest({ userId: user?._id });
-      if (fetchedRequest.request) {
-        set(request, fetchedRequest.request);
-        return request;
-      }
-    } catch (err) {
-      set(error, err);
-      return null;
-    } finally {
-      loading.value = false;
-    }
-  };
-
-  return {
-    request,
-    fetchRequest,
-    error,
-    isError,
-    isSuccess,
-    loading,
-  };
-};
 
 export const useRequestCreate = () => {
   const request = ref<Request>();
