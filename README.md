@@ -3,7 +3,7 @@
 </div>
     
 <p align="center">
-    Web app made as graduation project. Its purpose is organizing chords and connecting musicians.
+    Web app for organizing chords and connecting musicians made as graduation project.
 </p>
 
 </br>
