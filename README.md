@@ -2,7 +2,7 @@
     <img src='https://i.postimg.cc/Hk8jgYDD/full-logo-akordia.png' />
 </div>
     
-<p align="center">
+<p align="center" orientation="column">
     Web app for organizing chords and connecting musicians made as graduation project.
 </p>
 
@@ -19,7 +19,13 @@
 </div>
 
 </br>
-</br>
+
+[Live demo](https://akordia.vercel.app/)
+<br/>
+[Backend Deploy](https://chords-backend.herokuapp.com/)
+<br/>
+[Backend Repo](https://github.com/pacho26/akordia-backend)
+<br/>
 
 ```sh
 # install dependencies
