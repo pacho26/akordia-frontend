@@ -26,6 +26,9 @@ export default {
     username: 'Username',
     chords: 'Chords',
     votes: 'Votes',
+    author: 'Author',
+    artist: 'Artist',
+    title: 'Title',
   },
   header: {
     searchPlaceholder: 'Search for songs and artists',

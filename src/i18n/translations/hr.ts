@@ -26,6 +26,9 @@ export default {
     username: 'Korisničko ime',
     chords: 'Akordi',
     votes: 'Ocjene',
+    author: 'Autor',
+    artist: 'Izvođač',
+    title: 'Naziv',
   },
   header: {
     searchPlaceholder: 'Pretraži pjesme i izvođače',

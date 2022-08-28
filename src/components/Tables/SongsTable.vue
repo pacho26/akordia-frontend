@@ -27,7 +27,7 @@ defineProps<Props>();
     </p>
 
     <el-table v-if="!sm" :data="data" w="full" class="rounded">
-      <el-table-column prop="title" label="title" width="38%">
+      <el-table-column prop="title" :label="$t('homepage.title')" width="38%">
         <template #default="{ row }">
           <Link
             :to="`/song/${row._id}`"
@@ -37,8 +37,16 @@ defineProps<Props>();
           </Link>
         </template>
       </el-table-column>
-      <el-table-column prop="artist" label="Artist" width="38%" />
-      <el-table-column prop="authorUsername" label="Author" width="24%">
+      <el-table-column
+        prop="artist"
+        :label="$t('homepage.artist')"
+        width="38%"
+      />
+      <el-table-column
+        prop="authorUsername"
+        :label="$t('homepage.author')"
+        width="24%"
+      >
         <template #default="{ row }">
           <Link
             :to="`/profile/${row.author}`"
@@ -61,7 +69,11 @@ defineProps<Props>();
           </Link>
         </template>
       </el-table-column>
-      <el-table-column prop="artist" label="Artist" width="45%" />
+      <el-table-column
+        prop="artist"
+        :label="$t('homepage.artist')"
+        width="45%"
+      />
     </el-table>
   </div>
 </template>
