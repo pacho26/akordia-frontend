@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { QuillEditor } from '@vueup/vue-quill';
-
 interface Props {
   readOnly?: boolean;
   content?: string;

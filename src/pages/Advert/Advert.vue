@@ -59,8 +59,8 @@ const deleteAdvert = async () => {
     await deleteAdvertById(route.params.id as string);
     const lang = localStorage.getItem('lang') as Language;
     showNotification({
-      title: messages[lang].notifications.advertCreatedTitle,
-      message: messages[lang].notifications.advertCreatedText,
+      title: messages[lang].notifications.advertDeletedTitle,
+      message: messages[lang].notifications.advertDeletedText,
       type: 'success',
     });
     router.push('/');

@@ -5,6 +5,10 @@ import type { ElForm } from 'element-plus';
 import * as EmailValidator from 'email-validator';
 import { reactive } from 'vue';
 import { useAuth } from '../api/auth';
+import messages from '@/i18n/translations';
+
+type Language = 'en' | 'hr';
+const lang = localStorage.getItem('lang') as Language;
 
 export const useRegisterForm = () => {
   const form: UserRegister = reactive({
@@ -27,38 +31,38 @@ export const useRegisterForm = () => {
     username: [
       {
         required: true,
-        message: 'Please enter your username',
+        message: messages[lang].form.usernameError,
         trigger: 'blur',
       },
       {
-        min: 2,
-        max: 24,
-        message: 'Name should be between 2 and 24 characters',
+        min: 4,
+        max: 20,
+        message: messages[lang].form.usernameError2,
         trigger: 'blur',
       },
     ],
     email: [
       {
         required: true,
-        message: 'Please enter your email',
+        message: messages[lang].form.emailError,
         trigger: 'blur',
       },
       {
         validator: () => EmailValidator.validate(form.email),
-        message: 'Please enter a valid email',
+        message: messages[lang].form.emailError2,
         trigger: 'blur',
       },
     ],
     password: [
       {
         required: true,
-        message: 'Please enter your password',
+        message: messages[lang].form.passwordError,
         trigger: 'blur',
       },
       {
         required: true,
         min: 5,
-        message: 'Password too short',
+        message: messages[lang].form.passwordError2,
         trigger: 'blur',
       },
     ],
@@ -66,13 +70,13 @@ export const useRegisterForm = () => {
       {
         required: true,
         validator: passwordMatch,
-        message: 'Passwords do not match',
+        message: messages[lang].form.passwordError3,
         trigger: 'blur',
       },
     ],
     role: [
       {
-        message: 'Please select a role',
+        message: messages[lang].form.roleError,
         trigger: 'change',
       },
     ],

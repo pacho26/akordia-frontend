@@ -10,15 +10,6 @@ const emits = defineEmits(['change']);
 
 const editor = ref<any>();
 
-let isEditorSet = false;
-
-watchEffect(() => {
-  if (props.content && !isEditorSet && editor.value) {
-    editor.value.setHTML(props.content);
-    isEditorSet = true;
-  }
-});
-
 onMounted(() => {
   editor.value.setHTML(props.content || '');
 });
@@ -31,7 +22,7 @@ const emitChange = () => {
 <template>
   <QuillEditor
     ref="editor"
-    placeholder="Add advertisement content here..."
+    :placeholder="$t('advert.placeholderContentText')"
     :spellcheck="false"
     text="!base sm:!lg"
     bg="white"

@@ -12,28 +12,31 @@ export const useCreateAdvertForm = () => {
     content: '',
   });
 
+  type Language = 'en' | 'hr';
+  const lang = localStorage.getItem('lang') as Language;
+
   const rules = reactive({
     title: [
       {
         required: true,
-        message: 'Please enter the title',
+        message: messages[lang].form.titleError,
         trigger: 'blur',
       },
       {
         max: 50,
-        message: 'Title is too long',
+        message: messages[lang].form.titleError2,
         trigger: 'blur',
       },
     ],
     content: [
       {
         required: true,
-        message: 'Please enter the content',
+        message: messages[lang].form.contentError,
         trigger: 'blur',
       },
       {
         max: 5000,
-        message: 'Content is too long',
+        message: messages[lang].form.contentError2,
         trigger: 'blur',
       },
     ],

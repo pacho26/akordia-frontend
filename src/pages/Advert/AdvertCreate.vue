@@ -54,7 +54,7 @@ const updateContent = (newContent: string) => {
         v-model="form.title"
         type="text"
         size="large"
-        placeholder="e.g. Heavy metal band is looking for a drummer"
+        :placeholder="$t('advert.placeholderTitleText')"
       />
     </el-form-item>
     <AdvertRichTextEditor
@@ -63,13 +63,15 @@ const updateContent = (newContent: string) => {
       :content="form.content"
     />
     <div p="t-1" text="xs red" :class="{ 'opacity-0': !hasEditorErrorMsg }">
-      Please enter the content
+      {{ $t('advert.pleaseEnterContent') }}
     </div>
     <div flex="vcenter gap-4" justify="end" m="t-4">
       <Link to="/">
-        <Button variant="secondary">Discard</Button>
+        <Button variant="secondary">{{ $t('advert.discard') }}</Button>
       </Link>
-      <Button variant="primary" @click="save">Save</Button>
+      <Button variant="primary" @click="save">{{
+        $t('advert.publish')
+      }}</Button>
     </div>
   </el-form>
 </template>
