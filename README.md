@@ -3,7 +3,7 @@
 </div>
     
 <p align="center" orientation="column">
-    Web app for organizing chords and connecting musicians made as graduation project.
+    Web app for organizing chords and connecting musicians made as college graduation project.
 </p>
 
 </br>
