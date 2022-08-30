@@ -16,7 +16,7 @@ const { user, userId, setUser } = useUserStore();
 const route = useRoute();
 const { showNotification } = useNotification();
 
-type Language = 'en' | 'hr';
+type Language = 'en' | 'hr' | 'de';
 const lang = ref<Language>('hr');
 
 const form = ref({

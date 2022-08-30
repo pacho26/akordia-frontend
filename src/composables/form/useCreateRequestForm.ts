@@ -6,7 +6,7 @@ import { useUserStore } from '@/stores/user';
 import { storeToRefs } from 'pinia';
 import messages from '@/i18n/translations';
 
-type Language = 'en' | 'hr';
+type Language = 'en' | 'hr' | 'de';
 
 export const useCreateRequestForm = () => {
   const { user } = storeToRefs(useUserStore());

@@ -22,7 +22,7 @@ const { lastRequest } = storeToRefs(userStore);
 
 const authorUsername = ref('');
 
-type Language = 'en' | 'hr';
+type Language = 'en' | 'hr' | 'de';
 const lang = ref<Language>('hr');
 
 const updateLanguage = () => {

@@ -15,7 +15,7 @@ const search = async () => {
   searchTerm.value = searchTerm.value.trim();
   if (searchTerm.value.length < 3) {
     const { showSearchTermNotication } = useNotification();
-    type Language = 'en' | 'hr';
+    type Language = 'en' | 'hr' | 'de';
     const lang = localStorage.getItem('lang') as Language;
     showSearchTermNotication(lang);
     return;

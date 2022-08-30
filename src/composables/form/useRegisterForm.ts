@@ -7,7 +7,7 @@ import { reactive } from 'vue';
 import { useAuth } from '../api/auth';
 import messages from '@/i18n/translations';
 
-type Language = 'en' | 'hr';
+type Language = 'en' | 'hr' | 'de';
 const lang = localStorage.getItem('lang') as Language;
 
 export const useRegisterForm = () => {

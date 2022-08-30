@@ -1,5 +1,6 @@
 import localeLangEn from './en';
 import localeLangHr from './hr';
+import localeLangDe from './de';
 
 const messages = {
   hr: {
@@ -7,6 +8,9 @@ const messages = {
   },
   en: {
     ...localeLangEn,
+  },
+  de: {
+    ...localeLangDe,
   },
 };
 

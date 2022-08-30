@@ -4,7 +4,7 @@ import { useSongUpdate } from '../api/songs/index';
 import { useNotification } from '../useNotification';
 import messages from '@/i18n/translations';
 
-type Language = 'en' | 'hr';
+type Language = 'en' | 'hr' | 'de';
 
 export const useEditSongForm = () => {
   const { updateSong, isSuccess } = useSongUpdate();
@@ -99,7 +99,7 @@ export const useEditSongForm = () => {
           return;
         }
       }
-      type Language = 'en' | 'hr';
+      type Language = 'en' | 'hr' | 'de';
       const lang = localStorage.getItem('lang') as Language;
       showMutateSongError(lang);
     });

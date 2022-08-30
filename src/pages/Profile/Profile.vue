@@ -19,7 +19,7 @@ const { userId } = useUserStore();
 
 const selectedUser = ref<User | null>();
 
-type Language = 'en' | 'hr';
+type Language = 'en' | 'hr' | 'de';
 
 const updateUserDetails = async () => {
   try {

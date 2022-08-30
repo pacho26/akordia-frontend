@@ -14,7 +14,7 @@ const route = useRoute();
 const editor = ref<any>();
 const advert = ref<Advert>();
 
-type Language = 'en' | 'hr';
+type Language = 'en' | 'hr' | 'de';
 
 onBeforeMount(async () => {
   try {

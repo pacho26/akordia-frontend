@@ -24,7 +24,7 @@ const submitForm = () =>
       router.replace('/');
     },
     () => {
-      type Language = 'en' | 'hr';
+      type Language = 'en' | 'hr' | 'de';
       const lang = localStorage.getItem('lang') as Language;
       showRegisterError(lang);
     }

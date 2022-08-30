@@ -11,7 +11,7 @@ export const useCreateSongForm = () => {
   const { createSong, isSuccess } = useSongCreate();
   const router = useRouter();
 
-  type Language = 'en' | 'hr';
+  type Language = 'en' | 'hr' | 'de';
 
   const songModel: SongCreate = reactive({
     title: '',
@@ -94,7 +94,7 @@ export const useCreateSongForm = () => {
           return;
         }
       }
-      type Language = 'en' | 'hr';
+      type Language = 'en' | 'hr' | 'de';
       const lang = localStorage.getItem('lang') as Language;
       showMutateSongError(lang);
     });

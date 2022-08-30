@@ -7,7 +7,7 @@ interface NotificationOptions {
   type: NotificationType;
 }
 
-type Language = 'en' | 'hr';
+type Language = 'en' | 'hr' | 'de';
 
 type NotificationType = 'error' | 'warning' | 'info' | 'success';
 

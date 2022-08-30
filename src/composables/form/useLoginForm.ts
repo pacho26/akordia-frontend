@@ -4,7 +4,7 @@ import * as EmailValidator from 'email-validator';
 import { useAuth } from '../api/auth';
 import messages from '@/i18n/translations';
 
-type Language = 'en' | 'hr';
+type Language = 'en' | 'hr' | 'de';
 
 export const useLoginForm = () => {
   const form: UserLogin = reactive({

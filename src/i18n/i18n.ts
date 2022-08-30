@@ -16,7 +16,7 @@ export default i18n;
 export const getLanguages = () => {
   return Object.keys(messages);
 };
-export const setLocale = (lang: 'hr' | 'en') => {
+export const setLocale = (lang: 'hr' | 'en' | 'de') => {
   i18n.global.locale.value = lang;
   localStorage.setItem('lang', lang);
 };

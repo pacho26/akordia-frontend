@@ -12,7 +12,7 @@ export const useCreateAdvertForm = () => {
     content: '',
   });
 
-  type Language = 'en' | 'hr';
+  type Language = 'en' | 'hr' | 'de';
   const lang = localStorage.getItem('lang') as Language;
 
   const rules = reactive({
@@ -51,7 +51,7 @@ export const useCreateAdvertForm = () => {
   ) => {
     if (!formEl) return;
     formEl.validate(async (valid) => {
-      type Language = 'en' | 'hr';
+      type Language = 'en' | 'hr' | 'de';
       const lang = localStorage.getItem('lang') as Language;
 
       if (valid) {

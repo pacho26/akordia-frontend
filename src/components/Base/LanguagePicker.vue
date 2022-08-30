@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import CroatiaFlag from '@/assets/img/flags/croatia.png';
+import GermanyFlag from '@/assets/img/flags/germany.png';
 import UnitedKingdomFlag from '@/assets/img/flags/united-kingdom.png';
 import { getLanguages, setLocale } from '@/i18n/i18n';
 
-type Language = 'hr' | 'en';
+type Language = 'hr' | 'en' | 'de';
 
 const availableLanguages = getLanguages();
 
@@ -23,6 +24,8 @@ const getLanguageName = (language: string) => {
       return 'English';
     case 'hr':
       return 'Hrvatski';
+    case 'de':
+      return 'Deutsch';
     default:
       return '';
   }
@@ -34,6 +37,8 @@ const getLanguageFlag = (language: string) => {
       return UnitedKingdomFlag;
     case 'hr':
       return CroatiaFlag;
+    case 'de':
+      return GermanyFlag;
     default:
       return '';
   }

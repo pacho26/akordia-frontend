@@ -59,7 +59,7 @@ defineProps<Props>();
     </el-table>
 
     <el-table v-else :data="data" w="full" class="rounded">
-      <el-table-column prop="title" label="title" width="55%">
+      <el-table-column prop="title" :label="$t('homepage.title')" width="55%">
         <template #default="{ row }">
           <Link
             :to="`/song/${row._id}`"
