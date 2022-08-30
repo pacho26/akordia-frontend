@@ -13,7 +13,7 @@ export default {
     user: 'Benutzer',
   },
   sidebar: {
-    recentSongs: 'Neueste Songs',
+    recentSongs: 'Aktuelle Lieder',
   },
   homepage: {
     welcomeBack: 'Willkommen zurück',
