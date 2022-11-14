@@ -15,7 +15,7 @@
     <img src='https://i.postimg.cc/85zjxhTw/5-song-edit.png' />
     <img src='https://i.postimg.cc/9QyR9mxP/6-profile-overview.png' />
     <img src='https://i.postimg.cc/PqhLzgcg/7-profile-edit.png' />
-    <img src='https://i.postimg.cc/1XLXg2wY/9-advert.png' />
+    <img src='https://i.postimg.cc/Hnk4R5MH/9-advert.png' />
 </div>
 
 </br>
