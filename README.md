@@ -22,7 +22,7 @@
 
 [Live demo](https://akordia.vercel.app/)
 <br/>
-[Backend Deploy](https://chords-backend.herokuapp.com/)
+[Backend Deploy](https://akordia-backend.onrender.com/)
 <br/>
 [Backend Repo](https://github.com/pacho26/akordia-backend)
 <br/>
@@ -37,5 +37,5 @@ npm run dev
 
 .env
 ```sh
-VITE_API_URL=https://chords-backend.herokuapp.com/api
+VITE_API_URL=https://akordia-backend.onrender.com/api
 ```
