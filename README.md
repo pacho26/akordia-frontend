@@ -1,14 +1,4 @@
 <div align="center">
-    <img src='https://i.postimg.cc/Hk8jgYDD/full-logo-akordia.png' />
-</div>
-    
-<p align="center" orientation="column">
-    Web app for organizing chords and connecting musicians made as college graduation project.
-</p>
-
-</br>
-
-<div align="center">
     <img src='https://i.postimg.cc/kGDRRWZD/1-homepage.png' />
     <img src='https://i.postimg.cc/TYLWRqg4/2-request-create.png' />
     <img src='https://i.postimg.cc/Pq4C66nP/3-request-overview.png' />
